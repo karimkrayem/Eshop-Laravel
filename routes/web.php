@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +39,13 @@ Route::get('/contact.html', function () {
 
 // login
 Route::get('/login.html', function () {
-    return view('pages.login');
+    $login = User::all();
+    if (Auth::check()) {
+        return redirect()->back();
+    } else {
+
+        return view('pages.login', compact('login'));
+    }
 });
 
 // my-account

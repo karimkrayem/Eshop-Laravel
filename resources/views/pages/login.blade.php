@@ -1,4 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    @include('partials.login')
+    @include('auth.login')
+    @include('auth.register')
 @endsection
