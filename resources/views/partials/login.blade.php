@@ -22,36 +22,40 @@
    <!-- SHOPPING-CART-AREA START -->
    <div class="login-area  pt-80 pb-80">
        <div class="container">
-           <form action="#">
-               <div class="row">
-                   <div class="col-lg-6">
-                       <div class="customer-login text-left">
-                           <h4 class="title-1 title-border text-uppercase mb-30">Registered customers</h4>
-                           <p class="text-gray">If you have an account with us, Please login!</p>
-                           <input type="text" placeholder="Email here..." name="email">
-                           <input type="password" placeholder="Password">
-                           <p><a href="#" class="text-gray">Forget your password?</a></p>
-                           <button type="submit" data-text="login"
-                               class="button-one submit-button mt-15">login</button>
-                       </div>
+
+           <div class="row">
+               <div class="col-lg-6">
+                   <div class="customer-login text-left">
+                       <h4 class="title-1 title-border text-uppercase mb-30">Registered customers</h4>
+                       <p class="text-gray">If you have an account with us, Please login!</p>
+                       <input type="text" placeholder="Email here..." name="email">
+                       <input type="password" placeholder="Password">
+                       <p><a href="#" class="text-gray">Forget your password?</a></p>
+                       <button type="submit" data-text="login" class="button-one submit-button mt-15">login</button>
                    </div>
+               </div>
+               <form method="POST" action="{{ route('register') }}">
+                   @csrf
                    <div class="col-lg-6">
                        <div class="customer-login text-left">
                            <h4 class="title-1 title-border text-uppercase mb-30">new customers</h4>
                            <p class="text-gray">If you have an account with us, Please login!</p>
-                           <input type="text" placeholder="Your name here..." name="name">
-                           <input type="text" placeholder="Email address here..." name="email">
-                           <input type="password" placeholder="Password">
-                           <input type="password" placeholder="Confirm password">
+                           <input type="text" placeholder="Your name here..." :value="old('name')" required
+                               autofocus name="name">
+                           <input type="text" placeholder="Email address here..." :value="old('email')"
+                               name="email">
+                           <input type="password" name="password" required autocomplete="new-password"
+                               placeholder="Password">
+                           <input type="password" name="password_confirmation" required placeholder="Confirm password">
                            <p class="mb-0">
                                <input type="checkbox" id="newsletter" name="newsletter" checked>
                                <label for="newsletter"><span>Sign up for our newsletter!</span></label>
                            </p>
-                           <button type="submit" data-text="regiter"
+                           <button type="submit" data-text="register"
                                class="button-one submit-button mt-15">regiter</button>
                        </div>
                    </div>
-               </div>
+           </div>
            </form>
        </div>
    </div>
