@@ -1,8 +1,13 @@
 <?php
 
+use App\Models\Tag;
 use App\Models\User;
+use App\Models\Tag as ModelsTag;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,10 +74,19 @@ Route::get('/checkout.html', function () {
     return view('pages.checkout');
 });
 
-// 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+// BACKOFFICE 
+
+Route::get('/backoffice', function () {
+    return view('backoffice.pages.main');
+});
+
+
+
 
 require __DIR__ . '/auth.php';

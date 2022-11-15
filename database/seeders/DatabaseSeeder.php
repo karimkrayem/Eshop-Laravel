@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
+            TagSeeder::class,
+            // $this->command->info('Tag Seeder created.')
 
         ]);
         // \App\Models\User::factory(10)->create();
