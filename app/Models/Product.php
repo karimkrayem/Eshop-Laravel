@@ -16,9 +16,9 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    protected $fillable = ['name', 'description', 'src', 'category_id'];
+    // protected $fillable = ['name', 'description', 'src', 'category_id'];
 
-    public function tag()
+    public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }

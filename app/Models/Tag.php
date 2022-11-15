@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tag extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    // protected $fillable = ['name'];
+
+    public function product()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

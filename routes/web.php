@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackOfficeController;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Tag as ModelsTag;
@@ -82,10 +83,13 @@ Route::get('/dashboard', function () {
 
 // BACKOFFICE 
 
-Route::get('/backoffice', function () {
-    return view('backoffice.pages.main');
-});
+Route::get('/backoffice', [BackOfficeController::class, 'index']);
+Route::get('/productform', function () {
+    $product = Product::find(1);
+    $test = Product::all();
 
+    return view('backoffice.partials.productForm', compact('product', 'test'));
+});
 
 
 
