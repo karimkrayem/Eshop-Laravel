@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_tag', function (Blueprint $table) {
+        Schema::create('article_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('article_id')->constrained()->onDelete('cascade');
             $table->foreignId('tag_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_tag');
+        Schema::dropIfExists('article_tag');
     }
 };

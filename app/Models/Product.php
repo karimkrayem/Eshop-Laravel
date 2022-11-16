@@ -18,8 +18,5 @@ class Product extends Model
 
     // protected $fillable = ['name', 'description', 'src', 'category_id'];
 
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
-    }
+
 }

@@ -1,4 +1,4 @@
-<form action="/product/store" method="POST">
+<form action="/productform/store" method="POST">
     @csrf
     <div>
         <label for="name">Name</label>
@@ -19,14 +19,6 @@
     </select>
 
 
-    @foreach ($tags as $tag)
-        <p>
-
-            <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id=""> <label
-                for="tags">{{ $tag->name }}</label>
-        </p>
-        {{-- <input type="checkbox" name="" id=""> --}}
-    @endforeach
 
     <button type="submit">ADD</button>
 </form>
