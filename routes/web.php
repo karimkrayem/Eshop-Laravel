@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Models\Category;
 use App\Models\Product;
 
 /*
@@ -87,9 +88,14 @@ Route::get('/backoffice', [BackOfficeController::class, 'index']);
 Route::get('/productform', function () {
     $product = Product::find(1);
     $test = Product::all();
+    $tags = Tag::all();
+    $categories = Category::all();
 
-    return view('backoffice.partials.productForm', compact('product', 'test'));
+    return view('backoffice.partials.productForm', compact('product', 'test', 'tags', 'categories'));
 });
+
+
+Route::post('/product/store', [ProductController::class, 'store']);
 
 
 
