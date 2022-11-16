@@ -32,7 +32,7 @@ class ArticleController extends Controller
             'src' => 'required'
         ]);
 
-        Image::make(request()->file('src'))->resize(300, 200)->save($request->file('src')->hashName());
+        Image::make(request()->file('src'))->resize(300, 200)->save('src/articles/' . $request->file('src')->hashName());
         // $img->save();
 
         $store = new Article();

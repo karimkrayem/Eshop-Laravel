@@ -69,6 +69,7 @@ Route::get('/single-blog.html', function () {
 });
 // single-product
 Route::get('/single-product.html', function () {
+
     return view('pages.single-product');
 });
 

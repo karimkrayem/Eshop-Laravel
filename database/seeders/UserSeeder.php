@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
                     'email' => 'admin@admin.com',
                     'password' => Hash::make('admin@admin.com'),
                     'role_id' => 1,
+                    'src' => 'a'
                 ],
                 [
 
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
                     'email' => 'web@web.com',
                     'password' => Hash::make('web@web.com'),
                     'role_id' => 2,
+                    'src' => 'a'
                 ],
                 [
 
@@ -38,6 +40,7 @@ class UserSeeder extends Seeder
                     'email' => 'user@user.com',
                     'password' => Hash::make('user@user.com'),
                     'role_id' => 3,
+                    'src' => 'a'
                 ],
                 [
 
@@ -45,6 +48,7 @@ class UserSeeder extends Seeder
                     'email' => 'user2@User2.com',
                     'password' => Hash::make('User2@User2.com'),
                     'role_id' => 3,
+                    'src' => 'a'
                 ],
                 [
 
@@ -52,6 +56,7 @@ class UserSeeder extends Seeder
                     'email' => 'kokoRedacteurd@KokoRedacteur.com',
                     'password' => Hash::make('kokoRedacteurd@KokoRedacteur.com'),
                     'role_id' => 4,
+                    'src' => 'a'
                 ],
             ]
         );

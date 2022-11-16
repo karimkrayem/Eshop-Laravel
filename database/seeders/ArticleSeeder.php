@@ -21,14 +21,14 @@ class ArticleSeeder extends Seeder
             [
                 'title' => 'chair',
                 'content' => 'an old chair',
-                // 'src' => 'a'
+                'src' => 'a'
                 // 'user_id' => 1,
 
             ],
             [
                 'name' => 'sofa',
                 'description' => 'a new sofa',
-                // 'src' => 'b'
+                'src' => 'b'
             ],
 
         ]);

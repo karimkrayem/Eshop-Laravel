@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use Intervention\Image\Facades\Image;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {
@@ -37,17 +38,30 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'src' => 'required',
         ]);
+        Image::make(request()->file('src'))->resize(90, 100)->save('src/users/' . $request->file('src')->hashName());
+        // dd($request);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $store = new User();
+        $store->src = $request->file('src')->hashName();
+        $store->name = $request->name;
+        $store->password = Hash::make($request->password);
+        $store->email = $request->email;
+        // $store->user_id = $request->user_id;
+        $store->save();
+        // $user = User::create([
+        //     // $store = new User();
+        //     'name' => $request->name,
+        //     'src' => $request->file('src'),
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
 
-        event(new Registered($user));
+        // ]);
+        // dd($user);
+        event(new Registered($store));
 
-        Auth::login($user);
+        Auth::login($store);
 
         return redirect('/');
     }
