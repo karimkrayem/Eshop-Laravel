@@ -1,4 +1,4 @@
-<form action="/articleform/store" method="POST">
+<form action="/articleform/store" method="POST" enctype="multipart/form-data">
     @csrf
     <div>
         <label for="title">Title</label>
@@ -8,6 +8,11 @@
     <div>
         <label for="content">Content</label>
         <input type="text" name="content">
+    </div>
+
+    <div>
+        <label for="src">Image</label>
+        <input data-rule="required" id="username" type="file" name="src">
     </div>
 
 

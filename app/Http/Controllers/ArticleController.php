@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Article;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 
 class ArticleController extends Controller
@@ -27,11 +29,14 @@ class ArticleController extends Controller
             // 'User_id' => 'required',
             'title' => 'required',
             'content' => 'required',
-            // 'src' => 'required'
+            'src' => 'required'
         ]);
 
+        Image::make(request()->file('src'))->resize(300, 200)->save($request->file('src')->hashName());
+        // $img->save();
+
         $store = new Article();
-        // $store->src = $request->file('src')->hashName();
+        $store->src = $request->file('src')->hashName();
         $store->title = $request->title;
         $store->content = $request->content;
         // $store->user_id = $request->user_id;
