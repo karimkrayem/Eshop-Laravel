@@ -1,8 +1,6 @@
 <form method="POST" enctype="multipart/form-data" action="{{ route('register') }}">
     @csrf
     <div class="col-lg-6">
-
-
         <div class="customer-login text-left">
             <input id="username" type="file" name="src">
             <h4 class="title-1 title-border text-uppercase mb-30">new customers</h4>
@@ -18,8 +16,5 @@
             <button type="submit" data-text="register" class="button-one submit-button mt-15">regiter</button>
         </div>
     </div>
-    </div>
 </form>
-</div>
-</div>
 <!-- SHOPPING-CART-AREA END -->

@@ -1,4 +1,4 @@
-<form action="/productform/store" method="POST">
+<form action="/productform/store" enctype="multipart/form-data" method="POST">
     @csrf
     <div>
         <label for="name">Name</label>
@@ -17,6 +17,9 @@
             <option value="{{ $category->id }}">{{ $category->name }}</option>
         @endforeach
     </select>
+
+    <label for="files" class="">Upload Product Images:</label>
+    <input type="file" name="src[]" class="form-control" accept="image/*" multiple>
 
 
 

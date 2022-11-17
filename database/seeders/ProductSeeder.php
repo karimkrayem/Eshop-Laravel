@@ -20,14 +20,14 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'chair',
                 'description' => 'an old chair',
-                'src' => 'yo',
+                'image_id' => 1,
                 'category_id' => 1,
 
             ],
             [
                 'name' => 'sofa',
                 'description' => 'a new sofa',
-                'src' => 'yo',
+                'image_id' => 2,
                 'category_id' => 2,
             ],
 
