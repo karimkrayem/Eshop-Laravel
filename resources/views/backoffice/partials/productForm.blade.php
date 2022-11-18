@@ -19,7 +19,7 @@
     </select>
 
     <label for="files" class="">Upload Product Images:</label>
-    <input type="file" name="src[]" class="form-control" accept="image/*" multiple>
+    <input type="file" name="image[]" class="form-control" required  multiple>
 
 
 

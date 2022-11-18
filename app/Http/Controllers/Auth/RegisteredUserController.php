@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'src' => 'required',
         ]);
-        Image::make(request()->file('src'))->resize(90, 100)->save('src/users/' . $request->file('src')->hashName());
+        Image::make($request->file('src'))->resize(90, 100)->save('src/users/' . $request->file('src')->hashName());
         // dd($request);
 
         $store = new User();

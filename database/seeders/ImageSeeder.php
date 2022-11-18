@@ -17,10 +17,15 @@ class ImageSeeder extends Seeder
     {
         DB::table('images')->insert([
             [
-                'src' => 'yooo'
+                'image' => 'yooo',
+                'product_id' => 1
+
+
             ],
             [
-                'src' => 'soooo'
+                'image' => 'soooo',
+                'product_id' => 2
+
             ],
 
         ]);

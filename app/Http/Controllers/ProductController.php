@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use Str;
+// use Image;
 use App\Models\Tag;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Category;
+use Intervention\Image\Facades\Image as IMG;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
+// use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -25,30 +29,28 @@ class ProductController extends Controller
     {
         // Storage::put('public/img/', $request->file('src'));
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'category_id' => 'required',
-            // 'image_id' => 'required',
+            'name' => 'required| string | max:255',
+            'description' => 'required| string | max:255',
+            'category_id' => 'required| string | max:255',
+            // 'stock' => 'required| numeric',
+            // 'price' => 'required| numeric',
+            'images.*' => 'required|mimes:jpeg,jpg,png,webp'
         ]);
-        // dd($request);
-        // Image::make(request()->file('src'))->resize(90, 100)->save('src/product/' . $request->file('src')->hashName());
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            // 'price' => $request->price,
+        ]);
 
-
-        $store = new Product();
-        $images = new I
-        // $store->src = $request->file('src')->hashName();
-        $store->name = $request->name;
-        $store->description = $request->description;
-        $store->category_id = $request->category_id;
-        foreach ($request->file('src') as $image) {
-
-            dd($image);
-
-            $store->image()->attach($image);
+        foreach ($request->file('image') as $img) {;
+            var_dump($img);
+            $newImage = IMG::make($img)->resize(90, 100)->save('src/products/' . $img->hashName());
+            $image = new Image();
+            $image->image = $newImage->basename;
+            $image->product_id = DB::table('products')->latest('id')->first()->id;
+            $image->save();
         }
-        // $store->image_id = $request->file('src')->hashName();
-        $store->save();
-        // $store->author_id = $request->author_id;
-        return redirect('/');
+        return redirect()->back()->with('success', "Vous avez ajouté un membre");
     }
 }
