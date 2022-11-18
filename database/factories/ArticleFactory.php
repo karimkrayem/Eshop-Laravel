@@ -17,7 +17,12 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            //
+
+
+
+            'title' => $this->faker->word,
+            'content' => $this->faker->text($maxNbChars = 200),
+            'src' => $this->faker->imageUrl(width: 620, height: 480),
         ];
     }
 }

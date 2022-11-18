@@ -17,20 +17,6 @@ class ArticleSeeder extends Seeder
     public function run()
     {
         // Article::factory()->count(10)->create();
-        DB::table('articles')->insert([
-            [
-                'title' => 'chair',
-                'content' => 'an old chair',
-                'src' => 'a'
-                // 'user_id' => 1,
-
-            ],
-            [
-                'name' => 'sofa',
-                'description' => 'a new sofa',
-                'src' => 'b'
-            ],
-
-        ]);
+        Article::factory()->count(5)->create();
     }
 }
