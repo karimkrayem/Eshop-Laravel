@@ -1,2 +1,6 @@
-{{-- @extends('layouts.navigation') --}}
-@include('backoffice.partials.productForm')
+@extends('backoffice.layouts.app')
+
+
+@section('content')
+    @include('backoffice.partials.productForm')
+@endsection
