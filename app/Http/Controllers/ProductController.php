@@ -22,7 +22,7 @@ class ProductController extends Controller
         $product = Product::all();
         $categories = Category::all();
 
-        return view('backoffice.partials.productForm', compact('product', 'categories'));
+        return view('backoffice.pages.product', compact('product', 'categories'));
     }
 
     public function store(Request $request)

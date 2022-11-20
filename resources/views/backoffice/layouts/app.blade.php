@@ -1,147 +1,283 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <link rel="stylesheet" href=""> --}}
-    @vite('resources/css/app.css')
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home one || Hurst</title>
+    <meta name="description"
+        content="Hurst – Furniture Store eCommerce HTML Template is a clean and elegant design – suitable for selling flower, cookery, accessories, fashion, high fashion, accessories, digital, kids, watches, jewelries, shoes, kids, furniture, sports….. It has a fully responsive width adjusts automatically to any screen size or resolution.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+
+    <!-- all css here -->
+    <!-- bootstrap v5 css -->
+    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
+    <!-- animate css -->
+    <link rel="stylesheet" href={{ asset('css/animate.min.css') }}>
+    <!-- jquery-ui.min css -->
+    <link rel="stylesheet" href={{ asset('css/jquery-ui.min.css') }}>
+    <!-- meanmenu css -->
+    <link rel="stylesheet" href={{ asset('css/meanmenu.min.css') }}>
+    <!-- nivo-slider css -->
+    <link rel="stylesheet" href={{ asset('lib/css/nivo-slider.css') }}>
+    <link rel="stylesheet" href={{ asset('lib/css/preview.css') }}>
+    <!-- slick css -->
+    <link rel="stylesheet" href={{ asset('css/slick.min.css') }}>
+    <!-- lightbox css -->
+    <link rel="stylesheet" href={{ asset(' css/lightbox.min.css') }}>
+    <!-- material-design-iconic-font css -->
+    <link rel="stylesheet" href={{ asset('css/material-design-iconic-font.css') }}>
+    <!-- All common css of theme -->
+    <link rel="stylesheet" href={{ asset('css/default.css') }}>
+    <!-- style css -->
+    <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <!-- shortcode css -->
+    <link rel="stylesheet" href={{ asset('css/shortcode.css') }}>
+    <!-- responsive css -->
+    <link rel="stylesheet" href={{ asset('css/responsive.css') }}>
+    <!-- modernizr css -->
+    <script src={{ asset('js/vendor/modernizr-3.11.2.min.js') }}></script>
 </head>
 
 <body>
-    <nav class="bg-gray-50">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div class="relative flex h-16 items-center justify-between">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <!-- Mobile menu button-->
-                    <button type="button"
-                        class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                        aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <!--
-                  Icon when menu is closed.
-      
-                  Heroicon name: outline/bars-3
-      
-                  Menu open: "hidden", Menu closed: "block"
-                -->
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                        <!--
-                  Icon when menu is open.
-      
-                  Heroicon name: outline/x-mark
-      
-                  Menu open: "block", Menu closed: "hidden"
-                -->
-                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                    <div class="flex flex-shrink-0 items-center">
-                        <img class="block h-8 w-auto lg:hidden"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-                        <img class="hidden h-8 w-auto lg:block"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-                    </div>
-                    <div class="hidden sm:ml-6 sm:block">
-                        <div class="flex space-x-4">
-                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                aria-current="page">Dashboard</a>
+    <!-- WRAPPER START -->
+    <div class="wrapper">
 
-                            <a href="#"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
-
-                            <a href="#"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-
-                            <a href="#"
-                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+        <!-- Mobile-header-top Start -->
+        <div class="mobile-header-top d-block d-md-none">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- header-search-mobile start -->
+                        <div class="header-search-mobile">
+                            <div class="table">
+                                <div class="table-cell">
+                                    <ul>
+                                        <li><a class="search-open" href="#"><i class="zmdi zmdi-search"></i></a>
+                                        </li>
+                                        <li><a href="login.html"><i class="zmdi zmdi-lock"></i></a></li>
+                                        <li><a href="my-account.html"><i class="zmdi zmdi-account"></i></a></li>
+                                        <li><a href="wishlist.html"><i class="zmdi zmdi-favorite"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <button type="button"
-                        class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span class="sr-only">View notifications</span>
-                        <!-- Heroicon name: outline/bell -->
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                        </svg>
-                    </button>
-
-                    <!-- Profile dropdown -->
-                    <div class="relative ml-3">
-                        <div>
-                            <button type="button"
-                                class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="">
-                            </button>
-                        </div>
-
-                        <!--
-                  Dropdown menu, show/hide based on menu state.
-      
-                  Entering: "transition ease-out duration-100"
-                    From: "transform opacity-0 scale-95"
-                    To: "transform opacity-100 scale-100"
-                  Leaving: "transition ease-in duration-75"
-                    From: "transform opacity-100 scale-100"
-                    To: "transform opacity-0 scale-95"
-                -->
-                        <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
-                            tabindex="-1">
-                            <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                                tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                                tabindex="-1" id="user-menu-item-1">Settings</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                                tabindex="-1" id="user-menu-item-2">Sign out</a>
-                        </div>
+                        <!-- header-search-mobile start -->
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Mobile-header-top End -->
+        <!-- HEADER-AREA START -->
+        <header id="sticky-menu" class="header">
+            <div class="header-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 offset-md-4 col-7">
+                            <div class="logo text-md-center">
+                                <a href="/"><img src=" img/logo/logo.png " alt="" /></a>
+                            </div>
+                        </div>
 
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="sm:hidden" id="mobile-menu">
-            <div class="space-y-1 px-2 pt-2 pb-3">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-                    aria-current="page">Dashboard</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    <!-- MAIN-MENU START -->
+    <div class="menu-toggle hamburger hamburger--emphatic d-none d-md-block">
+        <div class="hamburger-box">
+            <div class="hamburger-inner"></div>
+        </div>
+    </div>
+    <div class="main-menu  d-none d-md-block">
+        <nav>
+            <ul>
+                <li><a href="index.html">home</a>
 
-                <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
+                </li>
+                <li><a href="shop.html">Forms</a>
+                    <div class="mega-menu menu-scroll">
+                        <div class="table">
+                            <div class="table-cell">
+                                <div class="half-width">
+                                    <ul>
+                                        <li class="menu-title">All Forms</li>
+                                        <li><a href="/productform">Product Form</a></li>
+                                        <li><a href="/articleform">Articles Form</a></li>
 
-                <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                                    </ul>
+                                </div>
 
-                <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+                                <div class="full-width">
+
+                                </div>
+                                <div class="pb-80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#">Edit</a>
+                    <div class="sub-menu menu-scroll">
+                        <ul>
+                            <li class="menu-title">Edit Section</li>
+                            <li><a href="elements-accordions.html">Roles</a></li>
+                            <li><a href="elements-toggles.html">Products</a></li>
+                            <li><a href="elements-tab.html">Artcles</a></li>
+                            <li><a href="elements-product-tab.html">Product Tab</a></li>
+                            <li><a href="elements-product-tab-2.html">Product Tab 2</a></li>
+                            <li><a href="elements-carousel.html">product carousel</a></li>
+                            <li><a href="elements-carousel-2.html">product carousel 2</a></li>
+                            <li><a href="elements-featured-product.html">Featured Product</a></li>
+                            <li><a href="elements-featured-product-2.html">Featured Product 2</a></li>
+                            <li><a href="elements-button.html">Button</a></li>
+                            <li><a href="elements-table.html">Table</a></li>
+                            <li><a href="elements-progress-bars.html">Progress Bar</a></li>
+                            <li><a href="elements-blog.html">Blog</a></li>
+                            <li><a href="elements-blog-2.html">Blog - 2</a></li>
+                            <li><a href="elements-team.html">Team</a></li>
+                            <li><a href="elements-footer.html">Footer</a></li>
+                            <li><a href="elements-footer-2.html">Footer 2</a></li>
+                            <li><a href="elements-map.html">Map</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+
+                <li><a href="shop-sidebar.html">Tags & Categories</a></li>
+                <li><a href="/shop-list.html">Banners</a></li>
+                <li><a href="blog.html">blog</a></li>
+                <li><a href="#">pages</a>
+                    <div class="sub-menu menu-scroll">
+                        <ul>
+                            <li class="menu-title">Page's</li>
+                            <li><a href="shop.html">Shop</a></li>
+                            <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
+                            <li><a href="shop-grid-right-sidebar.html">Shop Right Sidebar</a></li>
+                            <li><a href="/shop-list.html">Shop List</a></li>
+                            <li><a href="shop-list-right-sidebar.html">Shop List right sidebar</a></li>
+                            <li><a href="single-product.html">Single Product</a></li>
+                            <li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
+                            <li><a href="cart.html">Shopping Cart</a></li>
+                            <li><a href="wishlist.html">Wishlist</a></li>
+                            <li><a href="checkout.html">Checkout</a></li>
+                            <li><a href="order.html">Order</a></li>
+                            <li><a href="login.html">login / Registration</a></li>
+                            <li><a href="my-account.html">My Account</a></li>
+                            <li><a href="404.html">404</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="single-blog.html">Single Blog</a></li>
+                            <li><a href="single-blog-sidebar.html">Single Blog Sidebar</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="about.html">about us</a></li>
+                <li><a href="contact.html">contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- MAIN-MENU END -->
+    </header>
+    <!-- HEADER-AREA END -->
+    <!-- Mobile-menu start -->
+    <div class="mobile-menu-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 d-block d-md-none">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul>
+                                <li><a href="index.html">home</a>
+                                    <ul>
+                                        <li><a href="index.html">Home Version 1</a></li>
+                                        <li><a href="index-2.html">Home Version 2</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="shop.html">products</a></li>
+                                <li><a href="shop-sidebar.html">accesories</a></li>
+                                <li><a href="/shop-list.html">lookbook</a></li>
+                                <li><a href="blog.html">blog</a></li>
+                                <li><a href="#">pages</a>
+                                    <ul>
+                                        <li><a href="shop.html">Shop</a></li>
+                                        <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
+                                        <li><a href="/shop-list.html">Shop List</a></li>
+                                        <li><a href="single-product.html">Single Product</a></li>
+                                        <li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
+                                        <li><a href="cart.html">Shopping Cart</a></li>
+                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="order.html">Order</a></li>
+                                        <li><a href="login.html">login / Registration</a></li>
+                                        <li><a href="my-account.html">My Account</a></li>
+                                        <li><a href="404.html">404</a></li>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="single-blog.html">Single Blog</a></li>
+                                        <li><a href="single-blog-sidebar.html">Single Blog Sidebar</a></li>
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="about.html">about us</a></li>
+                                <li><a href="contact.html">contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
+    <!-- Mobile-menu end -->
 
 
     @yield('content')
 
+
+    <!-- FOOTER START -->
+
+    <!-- END QUICKVIEW PRODUCT -->
+
+    </div>
+    <!-- WRAPPER END -->
+
+    <!-- all js here -->
+    <!-- jquery latest version -->
+    <script src="js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- jquery.meanmenu js -->
+    <script src="js/jquery.meanmenu.js"></script>
+    <!-- slick.min js -->
+    <script src="js/slick.min.js"></script>
+    <!-- jquery.treeview js -->
+    <script src="js/jquery.treeview.js"></script>
+    <!-- lightbox.min js -->
+    <script src="js/lightbox.min.js"></script>
+    <!-- jquery-ui js -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- jquery.nivo.slider js -->
+    <script src="lib/js/jquery.nivo.slider.js"></script>
+    <script src="lib/home.js"></script>
+    <!-- jquery.nicescroll.min js -->
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <!-- countdon.min js -->
+    <script src="js/countdon.min.js"></script>
+    <!-- wow js -->
+    <script src="js/wow.min.js"></script>
+    <!-- plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- main js -->
+    <script src="js/main.js"></script>
 </body>
 
 </html>

@@ -41,24 +41,15 @@ class RegisteredUserController extends Controller
             'src' => 'required',
         ]);
         Image::make($request->file('src'))->resize(90, 100)->save('src/users/' . $request->file('src')->hashName());
-        // dd($request);
+
 
         $store = new User();
         $store->src = $request->file('src')->hashName();
         $store->name = $request->name;
         $store->password = Hash::make($request->password);
         $store->email = $request->email;
-        // $store->user_id = $request->user_id;
-        $store->save();
-        // $user = User::create([
-        //     // $store = new User();
-        //     'name' => $request->name,
-        //     'src' => $request->file('src'),
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
 
-        // ]);
-        // dd($user);
+        $store->save();
         event(new Registered($store));
 
         Auth::login($store);

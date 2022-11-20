@@ -63,6 +63,11 @@ Route::get('/my-account.html', function () {
 });
 
 
+// blog
+Route::get('/blog.html', function () {
+    return view('pages.blog');
+});
+
 // single-blog
 Route::get('/single-blog.html', function () {
     return view('pages.single-blog');
