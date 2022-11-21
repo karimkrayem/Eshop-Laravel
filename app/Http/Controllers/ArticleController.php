@@ -22,6 +22,12 @@ class ArticleController extends Controller
         $tags = Tag::all();
         return view('backoffice.pages.articlesForm', compact('tags', 'articles', 'users'));
     }
+
+    public function edit($id)
+    {
+        $articles = Article::find($id);
+        return view('backoffice.pages.editArticles', compact('articles'));
+    }
     public function store(Request $request)
     {
         // Storage::put('public/img/', $request->file('src'));

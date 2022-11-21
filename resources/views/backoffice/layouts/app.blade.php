@@ -129,7 +129,7 @@
                         <ul>
                             <li class="menu-title">Edit Section</li>
                             <li><a href="/users">Users</a></li>
-                            <li><a href="elements-toggles.html">Products</a></li>
+                            <li><a href="/allproducts">Products</a></li>
                             <li><a href="elements-tab.html">Articles</a></li>
                             <li><a href="elements-product-tab.html">Product Tab</a></li>
                             <li><a href="elements-product-tab-2.html">Product Tab 2</a></li>

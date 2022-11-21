@@ -34,8 +34,12 @@ class ProductController extends Controller
         return view('backoffice.pages.editproduct', compact('products', 'categories', 'images'));
     }
 
-
-
+    public function destroy($id)
+    {
+        $delete = Product::find($id);
+        $delete->delete();
+        return redirect()->back();
+    }
 
     public function store(Request $request)
     {

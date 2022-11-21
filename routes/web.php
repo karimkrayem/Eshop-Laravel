@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
+use App\Models\Article;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,12 +106,20 @@ Route::get('/allproducts', function () {
 
 Route::get('/product/edit/{id}', [ProductController::class, 'edit']);
 Route::put('/product/update/{id}', [ProductController::class, 'update']);
+Route::delete('/product/delete/{id}', [ProductController::class, 'destroy']);
 
 
 
 // ARTICLE BACKOFFICE
 Route::get('/articleform', [ArticleController::class, 'index']);
 Route::post('/articleform/store', [ArticleController::class, 'store']);
+Route::get('/allarticles', function () {
+    $articles = Article::all();
+    return view('backoffice.pages.allproducts', compact('articles'));
+});
+
+Route::post('/article/edit/{id}', [ArticleController::class, 'edit']);
+
 
 
 // ROLES BACKOFFICE

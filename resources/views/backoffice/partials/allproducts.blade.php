@@ -17,9 +17,14 @@
                 <p class="card-text">category: {{ $product->category }}</p>
                 <a href="/product/edit/{{ $product->id }}" class="btn btn-primary">Edit Product</a>
             </div>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
+
+            <form action="/product/delete/{{ $product->id }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button class="btn btn-danger " type="submit">Delete</button>
+
+            </form>
         </div>
     @endforeach
 </div>
