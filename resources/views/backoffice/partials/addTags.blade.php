@@ -1,32 +1,20 @@
-<table class="w-full text-sm text-left text-gray-500">
-    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-        <tr>
-            <th scope="col" class="px-6 py-3">
-                #
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Name
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Tags
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($product as $post)
-            <tr class="bg-white border-b">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900">
-                    {{ $post->id }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ $post->name }}
-                </td>
-                <td class="px-6 py-4">
-                    @foreach ($product->tags as $tag)
-                        {{ $tag->name }}
-                    @endforeach
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
+<div>
+    <h1>All the available tags for the Article blogs<i class="fa fa-transgender" aria-hidden="true"></i></h1>
+    @foreach ($tags as $tag)
+        <span>{{ $tag->name }}</span>
+    @endforeach
+</div>
+
+<div class="d-flex justify-center ">
+
+    <form action="/tagform/store" enctype="multipart/form-data" method="POST">
+        @csrf
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name">
+        </div>
+
+        <button type="submit">ADD</button>
+    </form>
+
+</div>

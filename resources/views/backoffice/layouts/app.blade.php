@@ -100,7 +100,7 @@
     <div class="main-menu  d-none d-md-block">
         <nav>
             <ul>
-                <li><a href="index.html">home</a>
+                <li><a href="/backoffice">home</a>
 
                 </li>
                 <li><a href="shop.html">Forms</a>
@@ -128,9 +128,9 @@
                     <div class="sub-menu menu-scroll">
                         <ul>
                             <li class="menu-title">Edit Section</li>
-                            <li><a href="elements-accordions.html">Roles</a></li>
+                            <li><a href="/users">Users</a></li>
                             <li><a href="elements-toggles.html">Products</a></li>
-                            <li><a href="elements-tab.html">Artcles</a></li>
+                            <li><a href="elements-tab.html">Articles</a></li>
                             <li><a href="elements-product-tab.html">Product Tab</a></li>
                             <li><a href="elements-product-tab-2.html">Product Tab 2</a></li>
                             <li><a href="elements-carousel.html">product carousel</a></li>

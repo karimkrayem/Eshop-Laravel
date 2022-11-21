@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\BackOfficeController;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Category;
 use App\Models\Tag as ModelsTag;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Models\Category;
-use App\Models\Product;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BackOfficeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,10 +98,20 @@ Route::get('/backoffice', [BackOfficeController::class, 'index']);
 // PRODUCT BACKOFFICE 
 Route::get('/productform', [ProductController::class, 'index']);
 Route::post('/productform/store', [ProductController::class, 'store']);
+Route::get('/allproducts', function () {
+    $products = Product::all();
+    return view('backoffice.pages.allproducts', compact('products'));
+});
+
+Route::get('/product/edit/{id}', [ProductController::class, 'edit']);
+Route::put('/product/update/{id}', [ProductController::class, 'update']);
+
+
 
 // ARTICLE BACKOFFICE
 Route::get('/articleform', [ArticleController::class, 'index']);
 Route::post('/articleform/store', [ArticleController::class, 'store']);
+
 
 // ROLES BACKOFFICE
 
@@ -108,6 +119,18 @@ Route::get('/users', [UserController::class, 'index']);
 Route::get('/user/edit/{id}', [UserController::class, 'edit']);
 Route::put('/user/update/{id}', [UserController::class, 'update']);
 Route::delete('/user/delete/{id}', [UserController::class, 'destroy']);
+
+
+// TAGS AND CATEGORIES BACKOFFICE
+Route::get('/tagcategoryform', function () {
+    $tags = Tag::all();
+    $categories = Category::all();
+    return view('backoffice.pages.tagsCategories', compact('tags', 'categories'));
+});
+
+Route::post('/tagform/store', [RoleController::class, 'storeTags']);
+Route::post('/categoryform/store', [RoleController::class, 'storeCategories']);
+
 
 
 

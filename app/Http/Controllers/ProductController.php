@@ -25,6 +25,18 @@ class ProductController extends Controller
         return view('backoffice.pages.product', compact('product', 'categories'));
     }
 
+    public function edit($id)
+    {
+
+        $products = Product::find($id);
+        $categories = Category::all();
+        $images = Image::all();
+        return view('backoffice.pages.editproduct', compact('products', 'categories', 'images'));
+    }
+
+
+
+
     public function store(Request $request)
     {
         // Storage::put('public/img/', $request->file('src'));
@@ -32,15 +44,16 @@ class ProductController extends Controller
             'name' => 'required| string | max:255',
             'description' => 'required| string | max:255',
             'category_id' => 'required| string | max:255',
-            // 'stock' => 'required| numeric',
-            // 'price' => 'required| numeric',
+            'stock' => 'required| numeric',
+            'price' => 'required| numeric',
             'images.*' => 'required|mimes:jpeg,jpg,png,webp'
         ]);
         Product::create([
             'name' => $request->name,
             'description' => $request->description,
             'category_id' => $request->category_id,
-            // 'price' => $request->price,
+            'stock' =>  $request->stock,
+            'price' => $request->price,
         ]);
 
         foreach ($request->file('image') as $img) {;
@@ -52,5 +65,17 @@ class ProductController extends Controller
             $image->save();
         }
         return redirect()->back()->with('success', "Vous avez ajouté un membre");
+    }
+
+    public function update(Request $request, $id)
+    {
+        $update = Product::find($id);
+        $update->name = $request->name;
+        $update->description = $request->description;
+        $update->stock = $request->stock;
+        $update->price = $request->price;
+        $update->category_id = $request->category_id;
+        $update->save();
+        return redirect()->back();
     }
 }
