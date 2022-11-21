@@ -39,12 +39,12 @@
                 </datalist> --}}
                 <div>
 
-                    <label for="category">Category</label>
+                    <label for="category_id">Category</label>
                 </div>
                 <div>
 
-                    <select class="p-2 border border-none bg-light " name="category_id" id="">
-                        <option value="{{ old('category_id', $products->category) }}">{{ $products->category->name }}
+                    <select class="p-2 border border-none bg-light" name="category_id" id="">
+                        <option value="{{ $products->category->id }}">{{ $products->category->name }}
                         <option disabled value="">-------
                         </option>
                         @foreach ($categories as $category)

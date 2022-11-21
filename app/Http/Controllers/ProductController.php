@@ -74,6 +74,7 @@ class ProductController extends Controller
         $update->description = $request->description;
         $update->stock = $request->stock;
         $update->price = $request->price;
+        // dd($request);
         $update->category_id = $request->category_id;
         $update->save();
         return redirect()->back();
