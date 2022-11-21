@@ -115,10 +115,13 @@ Route::get('/articleform', [ArticleController::class, 'index']);
 Route::post('/articleform/store', [ArticleController::class, 'store']);
 Route::get('/allarticles', function () {
     $articles = Article::all();
-    return view('backoffice.pages.allproducts', compact('articles'));
+    return view('backoffice.pages.allArticles', compact('articles'));
 });
 
-Route::post('/article/edit/{id}', [ArticleController::class, 'edit']);
+Route::get('/article/edit/{id}', [ArticleController::class, 'edit']);
+Route::put('/article/update/{id}', [ArticleController::class, 'update']);
+Route::delete('/article/delete/{id}', [ArticleController::class, 'destroy']);
+
 
 
 

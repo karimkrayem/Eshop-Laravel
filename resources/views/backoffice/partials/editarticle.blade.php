@@ -3,32 +3,26 @@
         @csrf
         @method('PUT')
         <div>
-            <label for="name">Name</label>
-            <input type="text" name="name" value="{{ old('name', $products->name) }}" id="">
+            <label for="Title">Title</label>
+            <input type="text" name="title" value="{{ old('name', $articles->title) }}" id="">
             {{-- <span>{{ $products->name }}</span> --}}
 
         </div>
         <div>
-            <label for="floating_email">Description</label>
+            <label for="floating_email">Content</label>
         </div>
-        <textarea class="w-100" name="description" id="" cols="30" rows="10">{{ $products->description }}</textarea>
+        <textarea class="w-100" name="content" id="" cols="30" rows="10">{{ $articles->content }}</textarea>
         {{-- <span>{{ $users->email }}</span> --}}
 
         <div class="d-flex justify-content-evenly">
             <div>
 
-                <label for="price">Price</label>
-                <input type="text" value="{{ old('price', $products->price) }}" name="price">
+                <label for="price">Author</label>
+                <input type="text" value="{{ old('', $articles->user->name) }}" name="user_id">
             </div>
 
             {{-- <span>{{ $products->price }}</span> --}}
 
-            <div>
-                <label for="stock   ">Stock</label>
-                <input type="text" name="stock" value="{{ old('stock', $products->stock) }}">
-                {{-- <span>{{ $products->stock }}</span> --}}
-
-            </div>
 
             <div class="d-flex flex-column  ">
 
@@ -37,7 +31,7 @@
                 <datalist id='category'>
                   
                 </datalist> --}}
-                <div>
+                {{-- <div>
 
                     <label for="category_id">Category</label>
                 </div>
@@ -54,30 +48,28 @@
                             @endif
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 {{-- <input type="file" value="{{}}" name="" id=""> --}}
                 {{-- <img src="{{ $products->images }}" alt=""> --}}
 
             </div>
         </div>
+
         <div>
+            <img name="src" src="{{ $articles->src }}" alt="">
+        </div>
+        {{-- <div>
 
             @foreach ($images as $image)
                 @if ($image->product_id == $products->id)
                     <img class="w-25" src="{{ $image->image }}" alt="">
                 @endif
             @endforeach
-        </div>
+        </div> --}}
         <div class="d-flex justify-content-end">
 
             <button class="p-3 m-3 border border-solid  " type="submit">Submit</button>
         </div>
     </form>
 </div>
-$table->id();
-$table->string('title');
-$table->string('content');
-$table->text('src');
-// $table->foreignId('user_id')->nullable()->constrained();
-$table->timestamps();

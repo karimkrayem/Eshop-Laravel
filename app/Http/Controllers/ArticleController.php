@@ -26,8 +26,16 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $articles = Article::find($id);
-        return view('backoffice.pages.editArticles', compact('articles'));
+        return view('backoffice.pages.editarticle', compact('articles'));
     }
+
+    public function destroy($id)
+    {
+        $delete = Article::find($id);
+        $delete->delete();
+        return redirect()->back();
+    }
+
     public function store(Request $request)
     {
         // Storage::put('public/img/', $request->file('src'));
@@ -35,7 +43,8 @@ class ArticleController extends Controller
             // 'User_id' => 'required',
             'title' => 'required',
             'content' => 'required',
-            'src' => 'required'
+            // 'user_id' => 'required',
+            // 'src' => 'required'
         ]);
 
         Image::make(request()->file('src'))->resize(300, 200)->save('src/articles/' . $request->file('src')->hashName());
@@ -45,12 +54,23 @@ class ArticleController extends Controller
         $store->src = $request->file('src')->hashName();
         $store->title = $request->title;
         $store->content = $request->content;
-        // $store->user_id = $request->user_id;
+        $store->user_id = $request->user_id;
         $store->save();
         foreach ($request->tag as $tag) {
 
             $store->tag()->attach($tag);
         }
         return redirect('/');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $update = Article::find($id);
+        $update->title = $request->title;
+        $update->content = $request->content;
+        // $update->src = $request->src;
+        // $update->user_id = $request->user_id;
+        $update->save();
+        return redirect()->back();
     }
 }

@@ -23,6 +23,7 @@ class ArticleFactory extends Factory
             'title' => $this->faker->word,
             'content' => $this->faker->text($maxNbChars = 200),
             'src' => $this->faker->imageUrl(width: 620, height: 480),
+            'user_id' => $this->faker->numberBetween(1, 4)
         ];
     }
 }

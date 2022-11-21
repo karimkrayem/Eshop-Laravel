@@ -32,11 +32,6 @@
 
             <div class="d-flex flex-column  ">
 
-                {{-- <div>{{ $products->category->name }}</div>
-                <input type="text" name="category_id" list="category" value="{{ old('category_id') }}">
-                <datalist id='category'>
-                  
-                </datalist> --}}
                 <div>
 
                     <label for="category_id">Category</label>

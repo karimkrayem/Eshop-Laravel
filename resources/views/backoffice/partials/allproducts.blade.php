@@ -14,7 +14,7 @@
                 <p class="card-text">{{ $product->description }}</p>
                 <p class="card-text">price : {{ $product->price }}</p>
                 <p class="card-text">stock : {{ $product->stock }}</p>
-                <p class="card-text">category: {{ $product->category }}</p>
+                <p class="card-text">category: {{ $product->category->name }}</p>
                 <a href="/product/edit/{{ $product->id }}" class="btn btn-primary">Edit Product</a>
             </div>
 
