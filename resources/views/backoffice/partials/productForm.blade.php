@@ -12,7 +12,6 @@
             <input type="text" name="description">
         </div>
 
-
         <select name="category_id" id="">
 
             @foreach ($categories as $category)

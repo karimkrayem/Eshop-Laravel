@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 use App\Models\Product;
 
@@ -100,6 +101,15 @@ Route::post('/productform/store', [ProductController::class, 'store']);
 // ARTICLE BACKOFFICE
 Route::get('/articleform', [ArticleController::class, 'index']);
 Route::post('/articleform/store', [ArticleController::class, 'store']);
+
+// ROLES BACKOFFICE
+
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/user/edit/{id}', [UserController::class, 'edit']);
+Route::put('/user/update/{id}', [UserController::class, 'update']);
+Route::delete('/user/delete/{id}', [UserController::class, 'destroy']);
+
+
 
 
 
