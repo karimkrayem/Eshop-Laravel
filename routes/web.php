@@ -1,23 +1,24 @@
 <?php
 
 use App\Models\Tag;
+use App\Models\Size;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Size;
 
 use App\Models\Tag as ModelsTag;
+use App\Models\Size as ModelsSize;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
-use App\Models\Size as ModelsSize;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,9 @@ Route::get('/login.html', function () {
 Route::get('/my-account.html', function () {
     return view('pages.my-account');
 });
+
+
+
 
 
 // blog
@@ -137,6 +141,10 @@ Route::put('/article/update/{id}', [ArticleController::class, 'update']);
 Route::delete('/article/delete/{id}', [ArticleController::class, 'destroy']);
 
 
+// TEAM BACKOFFICE
+Route::get('/team', [TeamController::class, 'index']);
+Route::get('/team/edit/{id}', [TeamController::class, 'edit']);
+Route::delete('/team/delete/{id}', [TeamController::class, 'destroy']);
 
 
 // ROLES BACKOFFICE
