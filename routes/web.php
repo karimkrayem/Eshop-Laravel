@@ -41,9 +41,12 @@ Route::get('/', function () {
 
 // shopList
 Route::get('/shop-list.html', function () {
-    $products = Product::all();
+    // $data = ;
+    $products = DB::table('products')->orderBy('id', 'desc')->paginate(5);
     $categories = Category::all();
     $sizes = Size::all();
+
+
     return view('pages.shop-list', compact('products', 'categories', 'sizes'));
 });
 

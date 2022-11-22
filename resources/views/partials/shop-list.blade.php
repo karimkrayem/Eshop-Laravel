@@ -26,7 +26,7 @@
                <div class="col-lg-3 order-2 order-lg-1">
                    <!-- Widget-Search start -->
                    <aside class="widget widget-search mb-30">
-                       <form action="#">
+                       <form>
                            <input type="text" placeholder="Search here..." />
                            <button type="submit">
                                <i class="zmdi zmdi-search"></i>
@@ -117,237 +117,56 @@
                            <div class="tab-pane active" id="list-view">
                                <div class="row shop-list">
                                    <!-- Single-product start -->
-                                   <div class="col-lg-12">
-                                       <div class="single-product clearfix">
-                                           <div class="product-img">
-                                               <span class="pro-label new-label">new</span>
-                                               <span class="pro-price-2">$ 56.20</span>
-                                               <a href="single-product.html"><img src="img/product/6.jpg"
-                                                       alt="" /></a>
-                                           </div>
-                                           <div class="product-info">
-                                               <div class="fix">
-                                                   <h4 class="post-title floatleft"><a href="#">dummy Product
-                                                           name</a></h4>
+                                   @foreach ($products as $product)
+                                       <div class="col-lg-12">
+                                           <div class="single-product clearfix">
+                                               <div class="product-img">
+                                                   <span class="pro-label new-label">new</span>
+                                                   <span class="pro-price-2">$ 56.20</span>
+                                                   <a href="single-product.html"><img src="img/product/6.jpg"
+                                                           alt="" /></a>
                                                </div>
-                                               <div class="fix mb-20">
-                                                   <span class="pro-price">$ 56.20</span>
-                                                   <span class="old-price font-16px ml-10"><del>$ 96.20</del></span>
-                                               </div>
-                                               <div class="product-description">
-                                                   <p>There are many variations of passages of Lorem Ipsum available,
-                                                       but the majority have be suffered alteration in some form, by
-                                                       injected humour, or randomised words which donot look even
-                                                       slightly believable. If you are going to use a passage of Lorem
-                                                       Ipsum, you neede be sure there isn't anythin going to use a
-                                                       passage embarrassing.</p>
-                                               </div>
-                                               <div class="clearfix">
-                                                   <div class="cart-plus-minus">
-                                                       <input type="text" value="02" name="qtybutton"
-                                                           class="cart-plus-minus-box">
+                                               <div class="product-info">
+                                                   <div class="fix">
+                                                       <h4 class="post-title floatleft"><a
+                                                               href="#">{{ $product->name }}</a></h4>
                                                    </div>
-                                                   <div class="product-action clearfix">
-                                                       <a href="#" data-bs-toggle="modal"
-                                                           data-bs-target="#productModal" title="Quick View"><i
-                                                               class="zmdi zmdi-zoom-in"></i></a>
-                                                       <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
-                                                           title="Add To Cart"><i
-                                                               class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                   <div class="fix mb-20">
+                                                       <span class="pro-price">$ 56.20</span>
+                                                       <span class="old-price font-16px ml-10"><del>$ 96.20</del></span>
+                                                   </div>
+                                                   <div class="product-description">
+                                                       <p>{{ $product->description }}</p>
+                                                   </div>
+                                                   <div class="clearfix">
+                                                       <div class="cart-plus-minus">
+                                                           <input type="text" value="02" name="qtybutton"
+                                                               class="cart-plus-minus-box">
+                                                       </div>
+                                                       <div class="product-action clearfix">
+                                                           <a href="#" data-bs-toggle="modal"
+                                                               data-bs-target="#productModal" title="Quick View"><i
+                                                                   class="zmdi zmdi-zoom-in"></i></a>
+                                                           <a href="cart.html" data-bs-toggle="tooltip"
+                                                               data-placement="top" title="Add To Cart"><i
+                                                                   class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                                       </div>
                                                    </div>
                                                </div>
                                            </div>
                                        </div>
-                                   </div>
+                                   @endforeach
+
                                    <!-- Single-product end -->
-                                   <!-- Single-product start -->
-                                   <div class="col-lg-12">
-                                       <div class="single-product clearfix">
-                                           <div class="product-img">
-                                               <span class="pro-label new-label">new</span>
-                                               <span class="pro-price-2">$ 56.20</span>
-                                               <a href="single-product.html"><img src="img/product/3.jpg"
-                                                       alt="" /></a>
-                                           </div>
-                                           <div class="product-info">
-                                               <div class="fix">
-                                                   <h4 class="post-title floatleft"><a href="#">dummy Product
-                                                           name</a></h4>
-                                               </div>
-                                               <div class="fix mb-20">
-                                                   <span class="pro-price">$ 56.20</span>
-                                               </div>
-                                               <div class="product-description">
-                                                   <p>There are many variations of passages of Lorem Ipsum available,
-                                                       but the majority have be suffered alteration in some form, by
-                                                       injected humour, or randomised words which donot look even
-                                                       slightly believable. If you are going to use a passage of Lorem
-                                                       Ipsum, you neede be sure there isn't anythin going to use a
-                                                       passage embarrassing.</p>
-                                               </div>
-                                               <div class="clearfix">
-                                                   <div class="cart-plus-minus">
-                                                       <input type="text" value="02" name="qtybutton"
-                                                           class="cart-plus-minus-box">
-                                                   </div>
-                                                   <div class="product-action clearfix">
-                                                       <a href="#" data-bs-toggle="modal"
-                                                           data-bs-target="#productModal" title="Quick View"><i
-                                                               class="zmdi zmdi-zoom-in"></i></a>
-                                                       <a href="cart.html" data-bs-toggle="tooltip"
-                                                           data-placement="top" title="Add To Cart"><i
-                                                               class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <!-- Single-product end -->
-                                   <!-- Single-product start -->
-                                   <div class="col-lg-12">
-                                       <div class="single-product clearfix">
-                                           <div class="product-img">
-                                               <span class="pro-label new-label">new</span>
-                                               <span class="pro-price-2">$ 56.20</span>
-                                               <a href="single-product.html"><img src="img/product/2.jpg"
-                                                       alt="" /></a>
-                                           </div>
-                                           <div class="product-info">
-                                               <div class="fix">
-                                                   <h4 class="post-title floatleft"><a href="#">dummy Product
-                                                           name</a></h4>
-                                               </div>
-                                               <div class="fix mb-20">
-                                                   <span class="pro-price">$ 56.20</span>
-                                               </div>
-                                               <div class="product-description">
-                                                   <p>There are many variations of passages of Lorem Ipsum available,
-                                                       but the majority have be suffered alteration in some form, by
-                                                       injected humour, or randomised words which donot look even
-                                                       slightly believable. If you are going to use a passage of Lorem
-                                                       Ipsum, you neede be sure there isn't anythin going to use a
-                                                       passage embarrassing.</p>
-                                               </div>
-                                               <div class="clearfix">
-                                                   <div class="cart-plus-minus">
-                                                       <input type="text" value="02" name="qtybutton"
-                                                           class="cart-plus-minus-box">
-                                                   </div>
-                                                   <div class="product-action clearfix">
-                                                       <a href="#" data-bs-toggle="modal"
-                                                           data-bs-target="#productModal" title="Quick View"><i
-                                                               class="zmdi zmdi-zoom-in"></i></a>
-                                                       <a href="cart.html" data-bs-toggle="tooltip"
-                                                           data-placement="top" title="Add To Cart"><i
-                                                               class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <!-- Single-product end -->
-                                   <!-- Single-product start -->
-                                   <div class="col-lg-12">
-                                       <div class="single-product clearfix">
-                                           <div class="product-img">
-                                               <span class="pro-label new-label">new</span>
-                                               <span class="pro-price-2">$ 56.20</span>
-                                               <a href="single-product.html"><img src="img/product/10.jpg"
-                                                       alt="" /></a>
-                                           </div>
-                                           <div class="product-info">
-                                               <div class="fix">
-                                                   <h4 class="post-title floatleft"><a href="#">dummy Product
-                                                           name</a></h4>
-                                               </div>
-                                               <div class="fix mb-20">
-                                                   <span class="pro-price">$ 56.20</span>
-                                                   <span class="old-price font-16px ml-10"><del>$ 96.20</del></span>
-                                               </div>
-                                               <div class="product-description">
-                                                   <p>There are many variations of passages of Lorem Ipsum available,
-                                                       but the majority have be suffered alteration in some form, by
-                                                       injected humour, or randomised words which donot look even
-                                                       slightly believable. If you are going to use a passage of Lorem
-                                                       Ipsum, you neede be sure there isn't anythin going to use a
-                                                       passage embarrassing.</p>
-                                               </div>
-                                               <div class="clearfix">
-                                                   <div class="cart-plus-minus">
-                                                       <input type="text" value="02" name="qtybutton"
-                                                           class="cart-plus-minus-box">
-                                                   </div>
-                                                   <div class="product-action clearfix">
-                                                       <a href="#" data-bs-toggle="modal"
-                                                           data-bs-target="#productModal" title="Quick View"><i
-                                                               class="zmdi zmdi-zoom-in"></i></a>
-                                                       <a href="cart.html" data-bs-toggle="tooltip"
-                                                           data-placement="top" title="Add To Cart"><i
-                                                               class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <!-- Single-product end -->
-                                   <!-- Single-product start -->
-                                   <div class="col-lg-12">
-                                       <div class="single-product clearfix">
-                                           <div class="product-img">
-                                               <span class="pro-label new-label">new</span>
-                                               <span class="pro-price-2">$ 56.20</span>
-                                               <a href="single-product.html"><img src="img/product/12.jpg"
-                                                       alt="" /></a>
-                                           </div>
-                                           <div class="product-info">
-                                               <div class="fix">
-                                                   <h4 class="post-title floatleft"><a href="#">dummy Product
-                                                           name</a></h4>
-                                               </div>
-                                               <div class="fix mb-20">
-                                                   <span class="pro-price">$ 56.20</span>
-                                               </div>
-                                               <div class="product-description">
-                                                   <p>There are many variations of passages of Lorem Ipsum available,
-                                                       but the majority have be suffered alteration in some form, by
-                                                       injected humour, or randomised words which donot look even
-                                                       slightly believable. If you are going to use a passage of Lorem
-                                                       Ipsum, you neede be sure there isn't anythin going to use a
-                                                       passage embarrassing.</p>
-                                               </div>
-                                               <div class="clearfix">
-                                                   <div class="cart-plus-minus">
-                                                       <input type="text" value="02" name="qtybutton"
-                                                           class="cart-plus-minus-box">
-                                                   </div>
-                                                   <div class="product-action clearfix">
-                                                       <a href="#" data-bs-toggle="modal"
-                                                           data-bs-target="#productModal" title="Quick View"><i
-                                                               class="zmdi zmdi-zoom-in"></i></a>
-                                                       <a href="cart.html" data-bs-toggle="tooltip"
-                                                           data-placement="top" title="Add To Cart"><i
-                                                               class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <!-- Single-product end -->
+
+
                                </div>
                            </div>
                        </div>
                        <!-- Pagination start -->
                        <div class="shop-pagination  text-center">
                            <div class="pagination">
-                               <ul>
-                                   <li><a href="#"><i class="zmdi zmdi-long-arrow-left"></i></a></li>
-                                   <li><a href="#">01</a></li>
-                                   <li><a class="active" href="#">02</a></li>
-                                   <li><a href="#">03</a></li>
-                                   <li><a href="#">04</a></li>
-                                   <li><a href="#">05</a></li>
-                                   <li><a href="#"><i class="zmdi zmdi-long-arrow-right"></i></a></li>
-                               </ul>
+                               {{ $products->links() }}
                            </div>
                        </div>
                        <!-- Pagination end -->
