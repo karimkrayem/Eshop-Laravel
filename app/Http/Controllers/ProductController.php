@@ -8,6 +8,7 @@ use App\Models\Tag;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Size;
 use Intervention\Image\Facades\Image as IMG;
 use Illuminate\Http\Request;
 // use Intervention\Image\Facades\Image;
@@ -21,8 +22,10 @@ class ProductController extends Controller
     {
         $product = Product::all();
         $categories = Category::all();
+        $sizes = Size::all();
 
-        return view('backoffice.pages.product', compact('product', 'categories'));
+
+        return view('backoffice.pages.product', compact('product', 'sizes', 'categories'));
     }
 
     public function edit($id)
@@ -30,8 +33,9 @@ class ProductController extends Controller
 
         $products = Product::find($id);
         $categories = Category::all();
+        $sizes = Size::all();
         $images = Image::all();
-        return view('backoffice.pages.editproduct', compact('products', 'categories', 'images'));
+        return view('backoffice.pages.editproduct', compact('products', 'sizes', 'categories', 'images'));
     }
 
     public function destroy($id)
@@ -48,16 +52,19 @@ class ProductController extends Controller
             'name' => 'required| string | max:255',
             'description' => 'required| string | max:255',
             'category_id' => 'required| string | max:255',
-            'stock' => 'required| numeric',
-            'price' => 'required| numeric',
+            'stock' => 'required',
+            'price' => 'required',
+            'size_id' => 'required| string | max:255',
             'images.*' => 'required|mimes:jpeg,jpg,png,webp'
         ]);
         Product::create([
             'name' => $request->name,
             'description' => $request->description,
             'category_id' => $request->category_id,
+            'size_id' => $request->size_id,
             'stock' =>  $request->stock,
             'price' => $request->price,
+
         ]);
 
         foreach ($request->file('image') as $img) {;
@@ -78,6 +85,7 @@ class ProductController extends Controller
         $update->description = $request->description;
         $update->stock = $request->stock;
         $update->price = $request->price;
+        $update->size_id = $request->size_id;
         // dd($request);
         $update->category_id = $request->category_id;
         $update->save();

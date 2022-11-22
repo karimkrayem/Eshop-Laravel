@@ -210,117 +210,36 @@
                        </div>
                        <div class="product-slider style-1 arrow-left-right">
                            <!-- Single-product start -->
-                           <div class="single-product">
-                               <div class="product-img">
-                                   <span class="pro-label new-label">new</span>
-                                   <a href="single-product.html"><img src="img/product/1.jpg" alt="" /></a>
-                                   <div class="product-action clearfix">
-                                       <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
-                                           title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                       <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
-                                           title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                           @foreach ($products as $product)
+                               <div class="single-product">
+                                   <div class="product-img">
+                                       <span class="pro-label new-label">new</span>
+                                       <a href="single-product.html"><img src="{{ $product->image }}"
+                                               alt="" /></a>
+                                       <div class="product-action clearfix">
+                                           <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
+                                               title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
+                                           <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
+                                               title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                                       </div>
                                    </div>
+                                   <div class="product-info clearfix">
+                                       <div class="fix">
+                                           <h4 class="post-title floatleft"><a href="#">{{ $product->name }}</a>
+                                           </h4>
+                                           <p class="floatright hidden-sm d-none d-md-block">
+                                               {{ $product->category->name }}</p>
+                                       </div>
+                                       <div class="fix">
+                                           <span class="pro-price floatleft">{{ $product->price }}</span>
+                                       </div>
+                                   </div>
+
                                </div>
-                               <div class="product-info clearfix">
-                                   <div class="fix">
-                                       <h4 class="post-title floatleft"><a href="#">dummy Product name</a></h4>
-                                       <p class="floatright hidden-sm d-none d-md-block">Furniture</p>
-                                   </div>
-                                   <div class="fix">
-                                       <span class="pro-price floatleft">$ 56.20</span>
-                                   </div>
-                               </div>
-                           </div>
+                           @endforeach
                            <!-- Single-product end -->
                            <!-- Single-product start -->
-                           <div class="single-product">
-                               <div class="product-img">
-                                   <span class="pro-label sale-label">Sale</span>
-                                   <a href="single-product.html"><img src="img/product/2.jpg" alt="" /></a>
-                                   <div class="product-action clearfix">
-                                       <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
-                                           title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                       <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
-                                           title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                   </div>
-                               </div>
-                               <div class="product-info clearfix">
-                                   <div class="fix">
-                                       <h4 class="post-title floatleft"><a href="#">dummy Product name</a></h4>
-                                       <p class="floatright hidden-sm d-none d-md-block">Furniture</p>
-                                   </div>
-                                   <div class="fix">
-                                       <span class="pro-price floatleft">$ 56.20</span>
-                                   </div>
-                               </div>
-                           </div>
-                           <!-- Single-product end -->
-                           <!-- Single-product start -->
-                           <div class="single-product">
-                               <div class="product-img">
-                                   <a href="single-product.html"><img src="img/product/3.jpg" alt="" /></a>
-                                   <div class="product-action clearfix">
-                                       <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
-                                           title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                       <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
-                                           title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                   </div>
-                               </div>
-                               <div class="product-info clearfix">
-                                   <div class="fix">
-                                       <h4 class="post-title floatleft"><a href="#">dummy Product name</a></h4>
-                                       <p class="floatright hidden-sm d-none d-md-block">Furniture</p>
-                                   </div>
-                                   <div class="fix">
-                                       <span class="pro-price floatleft">$ 56.20</span>
-                                   </div>
-                               </div>
-                           </div>
-                           <!-- Single-product end -->
-                           <!-- Single-product start -->
-                           <div class="single-product">
-                               <div class="product-img">
-                                   <a href="single-product.html"><img src="img/product/4.jpg" alt="" /></a>
-                                   <div class="product-action clearfix">
-                                       <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
-                                           title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                       <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
-                                           title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                   </div>
-                               </div>
-                               <div class="product-info clearfix">
-                                   <div class="fix">
-                                       <h4 class="post-title floatleft"><a href="#">dummy Product name</a></h4>
-                                       <p class="floatright hidden-sm d-none d-md-block">Furniture</p>
-                                   </div>
-                                   <div class="fix">
-                                       <span class="pro-price floatleft">$ 56.20</span>
-                                   </div>
-                               </div>
-                           </div>
-                           <!-- Single-product end -->
-                           <!-- Single-product start -->
-                           <div class="single-product">
-                               <div class="product-img">
-                                   <span class="pro-label new-label">new</span>
-                                   <a href="single-product.html"><img src="img/product/3.jpg" alt="" /></a>
-                                   <div class="product-action clearfix">
-                                       <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
-                                           title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                       <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
-                                           title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                   </div>
-                               </div>
-                               <div class="product-info clearfix">
-                                   <div class="fix">
-                                       <h4 class="post-title floatleft"><a href="#">dummy Product name</a></h4>
-                                       <p class="floatright hidden-sm d-none d-md-block">Furniture</p>
-                                   </div>
-                                   <div class="fix">
-                                       <span class="pro-price floatleft">$ 56.20</span>
-                                   </div>
-                               </div>
-                           </div>
+
                            <!-- Single-product end -->
                        </div>
                    </div>
@@ -346,78 +265,47 @@
                <!-- Section-title end -->
                <div class="row">
                    <!-- Single-blog start -->
-                   <div class="col-lg-6">
-                       <div class="single-blog mt-30">
-                           <div class="row">
-                               <div class="col-xl-6 col-md-7">
-                                   <div class="blog-info">
-                                       <div class="post-meta fix">
-                                           <div class="post-date floatleft"><span class="text-dark-red">30</span>
+                   @foreach ($articles as $article)
+                       <div class="col-lg-6">
+                           <div class="single-blog mt-30">
+                               <div class="row">
+                                   <div class="col-xl-6 col-md-7">
+                                       <div class="blog-info">
+                                           <div class="post-meta fix">
+                                               <div class="post-date floatleft"><span class="text-dark-red">30</span>
+                                               </div>
+                                               <div class="post-year floatleft">
+                                                   <p class="text-uppercase text-dark-red mb-0">
+                                                       {{ $article->created_at }}</p>
+                                                   <h4 class="post-title"><a href="#"
+                                                           tabindex="0">{{ $article->title }}</a></h4>
+                                               </div>
                                            </div>
-                                           <div class="post-year floatleft">
-                                               <p class="text-uppercase text-dark-red mb-0">June, 2021</p>
-                                               <h4 class="post-title"><a href="#" tabindex="0">Farniture
-                                                       drawing 2021</a></h4>
+                                           <div class="like-share fix">
+                                               <a href="#"><i class="zmdi zmdi-favorite"></i><span>89
+                                                       Like</span></a>
+                                               <a href="#"><i class="zmdi zmdi-comments"></i><span>59
+                                                       Comments</span></a>
+                                               <a href="#"><i class="zmdi zmdi-share"></i><span>29
+                                                       Share</span></a>
                                            </div>
+                                           <p>{{ $article->content }}</p>
+                                           <a href="#" class="button-2 text-dark-red">Read more...</a>
                                        </div>
-                                       <div class="like-share fix">
-                                           <a href="#"><i class="zmdi zmdi-favorite"></i><span>89
-                                                   Like</span></a>
-                                           <a href="#"><i class="zmdi zmdi-comments"></i><span>59
-                                                   Comments</span></a>
-                                           <a href="#"><i class="zmdi zmdi-share"></i><span>29 Share</span></a>
-                                       </div>
-                                       <p>There are many variations of passages of Lorem Ipsum available, but the
-                                           majority have suffered If you are going to use a passage Lorem Ipsum, you
-                                           alteration in some form.</p>
-                                       <a href="#" class="button-2 text-dark-red">Read more...</a>
                                    </div>
-                               </div>
-                               <div class="col-xl-6 col-md-5">
-                                   <div class="blog-photo">
-                                       <a href="#"><img src="img/blog/1.jpg" alt="" /></a>
+                                   <div class="col-xl-6 col-md-5">
+                                       <div class="blog-photo">
+                                           <a href="#"><img src="{{ $article->src }}" alt="" /></a>
+                                       </div>
                                    </div>
                                </div>
                            </div>
                        </div>
-                   </div>
+                   @endforeach
+
                    <!-- Single-blog end -->
                    <!-- Single-blog start -->
-                   <div class="col-lg-6">
-                       <div class="single-blog mt-30">
-                           <div class="row">
-                               <div class="col-xl-6 col-md-7">
-                                   <div class="blog-info">
-                                       <div class="post-meta fix">
-                                           <div class="post-date floatleft"><span class="text-dark-red">30</span>
-                                           </div>
-                                           <div class="post-year floatleft">
-                                               <p class="text-uppercase text-dark-red mb-0">June, 2021</p>
-                                               <h4 class="post-title"><a href="#" tabindex="0">Farniture
-                                                       drawing 2021</a></h4>
-                                           </div>
-                                       </div>
-                                       <div class="like-share fix">
-                                           <a href="#"><i class="zmdi zmdi-favorite"></i><span>89
-                                                   Like</span></a>
-                                           <a href="#"><i class="zmdi zmdi-comments"></i><span>59
-                                                   Comments</span></a>
-                                           <a href="#"><i class="zmdi zmdi-share"></i><span>29 Share</span></a>
-                                       </div>
-                                       <p>There are many variations of passages of Lorem Ipsum available, but the
-                                           majority have suffered If you are going to use a passage Lorem Ipsum, you
-                                           alteration in some form.</p>
-                                       <a href="#" class="button-2 text-dark-red">Read more...</a>
-                                   </div>
-                               </div>
-                               <div class="col-xl-6 col-md-5">
-                                   <div class="blog-photo">
-                                       <a href="#"><img src="img/blog/2.jpg" alt="" /></a>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
+
                    <!-- Single-blog end -->
                </div>
            </div>

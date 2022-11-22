@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tag;
+use App\Models\Size;
 use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,10 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function size()
+    {
+        return $this->belongsTo(Size::class);
+    }
 
-    protected $fillable = ['name', 'description', 'category_id'];
+    protected $fillable = ['name', 'description', 'category_id', 'size_id', 'price', 'stock'];
 }

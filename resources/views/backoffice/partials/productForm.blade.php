@@ -11,11 +11,26 @@
             <label for="description">Description</label>
             <input type="text" name="description">
         </div>
+        <div>
+            <label for="price">Price</label>
+            <input type="number" name="price">
+        </div>
+        <div>
+            <label for="stock">Stock</label>
+            <input type="number" name="stock">
+        </div>
+
 
         <select name="category_id" id="">
 
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
+        <select name="size_id" id="">
+
+            @foreach ($sizes as $size)
+                <option value="{{ $size->id }}">{{ $size->size }}</option>
             @endforeach
         </select>
 

@@ -15,6 +15,7 @@
                 <p class="card-text">price : {{ $product->price }}</p>
                 <p class="card-text">stock : {{ $product->stock }}</p>
                 <p class="card-text">category: {{ $product->category->name }}</p>
+                <p class="card-text">Size: {{ $product->size }}</p>
                 <a href="/product/edit/{{ $product->id }}" class="btn btn-primary">Edit Product</a>
             </div>
 
@@ -28,10 +29,3 @@
         </div>
     @endforeach
 </div>
-{{-- 
-
-$table->string('name')->nullable();
-$table->string('description')->nullable();
-$table->string('price')->nullable();
-$table->string('stock')->nullable();
-$table->foreignId('category_id')->constrained()->onDelete('cascade'); --}}

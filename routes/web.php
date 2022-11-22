@@ -2,9 +2,13 @@
 
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Article;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Size;
+
 use App\Models\Tag as ModelsTag;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -13,7 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
-use App\Models\Article;
+use App\Models\Size as ModelsSize;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,14 +32,19 @@ use App\Models\Article;
 
 Route::get('/', function () {
     $user = User::all();
-    return view('welcome', compact('user'));
+    $products = Product::all();
+    $articles = DB::table('articles')->take(2)->get();
+    return view('welcome', compact('user', 'products', 'articles'));
 });
 
 
 
 // shopList
 Route::get('/shop-list.html', function () {
-    return view('pages.shop-list');
+    $products = Product::all();
+    $categories = Category::all();
+    $sizes = Size::all();
+    return view('pages.shop-list', compact('products', 'categories', 'sizes'));
 });
 
 // about
@@ -68,7 +77,9 @@ Route::get('/my-account.html', function () {
 
 // blog
 Route::get('/blog.html', function () {
-    return view('pages.blog');
+    $articles = Article::all();
+    $tags = Tag::all();
+    return view('pages.blog', compact('articles', 'tags'));
 });
 
 // single-blog
