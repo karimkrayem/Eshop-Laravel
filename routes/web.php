@@ -80,7 +80,7 @@ Route::get('/my-account.html', function () {
 
 // blog
 Route::get('/blog.html', function () {
-    $articles = Article::all();
+    $articles = DB::table('articles')->orderBy('id', 'desc')->paginate(6);
     $tags = Tag::all();
     return view('pages.blog', compact('articles', 'tags'));
 });

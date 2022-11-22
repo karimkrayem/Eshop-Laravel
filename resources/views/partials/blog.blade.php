@@ -71,14 +71,7 @@
                         <div class="shop-pagination  text-center">
                             <div class="pagination">
                                 <ul>
-                                    <li><a href="#"><i class="zmdi zmdi-long-arrow-left"></i></a></li>
-                                    <li><a href="#">01</a></li>
-                                    <li><a class="active" href="#">02</a></li>
-                                    <li><a href="#">03</a></li>
-                                    <li><a href="#">04</a></li>
-                                    <li><a href="#">05</a></li>
-                                    <li><a class="active" href="#"><i class="zmdi zmdi-long-arrow-right"></i></a>
-                                    </li>
+                                    <a href=""> {{ $articles->links() }}
                                 </ul>
                             </div>
                         </div>
