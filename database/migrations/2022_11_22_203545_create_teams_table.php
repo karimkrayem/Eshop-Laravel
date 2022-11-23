@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('description');
+            $table->string('src');
             $table->foreignId('role_id')->default(3)->constrained();
             $table->timestamps();
         });

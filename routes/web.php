@@ -104,7 +104,6 @@ Route::get('/checkout.html', function () {
     return view('pages.checkout');
 });
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -143,8 +142,11 @@ Route::delete('/article/delete/{id}', [ArticleController::class, 'destroy']);
 
 // TEAM BACKOFFICE
 Route::get('/team', [TeamController::class, 'index']);
+Route::get('/addTeam', [TeamController::class, 'addTeam']);
 Route::get('/team/edit/{id}', [TeamController::class, 'edit']);
 Route::delete('/team/delete/{id}', [TeamController::class, 'destroy']);
+Route::post('/teamform/store', [TeamController::class, 'store']);
+Route::put('/team/update/{id}', [TeamController::class, 'update']);
 
 
 // ROLES BACKOFFICE

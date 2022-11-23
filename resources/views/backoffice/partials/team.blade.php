@@ -6,6 +6,13 @@
                 <span>{{ $team->id }}</span>
             </div>
             <div class="card-body">
+
+
+
+                <div>
+                    {{ $team->src }}
+                    <img src="{{ $team->src }}" alt="">
+                </div>
                 <h5 class="card-title">Name:</h5>
 
                 <p class="card-text">{{ $team->name }}</p>

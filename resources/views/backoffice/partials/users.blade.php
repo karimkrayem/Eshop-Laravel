@@ -6,6 +6,8 @@
 
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $user->email }}</p>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $user->role->role }}</p>
+            <img src="{{ $user->src }}" alt="">
+            <div>{{ $user->src }}</div>
             {{-- @can('check-admin', $user->role_id) --}}
             <a href="/user/edit/{{ $user->id }}">Edit</a>
 
@@ -30,4 +32,3 @@
         </div>
     @endforeach
 </div>
-

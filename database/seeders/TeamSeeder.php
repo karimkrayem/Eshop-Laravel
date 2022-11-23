@@ -20,25 +20,29 @@ class TeamSeeder extends Seeder
                 'name' => 'nani',
                 'surname' => 'wa',
                 'description' => 'zejfnzejf ezjvnzeojvqzoev sdlv,nsojdvhbz oevn',
-                'role_id' => 1
+                'role_id' => 1,
+                'src' => 'test.img'
             ],
             [
                 'name' => 'komo',
                 'surname' => 'yaro',
                 'description' => 'Sazertyuiopsdfghjkl qsdfghjk cfvgbhnj,k;l',
-                'role_id' => 2
+                'role_id' => 2,
+                'src' => 'test.img'
             ],
             [
                 'name' => 'sumi',
                 'surname' => 'mase',
                 'description' => 'Sazertyuiopsdfghjkl qsdfghjk cfvgbhnj,k;l',
-                'role_id' => 3
+                'role_id' => 3,
+                'src' => 'test.img'
             ],
             [
                 'name' => 'Yaro',
                 'surname' => 'Baka',
                 'description' => 'Sazertyuiopsdfghjkl qsdfghjk cfvgbhnj,k;l',
-                'role_id' => 4
+                'role_id' => 4,
+                'src' => 'test.img'
             ],
 
         ]);
