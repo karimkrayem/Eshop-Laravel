@@ -9,6 +9,12 @@
 
         </div>
         <div>
+            <label for="Title">Slug</label>
+            <input type="text" name="slug" value="{{ old('slug', $articles->slug) }}" id="">
+            {{-- <span>{{ $products->name }}</span> --}}
+
+        </div>
+        <div>
             <label for="floating_email">Content</label>
         </div>
         <textarea class="w-100" name="content" id="" cols="30" rows="10">{{ $articles->content }}</textarea>

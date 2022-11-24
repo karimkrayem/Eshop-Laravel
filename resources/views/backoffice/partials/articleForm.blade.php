@@ -18,6 +18,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="grid grid-cols-3 gap-6">
+                            <div class="col-span-3 sm:col-span-2">
+                                <label for="company-website"
+                                    class="block text-sm font-medium text-gray-700">Slug</label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+
+                                    <input type="text" name="slug" id="company-website"
+                                        class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        placeholder="slug">
+                                </div>
+                            </div>
+                        </div>
 
                         <div>
                             <label for="about" class="block text-sm font-medium text-gray-700">Content</label>

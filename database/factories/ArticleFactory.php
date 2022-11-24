@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
+use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,14 +18,17 @@ class ArticleFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->sentence;
+        $slug = Str::slug($title);
         return [
 
 
 
-            'title' => $this->faker->word,
+            'title' => $title,
             'content' => $this->faker->text($maxNbChars = 200),
             'src' => $this->faker->imageUrl(width: 620, height: 480),
-            'user_id' => $this->faker->numberBetween(1, 4)
+            'user_id' => $this->faker->numberBetween(1, 4),
+            'slug' => $slug
         ];
     }
 }

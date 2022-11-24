@@ -52,7 +52,9 @@ class TeamController extends Controller
             'role_id' => ['required', 'string', 'max:255'],
             // 'src' => ['required', 'string', 'max:500'],
         ]);
-        Image::make($request->file('src'))->resize(90, 100)->save('src/team/' . $request->file('src')->hashName());
+        // Image::make(request()->file('src'))->resize(300, 200)->save('src/articles/' . $request->file('src')->hashName());
+
+        Image::make(request()->file('src'))->resize(300, 200)->save('src/team/' . $request->file('src')->hashName());
         $store = new Team();
         $store->src = $request->file('src')->hashName();
         $store->name = $request->name;

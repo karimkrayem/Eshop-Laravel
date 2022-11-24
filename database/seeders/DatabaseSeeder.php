@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             ImageSeeder::class,
             ArticleSeeder::class,
             TeamRoleSeeder::class,
-            TeamSeeder::class,
+            // TeamSeeder::class,
 
             // $this->command->info('Tag Seeder created.')
 

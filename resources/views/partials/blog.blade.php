@@ -38,7 +38,8 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-blog mb-30">
                             <div class="blog-photo">
-                                <a href="#"><img src="{{ $article->src }}" alt="" /></a>
+                                <a href="{{ '/blog' . '/' . $article->slug }}"><img src="{{ $article->src }}"
+                                        alt="" /></a>
                                 <div class="like-share text-center fix">
                                     <a href="#"><i class="zmdi zmdi-favorite"></i><span>89 Like</span></a>
                                     <a href="#"><i class="zmdi zmdi-comments"></i><span>59 Comments</span></a>

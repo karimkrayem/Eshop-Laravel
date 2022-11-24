@@ -43,6 +43,7 @@ class ArticleController extends Controller
             // 'User_id' => 'required',
             'title' => 'required',
             'content' => 'required',
+            'slug' => 'required'
             // 'user_id' => 'required',
             // 'src' => 'required'
         ]);
@@ -55,6 +56,7 @@ class ArticleController extends Controller
         $store->title = $request->title;
         $store->content = $request->content;
         $store->user_id = $request->user_id;
+        $store->slug = $request->slug;
         $store->save();
         foreach ($request->tag as $tag) {
 
@@ -67,10 +69,25 @@ class ArticleController extends Controller
     {
         $update = Article::find($id);
         $update->title = $request->title;
+        $update->slug = $request->slug;
         $update->content = $request->content;
         // $update->src = $request->src;
         // $update->user_id = $request->user_id;
         $update->save();
         return redirect()->back();
+    }
+
+
+    // view sing blog
+    public function viewPost(string $article_slug)
+    {
+        $slug = Article::where('slug', $article_slug)->get();
+        if ($slug) {
+            $post = Article::where('slug', $article_slug)->first();
+            // $article_tag =
+            return view('pages.single-blog', compact('slug', 'post'));
+        } else {
+            return redirect()->back();
+        }
     }
 }

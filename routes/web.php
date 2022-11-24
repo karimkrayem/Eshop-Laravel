@@ -2,11 +2,12 @@
 
 use App\Models\Tag;
 use App\Models\Size;
+use App\Models\Team;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Product;
-use App\Models\Category;
 
+use App\Models\Category;
 use App\Models\Tag as ModelsTag;
 use App\Models\Size as ModelsSize;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +55,8 @@ Route::get('/shop-list.html', function () {
 
 // about
 Route::get('/about.html', function () {
-    return view('pages.about');
+    $teams = Team::all();
+    return view('pages.about', compact('teams'));
 });
 
 
@@ -88,11 +91,14 @@ Route::get('/blog.html', function () {
     $tags = Tag::all();
     return view('pages.blog', compact('articles', 'tags'));
 });
+Route::get('/blog/{article_slug}', [ArticleController::class, 'viewPost']);
 
 // single-blog
 Route::get('/single-blog.html', function () {
     return view('pages.single-blog');
 });
+
+Route::post('comments', [CommentController::class, 'store']);
 // single-product
 Route::get('/single-product.html', function () {
 

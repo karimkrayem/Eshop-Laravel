@@ -28,7 +28,7 @@
                    <div class="col-lg-12">
                        <div class="single-blog mb-30">
                            <div class="blog-photo">
-                               <a href="#"><img src="img/blog/10.jpg" alt="" /></a>
+                               <a href="#"><img src="{{ $post->src }}" alt="" /></a>
                                <div class="like-share fix">
                                    <a href="#"><i class="zmdi zmdi-account"></i><span>Thomas</span></a>
                                    <a href="#"><i class="zmdi zmdi-favorite"></i><span>89 Like</span></a>
@@ -40,25 +40,8 @@
                                </div>
                            </div>
                            <div class="blog-info blog-details-info">
-                               <h4 class="post-title post-title-2"><a href="#">Farniture drawing 2021</a></h4>
-                               <p>On the other hand, we denounce with righteous indignation and dislike men who are so
-                                   beguiled and demoralized by the charms of pleasure of the moment, so blinded by
-                                   desire, that they cannot foresee the pain and trouble that are bound to ensue; and
-                                   equal blame belongs to those who fail in their duty through weakness of will, which
-                                   is the same as saying through shrink ing from toil and pain. These cases are
-                                   perfectly simple and easy to distinguish. In a free hour. On the other hand, we
-                                   denounce with righteous indignation and dislike men who are so beguiled and
-                                   demoralized by the charms of pleasure of the moment, so blinded by desire, that they
-                                   cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs
-                                   to those who fail in their duty through weakness of will</p>
-                               <p>which is the same as saying through shrink ing from toil and pain. These cases are
-                                   perfectly simple and easy to distinguish. In a free hour.On the other hand, we
-                                   denounce with righteous indignation and dislike men who are so beguiled and
-                                   demoralized by the charms of pleasure of the moment, so blinded by desire, that they
-                                   cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs
-                                   to those who fail in their duty through weakness of will, which is the same as saying
-                                   through shrink ing from toil and pain. These cases are perfectly simple and easy to
-                                   distinguish. In a free hour.</p>
+                               <h4 class="post-title post-title-2"><a href="#">{{ $post->title }}</a></h4>
+                               <p>{{ $post->content }}</p>
                                <div class="post-share-tag clearfix mt-40">
                                    <div class="post-share floatleft">
                                        <span class="text-uppercase"><strong>Share</strong></span>
@@ -130,7 +113,7 @@
                                    <div class="leave-review">
                                        <h3 class="tab-title title-border mb-30">Leave your reviw</h3>
                                        <div class="reply-box">
-                                           <form action="#">
+                                           <form method="POST" action="{{ url('comments') }}">
                                                <div class="row">
                                                    <div class="col-md-6">
                                                        <input type="text" placeholder="Your name here..."
@@ -143,7 +126,9 @@
                                                </div>
                                                <div class="row">
                                                    <div class="col-md-12">
-                                                       <textarea class="custom-textarea" name="message" placeholder="Your review here..."></textarea>
+                                                       {{-- <input type="text" value="{{ $post->slug }}"
+                                                           name="" id=""> --}}
+                                                       <textarea class="custom-textarea" required name="comment_body" placeholder="Your review here..."></textarea>
                                                        <button type="submit" data-text="submit review"
                                                            class="button-one submit-button mt-20">submit
                                                            review</button>
