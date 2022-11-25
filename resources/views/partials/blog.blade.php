@@ -34,6 +34,7 @@
             </div>
             <div class="row">
                 <!-- Single-blog start -->
+               
                 @foreach ($articles as $article)
                     <div class="col-lg-4 col-md-6">
                         <div class="single-blog mb-30">

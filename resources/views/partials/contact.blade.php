@@ -2,11 +2,13 @@
    <div class="heading-banner-area">
 
        @foreach ($banners as $banner)
-           <style>
-               .heading-banner-area {
-                   background-image: url("{{ $banner->contact }}");
-               }
-           </style>
+           @if ($banner->id == 3)
+               <style>
+                   .heading-banner-area {
+                       background-image: url("{{ $banner->banner }}");
+                   }
+               </style>
+           @endif
        @endforeach
        <div class="container">
            <div class="row">

@@ -20,4 +20,5 @@ class BackOfficeController extends Controller
         $banners = Banner::all();
         return view('backoffice.partials.banners', compact('banners'));
     }
+
 };

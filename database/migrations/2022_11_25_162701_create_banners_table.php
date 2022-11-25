@@ -15,14 +15,8 @@ return new class extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->text('singleProduct');
-            $table->text('singleBlog');
-            $table->text('productList');
-            $table->text('contact');
-            $table->text('account');
-            $table->text('about');
-            $table->text('login');
-            $table->text('checkout');
+            $table->string('name');
+            $table->text('banner');
             $table->timestamps();
         });
     }

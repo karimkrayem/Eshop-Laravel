@@ -17,14 +17,8 @@ class BannerFactory extends Factory
     public function definition()
     {
         return [
-            'singleProduct' => $this->faker->imageUrl(),
-            'productList' => $this->faker->imageUrl(),
-            'contact' => $this->faker->imageUrl(),
-            'singleBlog' => $this->faker->imageUrl(),
-            'account' => $this->faker->imageUrl(),
-            'about' => $this->faker->imageUrl(),
-            'login' => $this->faker->imageUrl(),
-            'checkout' => $this->faker->imageUrl(),
+            'name' => $this->faker->word,
+            'banner' => $this->faker->imageUrl(),
 
         ];
     }

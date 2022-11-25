@@ -3,11 +3,13 @@
        {{-- <img class="heading-banner-area" src="{{ $banner->singleProduct }}" alt=""> --}}
 
        @foreach ($banners as $banner)
-           <style>
-               .heading-banner-area {
-                   background-image: url("{{ $banner->productList }}");
-               }
-           </style>
+           @if ($banner->id == 6)
+               <style>
+                   .heading-banner-area {
+                       background-image: url("{{ $banner->banner }}");
+                   }
+               </style>
+           @endif
        @endforeach
        <div class="container">
            <div class="row">

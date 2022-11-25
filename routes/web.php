@@ -116,7 +116,8 @@ Route::post('reviews', [ReviewController::class, 'store']);
 
 // checkout
 Route::get('/checkout.html', function () {
-    return view('pages.checkout');
+    $banners = Banner::all();
+    return view('pages.checkout', compact('banners'));
 });
 
 Route::get('/dashboard', function () {

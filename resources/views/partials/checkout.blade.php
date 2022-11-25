@@ -1,5 +1,14 @@
    <!-- HEADING-BANNER START -->
-   <div class="heading-banner-area overlay-bg">
+   <div class="heading-banner-area ">
+       @foreach ($banners as $banner)
+           @if ($banner->id == 2)
+               <style>
+                   .heading-banner-area {
+                       background-image: url({{ $banner->banner }})
+                   }
+               </style>
+           @endif
+       @endforeach
        <div class="container">
            <div class="row">
                <div class="col-md-12">
