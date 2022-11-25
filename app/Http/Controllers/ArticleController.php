@@ -86,7 +86,6 @@ class ArticleController extends Controller
         if ($slug) {
             $post = Article::where('slug', $article_slug)->first();
 
-            // $article_tag =
             return view('pages.single-blog', compact('slug', 'post'));
         } else {
             return redirect()->back();

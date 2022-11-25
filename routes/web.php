@@ -91,16 +91,16 @@ Route::get('/blog.html', function () {
 Route::get('/blog/{article_slug}', [ArticleController::class, 'viewPost']);
 
 // single-blog
-Route::get('/single-blog.html', function () {
-    return view('pages.single-blog');
-});
+// Route::get('/single-blog.html', function () {
+//     return view('pages.single-blog');
+// });
 
 Route::post('comments', [CommentController::class, 'store']);
 // single-product
-Route::get('/single-product.html', function () {
+// Route::get('/single-product.html', function () {
 
-    return view('pages.single-product');
-});
+//     return view('pages.single-product');
+// });
 
 Route::get('/product/{product_slug}', [ProductController::class, 'viewPost']);
 Route::post('reviews', [ReviewController::class, 'store']);

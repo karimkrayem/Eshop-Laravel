@@ -70,7 +70,7 @@
                                <h4 class="post-title floatleft">{{ $post->name }}</h4>
                            </div>
                            <div class="fix mb-20">
-                               <span class="pro-price">$ 56.20</span>
+                               <span class="pro-price">{{ $post->price }}</span>
                            </div>
                            <div class="product-description">
                                <p>{{ $post->description }}</p>
@@ -150,7 +150,7 @@
                            </div>
                            <div class="tab-pane active" id="reviews">
                                <div class="pro-tab-info pro-reviews">
-                                   <div class="customer-review mb-60">
+                                   {{-- <div class="customer-review mb-60">
                                        <h3 class="tab-title title-border mb-30">Customer review</h3>
                                        <ul class="product-comments clearfix">
                                            <li class="mb-30">
@@ -198,13 +198,86 @@
                                                </div>
                                            </li>
                                        </ul>
+                                   </div> --}}
+                                   <div class="customer-review mb-60">
+                                       <h3 class="tab-title title-border mb-30">Customer comments</h3>
+
+                                       @forelse ($post->reviews as $comment)
+                                           @if ($comment->id == 1)
+                                               <ul class="product-comments clearfix">
+                                                   <li class="w-100 mb-30">
+                                                       <div class="pro-reviewer">
+                                                           <img src="{{ $comment->user->src }}" alt="" />
+                                                       </div>
+                                                       <div class="pro-reviewer-comment">
+                                                           <div class="fix">
+                                                               <div class="floatleft mbl-center">
+                                                                   <h5 class="text-uppercase mb-0"><strong>
+                                                                           @if ($comment->user)
+                                                                               {{ $comment->user->name }}
+                                                                           @endif
+                                                                       </strong></h5>
+                                                                   <p class="reply-date">
+                                                                       {{ $comment->created_at->format('d-m-y h-m-s') }}
+                                                                   </p>
+                                                               </div>
+                                                               <div class="comment-reply floatright">
+                                                                   <a href="#"><i
+                                                                           class="zmdi zmdi-mail-reply"></i></a>
+                                                                   <a href="#"><i
+                                                                           class="zmdi zmdi-close"></i></a>
+                                                               </div>
+                                                           </div>
+                                                           <p class="mb-0">
+                                                               {{ $comment->comment_body }}
+
+                                                           </p>
+                                                       </div>
+                                                   </li>
+                                               @else
+                                                   <li class="threaded-comments bg-ba">
+                                                       <div class="pro-reviewer">
+                                                           <img src="img/reviewer/1.jpg" alt="" />
+                                                       </div>
+                                                       <div class="pro-reviewer-comment">
+                                                           <div class="fix">
+                                                               <div class="floatleft mbl-center">
+                                                                   <h5 class="text-uppercase mb-0">
+                                                                       <strong>{{ $comment->user->name }}</strong>
+                                                                   </h5>
+                                                                   <p class="reply-date">
+                                                                       {{ $comment->created_at->format('d-m-y h-m-s') }}
+                                                                       {{-- 27 Jun, 2021 at 2:30pm --}}
+                                                                   </p>
+                                                               </div>
+                                                               <div class="comment-reply floatright">
+                                                                   <a href="#"><i
+                                                                           class="zmdi zmdi-mail-reply"></i></a>
+                                                                   <a href="#"><i
+                                                                           class="zmdi zmdi-close"></i></a>
+                                                               </div>
+                                                           </div>
+                                                           <p class="mb-0">
+                                                               {{ $comment->comment_body }}
+                                                           </p>
+                                                       </div>
+                                                   </li>
+                                               </ul>
+                                           @endif
+                                       @empty
+                                           <h6>No Comments Yet</h6>
+                                       @endforelse
                                    </div>
+
                                    <div class="leave-review">
                                        <h3 class="tab-title title-border mb-30">Leave your review</h3>
 
                                        <div class="reply-box">
-                                           <form action="#">
-                                               <div class="row">
+                                           <form action="{{ url('reviews') }}" method="POST">
+                                               @csrf
+                                               <input type="text" name='product_slug' value="{{ $post->slug }}"
+                                                   name="" id="">
+                                               {{-- <div class="row">
                                                    <div class="col-md-6">
                                                        <input type="text" placeholder="Your name here..."
                                                            name="name" />
@@ -213,10 +286,16 @@
                                                        <input type="text" placeholder="Subject..."
                                                            name="name" />
                                                    </div>
-                                               </div>
+                                               </div> --}}
+                                               @if (session('message'))
+                                                   <div class="primary m-5  ">
+                                                       {{ session('message') }}
+                                                   </div>
+                                               @endif
+
                                                <div class="row">
                                                    <div class="col-md-12">
-                                                       <textarea class="custom-textarea" name="message" placeholder="Your review here..."></textarea>
+                                                       <textarea class="custom-textarea" name="comment_body" placeholder="Your review here..."></textarea>
                                                        <button type="submit" data-text="submit review"
                                                            class="button-one submit-button mt-20">submit
                                                            review</button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class ReviewController extends Controller
             // dd($post);
 
             if ($post) {
-                Product::create([
+                Review::create([
                     'product_id' => $post->id,
                     'user_id' => Auth::user()->id,
                     'comment_body' => $request->comment_body,
