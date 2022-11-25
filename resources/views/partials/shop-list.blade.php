@@ -123,8 +123,8 @@
                                                <div class="product-img">
                                                    <span class="pro-label new-label">new</span>
                                                    <span class="pro-price-2">$ 56.20</span>
-                                                   <a href="single-product.html"><img src="img/product/6.jpg"
-                                                           alt="" /></a>
+                                                   <a href="{{ '/product' . '/' . $product->slug }}"><img
+                                                           src="img/product/6.jpg" alt="" /></a>
                                                </div>
                                                <div class="product-info">
                                                    <div class="fix">

@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
-use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,10 +82,6 @@ Route::get('/my-account.html', function () {
     return view('pages.my-account');
 });
 
-
-
-
-
 // blog
 Route::get('/blog.html', function () {
     $articles = DB::table('articles')->orderBy('id', 'desc')->paginate(6);
@@ -104,6 +101,9 @@ Route::get('/single-product.html', function () {
 
     return view('pages.single-product');
 });
+
+Route::get('/product/{product_slug}', [ProductController::class, 'viewPost']);
+Route::post('reviews', [ReviewController::class, 'store']);
 
 // checkout
 Route::get('/checkout.html', function () {

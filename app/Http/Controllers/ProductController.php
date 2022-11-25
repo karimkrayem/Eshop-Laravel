@@ -91,4 +91,17 @@ class ProductController extends Controller
         $update->save();
         return redirect()->back();
     }
+
+    public function viewPost(string $product_slug)
+    {
+        $slug = Product::where('slug', $product_slug)->get();
+        if ($slug) {
+            $post = Product::where('slug', $product_slug)->first();
+
+            // $article_tag =
+            return view('pages.single-product', compact('slug', 'post'));
+        } else {
+            return redirect()->back();
+        }
+    }
 }

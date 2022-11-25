@@ -93,11 +93,12 @@
                                                            </div>
                                                            <p class="mb-0">
                                                                {{ $comment->comment_body }}
+
                                                            </p>
                                                        </div>
                                                    </li>
                                                @else
-                                                   <li class="w-100 threaded-comments bg-ba">
+                                                   <li class="threaded-comments bg-ba">
                                                        <div class="pro-reviewer">
                                                            <img src="img/reviewer/1.jpg" alt="" />
                                                        </div>
@@ -135,7 +136,8 @@
                                        <div class="reply-box">
                                            <form method="POST" action="{{ url('comments') }}">
                                                @csrf
-                                               {{-- <input type="text " name="article_slug" value="{{ $post->slug }}"> --}}
+                                               <input type="text " class="d-none" name="article_slug"
+                                                   value="{{ $post->slug }}">
                                                {{-- <div class="row">
                                                    <div class="col-md-6">
                                                        <input type="text" placeholder="Your name here..."

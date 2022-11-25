@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
-use App\Models\Comment;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class CommentController extends Controller
+class ReviewController extends Controller
 {
     public function store(Request $request)
     {
@@ -21,12 +20,12 @@ class CommentController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->with('message', 'comment area is mandetory');
             }
-            $post = Article::where('slug', $request->article_slug)->first();
+            $post = Product::where('slug', $request->product_slug)->first();
             // dd($post);
 
             if ($post) {
-                Comment::create([
-                    'article_id' => $post->id,
+                Product::create([
+                    'product_id' => $post->id,
                     'user_id' => Auth::user()->id,
                     'comment_body' => $request->comment_body,
                 ]);
