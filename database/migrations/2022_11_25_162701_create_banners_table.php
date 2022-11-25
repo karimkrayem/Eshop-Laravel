@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->text('single-prodouct');
-            $table->text('product-list');
+            $table->text('singleProduct');
+            $table->text('singleBlog');
+            $table->text('productList');
             $table->text('contact');
-            $table->text('single-blog');
             $table->text('account');
-            $table->text('single-prodouct');
+            $table->text('about');
+            $table->text('login');
+            $table->text('checkout');
             $table->timestamps();
         });
     }

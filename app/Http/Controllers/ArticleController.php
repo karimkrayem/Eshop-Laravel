@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Banner;
 use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -82,11 +83,14 @@ class ArticleController extends Controller
     // view sing blog
     public function viewPost(string $article_slug)
     {
+
+        $banners = Banner::all();
+
         $slug = Article::where('slug', $article_slug)->get();
         if ($slug) {
             $post = Article::where('slug', $article_slug)->first();
 
-            return view('pages.single-blog', compact('slug', 'post'));
+            return view('pages.single-blog', compact('slug', 'post', 'banners'));
         } else {
             return redirect()->back();
         }

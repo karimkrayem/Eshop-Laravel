@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use Str;
 // use Image;
 use App\Models\Tag;
+use App\Models\Size;
 use App\Models\Image;
+use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Size;
-use Intervention\Image\Facades\Image as IMG;
 use Illuminate\Http\Request;
 // use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as IMG;
 
 class ProductController extends Controller
 {
@@ -94,12 +95,14 @@ class ProductController extends Controller
 
     public function viewPost(string $product_slug)
     {
+        $banners = Banner::all();
+
         $slug = Product::where('slug', $product_slug)->get();
         if ($slug) {
             $post = Product::where('slug', $product_slug)->first();
 
             // $article_tag =
-            return view('pages.single-product', compact('slug', 'post'));
+            return view('pages.single-product', compact('slug', 'post', 'banners'));
         } else {
             return redirect()->back();
         }

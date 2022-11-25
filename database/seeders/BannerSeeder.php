@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Banner;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class BannerSeeder extends Seeder
 {
@@ -14,6 +15,6 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Banner::factory()->count(1)->create();
     }
 }

@@ -1,5 +1,14 @@
    <!-- HEADING-BANNER START -->
-   <div class="heading-banner-area overlay-bg">
+   <div class="heading-banner-area ">
+       {{-- <img class="heading-banner-area" src="{{ $banner->singleProduct }}" alt=""> --}}
+
+       @foreach ($banners as $banner)
+           <style>
+               .heading-banner-area {
+                   background-image: url("{{ $banner->productList }}");
+               }
+           </style>
+       @endforeach
        <div class="container">
            <div class="row">
                <div class="col-md-12">

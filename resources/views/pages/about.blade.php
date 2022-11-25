@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-    @extends('partials.about')
+    @include('partials.about')
 @endsection

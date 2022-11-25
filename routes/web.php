@@ -22,6 +22,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
+use App\Models\Banner;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,37 +50,45 @@ Route::get('/shop-list.html', function () {
     $products = DB::table('products')->orderBy('id', 'desc')->paginate(5);
     $categories = Category::all();
     $sizes = Size::all();
+    $banners = Banner::all();
 
 
-    return view('pages.shop-list', compact('products', 'categories', 'sizes'));
+    return view('pages.shop-list', compact('products', 'categories', 'sizes', 'banners'));
 });
 
 // about
 Route::get('/about.html', function () {
     $teams = Team::all();
-    return view('pages.about', compact('teams'));
+    $banners = Banner::all();
+
+    return view('pages.about', compact('teams', 'banners'));
 });
 
 
 // contact
 Route::get('/contact.html', function () {
-    return view('pages.contact');
+    $banners = Banner::all();
+    return view('pages.contact', compact('banners'));
 });
 
 // login
 Route::get('/login.html', function () {
+    $banners = Banner::all();
+
     $login = User::all();
     if (Auth::check()) {
         return redirect()->back();
     } else {
 
-        return view('pages.login', compact('login'));
+        return view('pages.login', compact('login', 'banners'));
     }
 });
 
 // my-account
 Route::get('/my-account.html', function () {
-    return view('pages.my-account');
+    $banners = Banner::all();
+
+    return view('pages.my-account', compact('banners'));
 });
 
 // blog
@@ -175,7 +184,8 @@ Route::post('/categoryform/store', [RoleController::class, 'storeCategories']);
 
 
 
-
+// BANNERS BACKOFFICE
+Route::get('/banners', [BackOfficeController::class, 'banners']);
 
 
 
