@@ -30,7 +30,8 @@
                            <div class="blog-photo">
                                <a href="#"><img src="{{ $post->src }}" alt="" /></a>
                                <div class="like-share fix">
-                                   <a href="#"><i class="zmdi zmdi-account"></i><span>Thomas</span></a>
+                                   <a href="#"><i
+                                           class="zmdi zmdi-account"></i><span>{{ $post->user->name }}</span></a>
                                    <a href="#"><i class="zmdi zmdi-favorite"></i><span>89 Like</span></a>
                                    <a href="#"><i class="zmdi zmdi-comments"></i><span>59 Comments</span></a>
                                </div>
@@ -61,60 +62,81 @@
                                    </div>
                                </div>
                                <div class="pro-reviews mt-60">
+
                                    <div class="customer-review mb-60">
                                        <h3 class="tab-title title-border mb-30">Customer comments</h3>
-                                       <ul class="product-comments clearfix">
-                                           <li class="mb-30">
-                                               <div class="pro-reviewer">
-                                                   <img src="img/reviewer/1.jpg" alt="" />
-                                               </div>
-                                               <div class="pro-reviewer-comment">
-                                                   <div class="fix">
-                                                       <div class="floatleft mbl-center">
-                                                           <h5 class="text-uppercase mb-0"><strong>Gerald
-                                                                   Barnes</strong></h5>
-                                                           <p class="reply-date">27 Jun, 2021 at 2:30pm</p>
+
+                                       @forelse ($post->comments as $comment)
+                                           @if ($comment->id == 1)
+                                               <ul class="product-comments clearfix">
+                                                   <li class="w-100 mb-30">
+                                                       <div class="pro-reviewer">
+                                                           <img src="{{ $comment->user->src }}" alt="" />
                                                        </div>
-                                                       <div class="comment-reply floatright">
-                                                           <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                                           <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                       <div class="pro-reviewer-comment">
+                                                           <div class="fix">
+                                                               <div class="floatleft mbl-center">
+                                                                   <h5 class="text-uppercase mb-0"><strong>
+                                                                           @if ($comment->user)
+                                                                               {{ $comment->user->name }}
+                                                                           @endif
+                                                                       </strong></h5>
+                                                                   <p class="reply-date">
+                                                                       {{ $comment->created_at->format('d-m-y h-m-s') }}
+                                                                   </p>
+                                                               </div>
+                                                               <div class="comment-reply floatright">
+                                                                   <a href="#"><i
+                                                                           class="zmdi zmdi-mail-reply"></i></a>
+                                                                   <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                               </div>
+                                                           </div>
+                                                           <p class="mb-0">
+                                                               {{ $comment->comment_body }}
+                                                           </p>
                                                        </div>
-                                                   </div>
-                                                   <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                       elit. Integer accumsan egestas elese ifend. Phasellus a felis at
-                                                       est bibendum feugiat ut eget eni Praesent et messages in con
-                                                       sectetur posuere dolor non.</p>
-                                               </div>
-                                           </li>
-                                           <li class="threaded-comments">
-                                               <div class="pro-reviewer">
-                                                   <img src="img/reviewer/1.jpg" alt="" />
-                                               </div>
-                                               <div class="pro-reviewer-comment">
-                                                   <div class="fix">
-                                                       <div class="floatleft mbl-center">
-                                                           <h5 class="text-uppercase mb-0"><strong>Gerald
-                                                                   Barnes</strong></h5>
-                                                           <p class="reply-date">27 Jun, 2021 at 2:30pm</p>
+                                                   </li>
+                                               @else
+                                                   <li class="w-100 threaded-comments bg-ba">
+                                                       <div class="pro-reviewer">
+                                                           <img src="img/reviewer/1.jpg" alt="" />
                                                        </div>
-                                                       <div class="comment-reply floatright">
-                                                           <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                                           <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                       <div class="pro-reviewer-comment">
+                                                           <div class="fix">
+                                                               <div class="floatleft mbl-center">
+                                                                   <h5 class="text-uppercase mb-0">
+                                                                       <strong>{{ $comment->user->name }}</strong>
+                                                                   </h5>
+                                                                   <p class="reply-date">
+                                                                       {{ $comment->created_at->format('d-m-y h-m-s') }}
+                                                                       {{-- 27 Jun, 2021 at 2:30pm --}}
+                                                                   </p>
+                                                               </div>
+                                                               <div class="comment-reply floatright">
+                                                                   <a href="#"><i
+                                                                           class="zmdi zmdi-mail-reply"></i></a>
+                                                                   <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                                               </div>
+                                                           </div>
+                                                           <p class="mb-0">
+                                                               {{ $comment->comment_body }}
+                                                           </p>
                                                        </div>
-                                                   </div>
-                                                   <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                       elit. Integer accumsan egestas elese ifend. Phasellus a felis at
-                                                       est bibendum feugiat ut eget eni Praesent et messages in con
-                                                       sectetur posuere dolor non.</p>
-                                               </div>
-                                           </li>
-                                       </ul>
+                                                   </li>
+                                               </ul>
+                                           @endif
+                                       @empty
+                                           <h6>No Comments Yet</h6>
+                                       @endforelse
                                    </div>
+
                                    <div class="leave-review">
                                        <h3 class="tab-title title-border mb-30">Leave your reviw</h3>
                                        <div class="reply-box">
                                            <form method="POST" action="{{ url('comments') }}">
-                                               <div class="row">
+                                               @csrf
+                                               {{-- <input type="text " name="article_slug" value="{{ $post->slug }}"> --}}
+                                               {{-- <div class="row">
                                                    <div class="col-md-6">
                                                        <input type="text" placeholder="Your name here..."
                                                            name="name" />
@@ -123,7 +145,13 @@
                                                        <input type="text" placeholder="Your email here..."
                                                            name="email" />
                                                    </div>
-                                               </div>
+                                               </div> --}}
+
+                                               @if (session('message'))
+                                                   <div class="primary m-5  ">
+                                                       {{ session('message') }}
+                                                   </div>
+                                               @endif
                                                <div class="row">
                                                    <div class="col-md-12">
                                                        {{-- <input type="text" value="{{ $post->slug }}"
@@ -135,6 +163,7 @@
                                                    </div>
                                                </div>
                                            </form>
+
                                        </div>
                                    </div>
                                </div>

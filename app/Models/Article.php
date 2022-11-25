@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Comment;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
 {
@@ -14,9 +16,19 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function users()
+    {
+        return $this->belongsTo(Comment::class);
+    }
 
     public function tag()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function comments()
+
+    {
+        return $this->hasMany(Comment::class, 'article_id', 'id');
     }
 }

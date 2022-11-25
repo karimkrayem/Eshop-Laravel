@@ -20,6 +20,8 @@
    </div>
    <!-- HEADING-BANNER END -->
    <!-- SHOPPING-CART-AREA START -->
+
+
    <div class="login-area  pt-80 pb-80">
        <div class="container">
 
@@ -27,9 +29,15 @@
                <form method="POST" action="{{ route('login') }}">
                    @csrf
                    <div class="col-lg-6">
+
                        <div class="customer-login text-left">
                            <h4 class="title-1 title-border text-uppercase mb-30">Registered customers</h4>
                            <p class="text-gray">If you have an account with us, Please login!</p>
+                           @if (session('message'))
+                               <div class="primary m-3 ">
+                                   {{ session('message') }}
+                               </div>
+                           @endif
                            <input type="text" autofocus placeholder="Email here..." :value="old('email')"
                                name="email">
                            <input type="password" name="password" placeholder="Password">

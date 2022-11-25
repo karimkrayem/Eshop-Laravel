@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Article;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Comment extends Model
 {
@@ -11,4 +13,13 @@ class Comment extends Model
 
     protected $table = 'comments';
     protected $fillable = ['user_id', 'article_id', 'comment_body'];
+
+    public function post()
+    {
+        return $this->belongsTo(Article::class, 'article_id', 'id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

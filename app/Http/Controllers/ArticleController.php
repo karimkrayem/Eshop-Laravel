@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -84,6 +85,7 @@ class ArticleController extends Controller
         $slug = Article::where('slug', $article_slug)->get();
         if ($slug) {
             $post = Article::where('slug', $article_slug)->first();
+
             // $article_tag =
             return view('pages.single-blog', compact('slug', 'post'));
         } else {
