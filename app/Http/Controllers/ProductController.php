@@ -29,6 +29,30 @@ class ProductController extends Controller
         return view('backoffice.pages.product', compact('product', 'sizes', 'categories'));
     }
 
+    public function shopList()
+    {
+
+
+        // $data = ;
+        $products = DB::table('products')->orderBy('id', 'desc')->paginate(5);
+        $images = Image::all();
+        $categories = Category::all();
+        $sizes = Size::all();
+        $banners = Banner::all();
+        // $productss = Product::where('category_id', $id);
+
+        return view('pages.shop-list', compact('products', 'categories', 'sizes', 'banners', 'images'));
+    }
+
+
+
+    public function categories(Request $request)
+    {
+
+
+        // return Product::filter($request)->get();
+    }
+
     public function edit($id)
     {
 
@@ -79,6 +103,8 @@ class ProductController extends Controller
         return redirect()->back()->with('success', "Vous avez ajouté un membre");
     }
 
+
+
     public function update(Request $request, $id)
     {
         $update = Product::find($id);
@@ -87,7 +113,6 @@ class ProductController extends Controller
         $update->stock = $request->stock;
         $update->price = $request->price;
         $update->size_id = $request->size_id;
-        // dd($request);
         $update->category_id = $request->category_id;
         $update->save();
         return redirect()->back();
@@ -107,4 +132,5 @@ class ProductController extends Controller
             return redirect()->back();
         }
     }
+
 }

@@ -6,9 +6,10 @@
         @if ($banner->id == 1)
             <style>
                 .heading-banner-area {
-                    background-image: url("{{ $banner->banner }}");
+                    background-image: url("src/banners/{{ $banner->banner }}");
                 }
             </style>
+            <img src="{{ $banner->banner }}" alt="">
         @endif
     @endforeach
     <div class="container">

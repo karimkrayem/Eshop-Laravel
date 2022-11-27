@@ -53,7 +53,8 @@
                        <div id="cat-treeview" class="widget-info product-cat boxscrol2">
                            @foreach ($categories as $category)
                                <ul>
-                                   <li><span>{{ $category->name }}</span>
+                                   <li><a href="/shop-list.html"><span
+                                               class="kk-category">{{ $category->name }}</span></a>
                                    </li>
 
                                </ul>
@@ -92,7 +93,7 @@
                        <div class="tab-content">
                            <div class="tab-pane" id="grid-view">
                                <div class="row">
-                                   @foreach ($products as $product)
+                                   @forelse ($products as $product)
                                        <!-- Single-product start -->
                                        <div class="col-lg-4 col-md-6">
                                            <div class="single-product">
@@ -118,11 +119,12 @@
                                                </div>
                                            </div>
                                        </div>
-                                   @endforeach
+
+                                   @empty
+                                       <h4>No Products Available for {{ $categories->name }}</h4>
+                                   @endforelse
 
                                    <!-- Single-product end -->
-
-
                                </div>
                            </div>
                            <div class="tab-pane active" id="list-view">
@@ -186,5 +188,14 @@
                </div>
            </div>
        </div>
+
+       <script>
+           const category = document.querySelectorAll('.kk-category')
+           category.addEventListener('onClick', function() {
+               DB
+           })
+           for (let i = 0; i >= 0; i++)
+               console.log(category[i].innerText);
+       </script>
    </div>
    <!-- PRODUCT-AREA END -->

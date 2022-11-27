@@ -1,13 +1,18 @@
 <?php
 
 use App\Models\Tag;
+use App\Models\Info;
 use App\Models\Size;
+use App\Models\Star;
 use App\Models\Team;
 use App\Models\User;
+
+use App\Models\Image;
+use App\Models\Banner;
 use App\Models\Article;
 use App\Models\Product;
-
 use App\Models\Category;
+use App\Models\BackOffice;
 use App\Models\Tag as ModelsTag;
 use App\Models\Size as ModelsSize;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +27,6 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
-use App\Models\Banner;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,24 +41,33 @@ use App\Models\Banner;
 
 Route::get('/', function () {
     $user = User::all();
+    $star = Star::all();
     $products = Product::all();
     $articles = DB::table('articles')->take(2)->get();
-    return view('welcome', compact('user', 'products', 'articles'));
+    $last = Product::latest()->first();
+    $infos = Info::all();
+
+    return view('welcome', compact('user', 'infos', 'star', 'products', 'articles', 'last'));
 });
 
 
 
 // shopList
-Route::get('/shop-list.html', function () {
-    // $data = ;
-    $products = DB::table('products')->orderBy('id', 'desc')->paginate(5);
-    $categories = Category::all();
-    $sizes = Size::all();
-    $banners = Banner::all();
+// Route::get('/shop-list.html', function () {
+//     // $data = ;
+//     $images = Image::all();
+//     $products = DB::table('products')->orderBy('id', 'desc')->paginate(5);
+//     $categories = Category::all();
+//     $sizes = Size::all();
+//     $banners = Banner::all();
+//     return view('pages.shop-list', compact('products', 'categories', 'sizes', 'banners', 'images'));
+// });
+
+Route::get('/shop-list.html', [ProductController::class, 'shopList'])->name('shopList');
+// Route::get('/shop-list.html', [ProductController::class, 'categories']);
 
 
-    return view('pages.shop-list', compact('products', 'categories', 'sizes', 'banners'));
-});
+// Route::get('/shop-list.html', [ProductController::class, ' categories']);
 
 // about
 Route::get('/about.html', function () {
@@ -98,19 +111,7 @@ Route::get('/blog.html', function () {
     return view('pages.blog', compact('articles', 'tags'));
 });
 Route::get('/blog/{article_slug}', [ArticleController::class, 'viewPost']);
-
-// single-blog
-// Route::get('/single-blog.html', function () {
-//     return view('pages.single-blog');
-// });
-
 Route::post('comments', [CommentController::class, 'store']);
-// single-product
-// Route::get('/single-product.html', function () {
-
-//     return view('pages.single-product');
-// });
-
 Route::get('/product/{product_slug}', [ProductController::class, 'viewPost']);
 Route::post('reviews', [ReviewController::class, 'store']);
 
@@ -128,6 +129,10 @@ Route::get('/dashboard', function () {
 // BACKOFFICE 
 
 Route::get('/backoffice', [BackOfficeController::class, 'index']);
+Route::put('/star/update/{id}', [BackOfficeController::class, 'star']);
+Route::get('/star/edit/{id}', [BackOfficeController::class, 'edit']);
+
+
 
 // PRODUCT BACKOFFICE 
 Route::get('/productform', [ProductController::class, 'index']);
@@ -187,6 +192,10 @@ Route::post('/categoryform/store', [RoleController::class, 'storeCategories']);
 
 // BANNERS BACKOFFICE
 Route::get('/banners', [BackOfficeController::class, 'banners']);
+Route::get('/banner/edit/{id}', [BackOfficeController::class, 'editBanner']);
+Route::put('/banner/update/{id}', [BackOfficeController::class, 'updateBanner']);
+
+
 
 
 

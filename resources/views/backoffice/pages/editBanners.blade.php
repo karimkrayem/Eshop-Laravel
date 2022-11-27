@@ -1,5 +1,4 @@
 @extends('backoffice.layouts.app')
 @section('content')
-@include('backoffice.pages.editBanners')
-    
+    @include('backoffice.partials.editBanners')
 @endsection

@@ -7,16 +7,18 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ $banner->name }}</h5>
-                <img src="{{ $banner->banner }}" alt="">
+                <img src="src/banners/{{ $banner->banner }}" alt="">
 
                 {{-- <a href="/article/edit/{{ $article->id }}" class="btn btn-primary">Edit Product</a> --}}
             </div>
-
+            {{-- 
             <form action="/banner/delete/{{ $banner->id }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger " type="submit">Delete</button>
-            </form>
+            </form> --}}
+
+            <a href="/banner/edit/{{ $banner->id }}" class="btn btn-primary">Edit Banner</a>
         </div>
     @endforeach
 </div>
