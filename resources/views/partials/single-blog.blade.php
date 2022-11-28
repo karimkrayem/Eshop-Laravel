@@ -43,7 +43,8 @@
                                    <a href="#"><i
                                            class="zmdi zmdi-account"></i><span>{{ $post->user->name }}</span></a>
                                    <a href="#"><i class="zmdi zmdi-favorite"></i><span>89 Like</span></a>
-                                   <a href="#"><i class="zmdi zmdi-comments"></i><span>59 Comments</span></a>
+                                   <a href="#"><i class="zmdi zmdi-comments"></i><span>{{ $numberPost }}
+                                           Comments</span></a>
                                </div>
                                <div class="post-date post-date-2">
                                    <span class="text-dark-red">30</span>

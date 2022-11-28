@@ -19,6 +19,10 @@
             <label for="stock">Stock</label>
             <input type="number" name="stock">
         </div>
+        <div>
+            <label for="slug">Slug</label>
+            <input type="string" name="slug">
+        </div>
 
 
         <select name="category_id" id="">

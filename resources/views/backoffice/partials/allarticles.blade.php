@@ -32,10 +32,3 @@
         </div>
     @endforeach
 </div>
-{{-- 
-
-$table->string('name')->nullable();
-$table->string('description')->nullable();
-$table->string('price')->nullable();
-$table->string('stock')->nullable();
-$table->foreignId('category_id')->constrained()->onDelete('cascade'); --}}

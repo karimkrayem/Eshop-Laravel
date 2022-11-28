@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\Info;
 use App\Models\User;
 use App\Models\Banner;
 use App\Models\Article;
@@ -81,16 +82,17 @@ class ArticleController extends Controller
 
 
     // view sing blog
-    public function viewPost(string $article_slug)
+    public function viewPost(string $article_slug, $id)
     {
 
         $banners = Banner::all();
-
+        $infos = Info::all();
+        $numberPost = Comment::where('article_id', $id)->count();
         $slug = Article::where('slug', $article_slug)->get();
         if ($slug) {
             $post = Article::where('slug', $article_slug)->first();
 
-            return view('pages.single-blog', compact('slug', 'post', 'banners'));
+            return view('pages.single-blog', compact('slug', 'post', 'numberPost', 'banners', 'infos'));
         } else {
             return redirect()->back();
         }

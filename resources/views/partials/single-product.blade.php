@@ -285,8 +285,8 @@
                                        <div class="reply-box">
                                            <form action="{{ url('reviews') }}" method="POST">
                                                @csrf
-                                               <input type="text" name='product_slug' value="{{ $post->slug }}"
-                                                   name="" id="">
+                                               <input type="text" class="d-none" name='product_slug'
+                                                   value="{{ $post->slug }}" name="" id="">
                                                {{-- <div class="row">
                                                    <div class="col-md-6">
                                                        <input type="text" placeholder="Your name here..."

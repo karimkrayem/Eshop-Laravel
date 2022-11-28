@@ -32,8 +32,18 @@
                <!-- Slider-banner start -->
                <div class="slider-banner">
                    <div class="single-banner banner-1">
+                       {{-- <style>
+                           .img-home-kk {
+                               width: 450px;
+                               height: 350px;
 
-                       <a class="banner-thumb" href="#"><img src="img/banner/1.jpg" alt="" /></a>
+                           }
+                       </style> --}}
+                       @if ($images->product_id == $last->id)
+                           <a class="banner-thumb" href="#"><img class="img-home-kk"
+                                   src="src/products/{{ $images->image }}" alt="" /></a>
+                       @endif
+
                        <span class="pro-label new-label">new</span>
                        <span class="price">${{ $last->price }}</span>
                        <div class="banner-brief">
@@ -45,12 +55,19 @@
                    </div>
                    <div class="single-banner banner-2">
                        @foreach ($star as $star)
-                           <a class="banner-thumb" href="#"><img src="img/banner/2.jpg" alt="" /></a>
-                           <div class="banner-brief">
-                               <h2 class="banner-title"><a href="#">{{ $star->product->name }}</a></h2>
-                               <p class="hidden-md hidden-sm d-none d-md-block">{{ $star->product->description }}</p>
-                               <a href="#" class="button-one font-16px" data-text="Buy now">Buy now</a>
-                           </div>
+                           @foreach ($test as $imagess)
+                               @if ($star->product->id == $imagess->id)
+                                   <a class="banner-thumb" href="#"><img src="src/products/{{ $imagess->image }}"
+                                           alt="" /></a>
+                               @endif
+
+                               <div class="banner-brief">
+                                   <h2 class="banner-title"><a href="#">{{ $star->product->name }}</a></h2>
+                                   <p class="hidden-md hidden-sm d-none d-md-block">{{ $star->product->description }}
+                                   </p>
+                                   <a href="#" class="button-one font-16px" data-text="Buy now">Buy now</a>
+                               </div>
+                           @endforeach
                        @endforeach
                    </div>
                </div>
@@ -61,9 +78,12 @@
                <div class="slider-area">
                    <div class="bend niceties preview-2">
                        <div id="ensign-nivoslider" class="slides">
-                           <img src="img/slider/slider-1/1.jpg" alt="" title="#slider-direction-1" />
-                           <img src="img/slider/slider-1/2.jpg" alt="" title="#slider-direction-2" />
-                           <img src="img/slider/slider-1/3.jpg" alt="" title="#slider-direction-3" />
+                           @foreach ($carousels as $carousel)
+                               <img src="src/carousels/{{ $carousel->carousel }}" alt=""
+                                   title="#slider-direction-{{ $carousel->id }}" />
+                           @endforeach
+                           {{-- <img src="img/slider/slider-1/2.jpg" alt="" title="#slider-direction-2" />
+                               <img src="img/slider/slider-1/3.jpg" alt="" title="#slider-direction-3" /> --}}
                        </div>
                        <!-- direction 1 -->
                        <div id="slider-direction-1" class="t-cn slider-direction">
@@ -213,12 +233,22 @@
                        </div>
                        <div class="product-slider style-1 arrow-left-right">
                            <!-- Single-product start -->
+                           {{-- @foreach ($imagess as $imagess) --}}
                            @foreach ($products as $product)
+                               {{-- @foreach ($test as $image) --}}
+                               {{-- {{ dd($image->product_id) }} --}}
+                               {{-- @if ($product->id == $image->product_id) --}}
+
+                               {{-- @endif --}}
+                               {{-- @endforeach --}}
+                               {{-- @foreach ($imagess as $image) --}}
                                <div class="single-product">
                                    <div class="product-img">
                                        <span class="pro-label new-label">new</span>
-                                       <a href="single-product.html"><img src="{{ $product->image }}"
+                                       <a href="single-product.html">
+                                           <img src="src/products/{{ $test->where('product_id', $product->id)->first()->image }}"
                                                alt="" /></a>
+
                                        <div class="product-action clearfix">
                                            <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
                                                title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
@@ -228,18 +258,22 @@
                                    </div>
                                    <div class="product-info clearfix">
                                        <div class="fix">
-                                           <h4 class="post-title floatleft"><a href="#">{{ $product->name }}</a>
+                                           <h4 class="post-title floatleft"><a
+                                                   href="#">{{ $product->name }}</a>
                                            </h4>
                                            <p class="floatright hidden-sm d-none d-md-block">
                                                {{ $product->category->name }}</p>
                                        </div>
                                        <div class="fix">
-                                           <span class="pro-price floatleft">{{ $product->price }}</span>
+                                           <span class="pro-price floatleft">$ {{ $product->price }}</span>
+
                                        </div>
                                    </div>
 
                                </div>
+                               {{-- @endforeach --}}
                            @endforeach
+                           {{-- @endforeach --}}
                            <!-- Single-product end -->
                            <!-- Single-product start -->
 

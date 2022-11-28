@@ -31,10 +31,10 @@ class Product extends Model
         return $this->belongsTo(Size::class);
     }
 
-    // public function productImages()
-    // {
-    //     return $this->hasMany(Image::class, 'Product_id', 'id');
-    // }
+    public function productImages()
+    {
+        return $this->hasMany(Image::class, 'Product_id', 'id');
+    }
 
     public function reviews()
 
@@ -44,5 +44,5 @@ class Product extends Model
 
 
 
-    protected $fillable = ['name', 'description', 'category_id', 'size_id', 'price', 'stock', 'user_id'];
+    protected $fillable = ['name', 'description', 'category_id', 'slug', 'size_id', 'price', 'stock', 'user_id'];
 }

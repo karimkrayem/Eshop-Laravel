@@ -1,4 +1,4 @@
 @extends('backoffice.layouts.app')
 @section('content')
-@include('backoffice.partials.allproducts')    
+    @include('backoffice.partials.allproducts')
 @endsection

@@ -10,7 +10,9 @@ use App\Models\User;
 use App\Models\Image;
 use App\Models\Banner;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\Product;
+use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\BackOffice;
 use App\Models\Tag as ModelsTag;
@@ -46,8 +48,12 @@ Route::get('/', function () {
     $articles = DB::table('articles')->take(2)->get();
     $last = Product::latest()->first();
     $infos = Info::all();
+    $test = Image::all();
+    $images = Image::latest()->first();
+    $carousels = Carousel::all();
 
-    return view('welcome', compact('user', 'infos', 'star', 'products', 'articles', 'last'));
+
+    return view('welcome', compact('user', 'test', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
 });
 
 
@@ -64,7 +70,7 @@ Route::get('/', function () {
 // });
 
 Route::get('/shop-list.html', [ProductController::class, 'shopList'])->name('shopList');
-// Route::get('/shop-list.html', [ProductController::class, 'categories']);
+Route::get('/shop-list.html/category/{id}', [ProductController::class, 'categories']);
 
 
 // Route::get('/shop-list.html', [ProductController::class, ' categories']);
@@ -73,6 +79,7 @@ Route::get('/shop-list.html', [ProductController::class, 'shopList'])->name('sho
 Route::get('/about.html', function () {
     $teams = Team::all();
     $banners = Banner::all();
+
 
     return view('pages.about', compact('teams', 'banners'));
 });
@@ -87,30 +94,37 @@ Route::get('/contact.html', function () {
 // login
 Route::get('/login.html', function () {
     $banners = Banner::all();
+    $infos = Info::all();
+
 
     $login = User::all();
     if (Auth::check()) {
         return redirect()->back();
     } else {
 
-        return view('pages.login', compact('login', 'banners'));
+        return view('pages.login', compact('login', 'banners', 'infos'));
     }
 });
 
 // my-account
 Route::get('/my-account.html', function () {
     $banners = Banner::all();
+    $infos = Info::all();
 
-    return view('pages.my-account', compact('banners'));
+
+    return view('pages.my-account', compact('banners', 'infos'));
 });
 
 // blog
 Route::get('/blog.html', function () {
     $articles = DB::table('articles')->orderBy('id', 'desc')->paginate(6);
     $tags = Tag::all();
-    return view('pages.blog', compact('articles', 'tags'));
+    $comments = Comment::all();
+    $infos = Info::all();
+
+    return view('pages.blog', compact('articles', 'tags', 'infos', 'comments'));
 });
-Route::get('/blog/{article_slug}', [ArticleController::class, 'viewPost']);
+Route::get('/blog/{article_slug}/{id}', [ArticleController::class, 'viewPost']);
 Route::post('comments', [CommentController::class, 'store']);
 Route::get('/product/{product_slug}', [ProductController::class, 'viewPost']);
 Route::post('reviews', [ReviewController::class, 'store']);
@@ -139,7 +153,8 @@ Route::get('/productform', [ProductController::class, 'index']);
 Route::post('/productform/store', [ProductController::class, 'store']);
 Route::get('/allproducts', function () {
     $products = Product::all();
-    return view('backoffice.pages.allproducts', compact('products'));
+    $images = Image::all();
+    return view('backoffice.pages.allproducts', compact('products', 'images'));
 });
 
 Route::get('/product/edit/{id}', [ProductController::class, 'edit']);
@@ -194,6 +209,15 @@ Route::post('/categoryform/store', [RoleController::class, 'storeCategories']);
 Route::get('/banners', [BackOfficeController::class, 'banners']);
 Route::get('/banner/edit/{id}', [BackOfficeController::class, 'editBanner']);
 Route::put('/banner/update/{id}', [BackOfficeController::class, 'updateBanner']);
+
+// CAROUSEL BACKOFFICE
+Route::get('/carousel', [BackOfficeController::class, 'carousel']);
+// Route::get('/carouselForm', [BackOfficeController::class, 'carouselForm']);
+
+Route::get('/carousel/edit/{id}', [BackOfficeController::class, 'carouselEdit']);
+Route::put('/carousel/update/{id}', [BackOfficeController::class, 'carouselUpdate']);
+Route::delete('/carousel/delete/{id}', [BackOfficeController::class, 'carouselDelete']);
+Route::post('/carousel/store', [BackOfficeController::class, 'storeCarousel']);
 
 
 

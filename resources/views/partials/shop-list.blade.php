@@ -51,14 +51,16 @@
                            <h4>Categories</h4>
                        </div>
                        <div id="cat-treeview" class="widget-info product-cat boxscrol2">
-                           @foreach ($categories as $category)
+                           @forelse ($categories as $category)
                                <ul>
-                                   <li><a href="/shop-list.html"><span
+                                   <li><a href="/shop-list.html/category/{{ $category->id }}"><span
                                                class="kk-category">{{ $category->name }}</span></a>
                                    </li>
 
                                </ul>
-                           @endforeach
+                           @empty
+                               <div>test</div>
+                           @endforelse
                        </div>
                    </aside>
                    <!-- Widget-categories end -->
