@@ -31,14 +31,21 @@
    </div>
    <!-- HEADING-BANNER END -->
    <!-- PRODUCT-AREA START -->
-   <div class="product-area pt-80 pb-80 product-style-2">
+   <div class="product-area pt-80 product-style-2">
        <div class="container">
            <div class="row">
                <div class="col-lg-3 order-2 order-lg-1">
                    <!-- Widget-Search start -->
                    <aside class="widget widget-search mb-30">
-                       <form>
-                           <input type="text" placeholder="Search here..." />
+                       <form action="{{ url('search') }}" method="GET">
+                           @csrf
+
+                           @if (session('message'))
+                               <div class="primary m-5  ">
+                                   {{ session('message') }}
+                               </div>
+                           @endif
+                           <input type="search" name="search" placeholder="Search here..." />
                            <button type="submit">
                                <i class="zmdi zmdi-search"></i>
                            </button>
@@ -137,7 +144,7 @@
                                            <div class="single-product clearfix">
                                                <div class="product-img">
                                                    <span class="pro-label new-label">new</span>
-                                                   <span class="pro-price-2">$ 56.20</span>
+                                                   <span class="pro-price-2">$ {{ $product->price }}</span>
                                                    <a href="{{ '/product' . '/' . $product->slug }}"><img
                                                            src="img/product/6.jpg" alt="" /></a>
                                                </div>
@@ -147,26 +154,49 @@
                                                                href="#">{{ $product->name }}</a></h4>
                                                    </div>
                                                    <div class="fix mb-20">
-                                                       <span class="pro-price">$ 56.20</span>
+                                                       <span class="pro-price">$ {{ $product->price }}</span>
                                                        <span class="old-price font-16px ml-10"><del>$ 96.20</del></span>
                                                    </div>
                                                    <div class="product-description">
                                                        <p>{{ $product->description }}</p>
                                                    </div>
-                                                   <div class="clearfix">
-                                                       <div class="cart-plus-minus">
-                                                           <input type="text" value="02" name="qtybutton"
-                                                               class="cart-plus-minus-box">
-                                                       </div>
-                                                       <div class="product-action clearfix">
-                                                           <a href="#" data-bs-toggle="modal"
-                                                               data-bs-target="#productModal" title="Quick View"><i
-                                                                   class="zmdi zmdi-zoom-in"></i></a>
-                                                           <a href="cart.html" data-bs-toggle="tooltip"
-                                                               data-placement="top" title="Add To Cart"><i
-                                                                   class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                                       </div>
-                                                   </div>
+                                                   @if ($product->stock > 0)
+                                                       <form action="{{ url('addcart', $product->id) }}"
+                                                           method="POST">
+
+                                                           @csrf
+                                                           <div class="clearfix">
+                                                               <div class="cart-plus-minus">
+                                                                   <input type="text" value="{{ $product->stock }}"
+                                                                       name="quantity" class="cart-plus-minus-box">
+                                                               </div>
+                                                               <div class="product-action clearfix">
+                                                                   <a href="#" data-bs-toggle="modal"
+                                                                       data-bs-target="#productModal"
+                                                                       title="Quick View"><i
+                                                                           class="zmdi zmdi-zoom-in"></i></a>
+
+                                                                   {{-- <input type="submit" data-bs-toggle="tooltip"
+                                                                       data-placement="top"
+                                                                       class="zmdi zmdi-shopping-cart-plus"
+                                                                       title="Add To Cart"> --}}
+                                                                   <button type="submit"> <i
+                                                                           class="zmdi zmdi-shopping-cart-plus"></i></button>
+                                                                   {{-- <a href="cart.html" type="submit"
+                                                                       data-bs-toggle="tooltip" data-placement="top"
+                                                                       title="Add To Cart"><i
+                                                                           class="zmdi zmdi-shopping-cart-plus"></i></a>
+
+                                                                   <i class="zmdi zmdi-shopping-cart-plus"> <input
+                                                                           type="submit" value=""
+                                                                           class="hidden"></i> --}}
+
+                                                               </div>
+                                                           </div>
+                                                       </form>
+                                                   @else
+                                                       <span class="cart">OUT OF STOCK</span>
+                                                   @endif
                                                </div>
                                            </div>
                                        </div>

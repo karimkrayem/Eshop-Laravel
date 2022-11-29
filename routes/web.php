@@ -71,6 +71,7 @@ Route::get('/', function () {
 
 Route::get('/shop-list.html', [ProductController::class, 'shopList'])->name('shopList');
 Route::get('/shop-list.html/category/{id}', [ProductController::class, 'categories']);
+Route::get('/search', [ProductController::class, 'search']);
 
 
 // Route::get('/shop-list.html', [ProductController::class, ' categories']);
@@ -132,8 +133,12 @@ Route::post('reviews', [ReviewController::class, 'store']);
 // checkout
 Route::get('/checkout.html', function () {
     $banners = Banner::all();
-    return view('pages.checkout', compact('banners'));
+    $infos = Info::all();
+    return view('pages.checkout', compact('banners', 'infos'));
 });
+
+Route::post('/addcart/{id}', [ProductController::class, 'addcart']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

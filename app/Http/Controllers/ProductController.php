@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use Str;
 // use Image;
 use App\Models\Tag;
+use App\Models\Cart;
 use App\Models\Info;
 use App\Models\Size;
 use App\Models\Image;
 use App\Models\Banner;
 use App\Models\Product;
-use App\Models\Category;
 // use Intervention\Image\Facades\Image;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as IMG;
 
@@ -33,6 +35,7 @@ class ProductController extends Controller
 
     public function shopList()
     {
+
 
 
         // $data = ;
@@ -156,6 +159,42 @@ class ProductController extends Controller
             return view('pages.single-product', compact('slug', 'post', 'banners', 'infos'));
         } else {
             return redirect()->back();
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $search =  $request->search;
+        $images = Image::all();
+        $categories = Category::all();
+        $sizes = Size::all();
+        $banners = Banner::all();
+        $infos = Info::all();
+        $products = Product::where('name', 'Like', '%' . $search . '%')->paginate(5);
+
+        if ($search != $products) {
+            return redirect()->back()->with('message', 'No Product Found');
+        }
+        return view('pages.shop-list', compact('products', 'images', 'categories', 'banners', 'infos', 'sizes'));
+    }
+
+
+    public function addcart(Request $request, $id)
+    {
+        if (Auth::id()) {
+            $product = Product::find($id);
+            $user = auth()->user();
+            $cart = new Cart;
+            $cart->name = $user->name;
+            $cart->product_title = $product->name;
+            $cart->price = $product->price;
+            $cart->quantity = $request->quantity;
+            $cart->save();
+
+
+            return redirect()->back();
+        } else {
+            return redirect('login.html');
         }
     }
 }
