@@ -15,6 +15,6 @@ class BannerSeeder extends Seeder
      */
     public function run()
     {
-        Banner::factory()->count(8)->create();
+        Banner::factory()->count(10)->create();
     }
 }

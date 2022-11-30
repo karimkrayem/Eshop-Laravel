@@ -29,6 +29,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
+use App\Models\Cart;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ use App\Http\Controllers\BackOfficeController;
 Route::get('/', function () {
     $user = User::all();
     $star = Star::all();
+    $authUser = auth()->user();
     $products = Product::all();
     $articles = DB::table('articles')->take(2)->get();
     $last = Product::latest()->first();
@@ -51,9 +53,15 @@ Route::get('/', function () {
     $test = Image::all();
     $images = Image::latest()->first();
     $carousels = Carousel::all();
+    $allCart = Cart::all();
+    // if ($allCart->count() > 0) {
+
+    $countCart = Cart::where('name', $authUser->name)->count();
+    // $countCart = Cart::all();
+    // }
 
 
-    return view('welcome', compact('user', 'test', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
+    return view('welcome', compact('user', 'test', 'countCart', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
 });
 
 
@@ -79,31 +87,47 @@ Route::get('/search', [ProductController::class, 'search']);
 // about
 Route::get('/about.html', function () {
     $teams = Team::all();
+    $infos = Info::all();
     $banners = Banner::all();
+    $authUser = auth()->user();
+    $countCart = Cart::where('name', $authUser->name)->count();
 
 
-    return view('pages.about', compact('teams', 'banners'));
+    return view('pages.about', compact('teams', 'countCart', 'banners', 'infos'));
 });
 
 
 // contact
 Route::get('/contact.html', function () {
     $banners = Banner::all();
-    return view('pages.contact', compact('banners'));
+    $authUser = auth()->user();
+    $countCart = Cart::where('name', $authUser->name)->count();
+    $infos = Info::all();
+    return view('pages.contact', compact('banners', 'infos', 'countCart'));
 });
 
 // login
 Route::get('/login.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
-
-
     $login = User::all();
+    // $authUser = auth()->user();
+    // $countCart = Cart::where('name', $authUser->name)->count();
+    $infos = Info::all();
+
+    $countCart = Cart::all();
+
+    // if (Auth::check()) {
+
+    //     $authUser = auth()->user();
+    //     dd($authUser);
+    //     $countCart = Cart::where('name', $authUser->name)->count();
+    // }
     if (Auth::check()) {
         return redirect()->back();
     } else {
 
-        return view('pages.login', compact('login', 'banners', 'infos'));
+        return view('pages.login', compact('login', 'countCart', 'banners', 'infos'));
     }
 });
 
@@ -111,9 +135,11 @@ Route::get('/login.html', function () {
 Route::get('/my-account.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
+    $authUser = auth()->user();
+    $countCart = Cart::where('name', $authUser->name)->count();
 
 
-    return view('pages.my-account', compact('banners', 'infos'));
+    return view('pages.my-account', compact('banners', 'infos', 'countCart'));
 });
 
 // blog
@@ -122,8 +148,10 @@ Route::get('/blog.html', function () {
     $tags = Tag::all();
     $comments = Comment::all();
     $infos = Info::all();
+    $authUser = auth()->user();
+    $countCart = Cart::where('name', $authUser->name)->count();
 
-    return view('pages.blog', compact('articles', 'tags', 'infos', 'comments'));
+    return view('pages.blog', compact('articles', 'tags', 'infos', 'countCart', 'comments'));
 });
 Route::get('/blog/{article_slug}/{id}', [ArticleController::class, 'viewPost']);
 Route::post('comments', [CommentController::class, 'store']);
@@ -134,12 +162,36 @@ Route::post('reviews', [ReviewController::class, 'store']);
 Route::get('/checkout.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
-    return view('pages.checkout', compact('banners', 'infos'));
+    $authUser = auth()->user();
+    $countCart = Cart::where('name', $authUser->name)->count();
+    return view('pages.checkout', compact('banners', 'countCart', 'infos'));
 });
+
+// CART
+
+Route::get('/cart.html', function () {
+    $authUser = auth()->user();
+    // $product = Product::where('')
+    $infos = Info::all();
+    $images = Image::all();
+    $allCart = Cart::all();
+
+    $countCart = Cart::where('name', $authUser->name)->count();
+    $cart = Cart::where('name', $authUser->name)->get();
+    return view('pages.cart', compact('countCart', 'infos', 'allCart', 'images', 'cart'));
+});
+Route::delete('/cart.html/delete/{id}', [ProductController::class, 'destroyCart']);
 
 Route::post('/addcart/{id}', [ProductController::class, 'addcart']);
 
+// Order
+Route::get('/order.html', function () {
+    $authUser = auth()->user();
+    $infos = Info::all();
 
+    $countCart = Cart::where('name', $authUser->name)->count();
+    return view('pages.order', compact('countCart', 'infos'));
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

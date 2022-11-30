@@ -38,8 +38,10 @@
                    <div class="single-product clearfix">
                        <!-- Single-pro-slider Big-photo start -->
                        <div class="single-pro-slider single-big-photo view-lightbox slider-for">
+                           {{-- {{dd(src/products/{{ $images->where('product_id', $post->id)->first()->image )}} --}}
                            <div>
-                               <img src="img/single-product/medium/1.jpg" alt="" />
+                               <img src="{{ asset('src/products/' . $images->where('product_id', $post->id)->first()->image) }}"
+                                   alt="" />
                                <a class="view-full-screen" href="img/single-product/large/1.jpg"
                                    data-lightbox="roadtrip" data-title="My caption">
                                    <i class="zmdi zmdi-zoom-in"></i>
@@ -105,22 +107,14 @@
                                </div>
                            </div>
                            <!-- Single-pro-slider Small-photo start -->
+
                            <div class="single-pro-slider single-sml-photo slider-nav">
-                               <div>
-                                   <img src="img/single-product/small/1.jpg" alt="" />
-                               </div>
-                               <div>
-                                   <img src="img/single-product/small/2.jpg" alt="" />
-                               </div>
-                               <div>
-                                   <img src="img/single-product/small/3.jpg" alt="" />
-                               </div>
-                               <div>
-                                   <img src="img/single-product/small/4.jpg" alt="" />
-                               </div>
-                               <div>
-                                   <img src="img/single-product/small/5.jpg" alt="" />
-                               </div>
+                               @foreach ($images->where('product_id', $post->id) as $image)
+                                   <div>
+                                       <img src="{{ asset('src/products/' . $image->image) }}" alt="" />
+                                   </div>
+                               @endforeach
+
                            </div>
                            <!-- Single-pro-slider Small-photo end -->
                        </div>

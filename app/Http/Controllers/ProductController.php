@@ -45,9 +45,19 @@ class ProductController extends Controller
         $sizes = Size::all();
         $banners = Banner::all();
         $infos = Info::all();
+        $countCart = Cart::all();
+
+        if (Auth::check()) {
+
+            $authUser = auth()->user();
+
+            $countCart = Cart::where('name', $authUser->name)->count();
+        }
+
+        // dd($countCart);
         // $productss = Product::where('category_id', $id);
 
-        return view('pages.shop-list', compact('products', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('products', 'countCart', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
 
@@ -62,9 +72,17 @@ class ProductController extends Controller
         $sizes = Size::all();
         $banners = Banner::all();
         $infos = Info::all();
+        $countCart = Cart::all();
+
+        if (Auth::check()) {
+
+            $authUser = auth()->user();
+
+            $countCart = Cart::where('name', $authUser->name)->count();
+        }
         // $productss = Product::where('category_id', $id);
 
-        return view('pages.shop-list', compact('products', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('countCart', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
     public function edit($id)
@@ -117,16 +135,6 @@ class ProductController extends Controller
             $image->save();
         }
 
-
-        // if ($request->hasFile('image')) {
-        //     $uploadPath = 'public/src/products/';
-        //     foreach ($request->file('image') as $imageFile) {;
-        //         $extention = $imageFile->getClientOrginalExtention();
-        //         $fileName = time() . '.' . $extention;
-        //         $imageFile->move($uploadPath, $fileName);
-        //         $finalImagePathName = $uploadPath . '.' . $fileName;
-        //     }
-        // }
         return redirect()->back()->with('success', "Vous avez ajouté un membre");
     }
 
@@ -150,13 +158,23 @@ class ProductController extends Controller
     {
         $banners = Banner::all();
         $infos = Info::all();
+        $countCart = Cart::all();
+        $images = Image::all();
+        $products = Product::all();
+
+        if (Auth::check()) {
+
+            $authUser = auth()->user();
+
+            $countCart = Cart::where('name', $authUser->name)->count();
+        }
 
         $slug = Product::where('slug', $product_slug)->get();
         if ($slug) {
             $post = Product::where('slug', $product_slug)->first();
 
             // $article_tag =
-            return view('pages.single-product', compact('slug', 'post', 'banners', 'infos'));
+            return view('pages.single-product', compact('slug', 'countCart', 'images', 'post', 'banners', 'infos'));
         } else {
             return redirect()->back();
         }
@@ -170,12 +188,20 @@ class ProductController extends Controller
         $sizes = Size::all();
         $banners = Banner::all();
         $infos = Info::all();
-        $products = Product::where('name', 'Like', '%' . $search . '%')->paginate(5);
+        $countCart = Cart::all();
 
-        if ($search != $products) {
+        if (Auth::check()) {
+
+            $authUser = auth()->user();
+
+            $countCart = Cart::where('name', $authUser->name)->count();
+        }
+        $products = Product::where('name', 'Like', '%' . $search . '%')->paginate(5);
+        if ($products->count() == 0) {
+            // dd($search, $products);
             return redirect()->back()->with('message', 'No Product Found');
         }
-        return view('pages.shop-list', compact('products', 'images', 'categories', 'banners', 'infos', 'sizes'));
+        return view('pages.shop-list', compact('products', 'images', 'categories', 'countCart', 'banners', 'infos', 'sizes'));
     }
 
 
@@ -196,5 +222,12 @@ class ProductController extends Controller
         } else {
             return redirect('login.html');
         }
+    }
+
+    public function destroyCart($id)
+    {
+        $delete = Cart::find($id);
+        $delete->delete();
+        return redirect()->back();
     }
 }

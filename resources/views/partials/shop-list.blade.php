@@ -109,7 +109,8 @@
                                                <div class="product-img">
                                                    <span class="pro-label new-label">new</span>
                                                    <span class="pro-price-2">$ 56.20</span>
-                                                   <a href="single-product.html"><img src="img/product/6.jpg"
+                                                   <a href="single-product.html"><img
+                                                           src="src/products/{{ $images->where('product_id', $product->id)->first()->image }}"
                                                            alt="" /></a>
                                                </div>
                                                <div class="product-info clearfix text-center">
@@ -146,7 +147,8 @@
                                                    <span class="pro-label new-label">new</span>
                                                    <span class="pro-price-2">$ {{ $product->price }}</span>
                                                    <a href="{{ '/product' . '/' . $product->slug }}"><img
-                                                           src="img/product/6.jpg" alt="" /></a>
+                                                           src="src/products/{{ $images->where('product_id', $product->id)->first()->image }}"
+                                                           alt="" /></a>
                                                </div>
                                                <div class="product-info">
                                                    <div class="fix">
