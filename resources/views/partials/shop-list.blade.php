@@ -79,7 +79,7 @@
                        <div class="widget-info size-filter clearfix">
                            <ul>
                                @foreach ($sizes as $size)
-                                   <li><a href="#">{{ $size->size }}</a></li>
+                                   <li><a href="/shop-list.html/size/{{ $size->id }}">{{ $size->size }}</a></li>
                                @endforeach
                            </ul>
                        </div>
@@ -108,14 +108,15 @@
                                            <div class="single-product">
                                                <div class="product-img">
                                                    <span class="pro-label new-label">new</span>
-                                                   <span class="pro-price-2">$ 56.20</span>
-                                                   <a href="single-product.html"><img
+                                                   <span class="pro-price-2">$ {{ $product->price }}</span>
+                                                   <a href="{{ '/product' . '/' . $product->slug }}"><img
                                                            src="src/products/{{ $images->where('product_id', $product->id)->first()->image }}"
                                                            alt="" /></a>
                                                </div>
                                                <div class="product-info clearfix text-center">
                                                    <div class="fix">
-                                                       <h4 class="post-title"><a href="#">{{ $product->name }}</a>
+                                                       <h4 class="post-title"><a
+                                                               href="#">{{ $product->name }}</a>
                                                        </h4>
                                                    </div>
                                                    <div class="product-action clearfix">
@@ -131,7 +132,7 @@
                                        </div>
 
                                    @empty
-                                       <h4>No Products Available for {{ $categories->name }}</h4>
+                                       <h4>No Products Available </h4>
                                    @endforelse
 
                                    <!-- Single-product end -->
@@ -140,7 +141,7 @@
                            <div class="tab-pane active" id="list-view">
                                <div class="row shop-list">
                                    <!-- Single-product start -->
-                                   @foreach ($products as $product)
+                                   @forelse ($products as $product)
                                        <div class="col-lg-12">
                                            <div class="single-product clearfix">
                                                <div class="product-img">
@@ -202,7 +203,9 @@
                                                </div>
                                            </div>
                                        </div>
-                                   @endforeach
+                                   @empty
+                                       <h4>No Products Available </h4>
+                                   @endforelse
 
                                    <!-- Single-product end -->
 
@@ -222,14 +225,5 @@
                </div>
            </div>
        </div>
-
-       <script>
-           const category = document.querySelectorAll('.kk-category')
-           category.addEventListener('onClick', function() {
-               DB
-           })
-           for (let i = 0; i >= 0; i++)
-               console.log(category[i].innerText);
-       </script>
    </div>
    <!-- PRODUCT-AREA END -->

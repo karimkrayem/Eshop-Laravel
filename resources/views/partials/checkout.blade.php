@@ -94,14 +94,13 @@
                                                            </tr>
                                                        </thead>
                                                        <tbody>
-                                                           <tr>
-                                                               <td>Dummy Product Name x 2</td>
-                                                               <td class="text-end">$86.00</td>
-                                                           </tr>
-                                                           <tr>
-                                                               <td>Dummy Product Name x 1</td>
-                                                               <td class="text-end">$69.00</td>
-                                                           </tr>
+                                                           @foreach ($cart as $carts)
+                                                               <tr>
+                                                                   <td>{{ $carts->product_title }} x
+                                                                       {{ $carts->quantity }}</td>
+                                                                   <td class="text-end">${{ $carts->price }}</td>
+                                                               </tr>
+                                                           @endforeach
                                                            <tr>
                                                                <td>Cart Subtotal</td>
                                                                <td class="text-end">$155.00</td>

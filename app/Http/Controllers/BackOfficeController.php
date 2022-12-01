@@ -100,7 +100,7 @@ class BackOfficeController extends Controller
         $file->carousel = $request->file('carousel')->hashName();
         Image::make($request->file('carousel'))->resize(1220, 800)->save(public_path('src/carousels/' . $file->carousel));
         $file->save();
-        return redirect()->back();
+        return redirect('/carousel');
     }
 
     public function carouselForm()

@@ -37,8 +37,6 @@ class ProductController extends Controller
     {
 
 
-
-        // $data = ;
         $products = DB::table('products')->orderBy('id', 'desc')->paginate(5);
         $images = Image::all();
         $categories = Category::all();
@@ -46,18 +44,16 @@ class ProductController extends Controller
         $banners = Banner::all();
         $infos = Info::all();
         $countCart = Cart::all();
+        $authUser = auth()->user();
+        $cart = Cart::where('name', $authUser->name)->get();
 
         if (Auth::check()) {
 
             $authUser = auth()->user();
-
             $countCart = Cart::where('name', $authUser->name)->count();
         }
 
-        // dd($countCart);
-        // $productss = Product::where('category_id', $id);
-
-        return view('pages.shop-list', compact('products', 'countCart', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('products', 'cart', 'countCart', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
 
@@ -73,6 +69,9 @@ class ProductController extends Controller
         $banners = Banner::all();
         $infos = Info::all();
         $countCart = Cart::all();
+        $authUser = auth()->user();
+        $cart = Cart::where('name', $authUser->name)->get();
+
 
         if (Auth::check()) {
 
@@ -82,7 +81,33 @@ class ProductController extends Controller
         }
         // $productss = Product::where('category_id', $id);
 
-        return view('pages.shop-list', compact('countCart', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('countCart', 'cart', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
+    }
+
+    public function sizes($id)
+    {
+
+
+        $products = DB::table('products')->where('size_id', $id)->paginate(5);
+        $images = Image::all();
+        $categories = Category::all();
+        $sizes = Size::all();
+        $banners = Banner::all();
+        $infos = Info::all();
+        $countCart = Cart::all();
+        $authUser = auth()->user();
+        $cart = Cart::where('name', $authUser->name)->get();
+
+
+        if (Auth::check()) {
+
+            $authUser = auth()->user();
+
+            $countCart = Cart::where('name', $authUser->name)->count();
+        }
+        // $productss = Product::where('category_id', $id);
+
+        return view('pages.shop-list', compact('countCart', 'cart', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
     public function edit($id)
@@ -158,9 +183,12 @@ class ProductController extends Controller
     {
         $banners = Banner::all();
         $infos = Info::all();
-        $countCart = Cart::all();
         $images = Image::all();
         $products = Product::all();
+        $countCart = Cart::all();
+        $authUser = auth()->user();
+        $cart = Cart::where('name', $authUser->name)->get();
+
 
         if (Auth::check()) {
 
@@ -174,7 +202,7 @@ class ProductController extends Controller
             $post = Product::where('slug', $product_slug)->first();
 
             // $article_tag =
-            return view('pages.single-product', compact('slug', 'countCart', 'images', 'post', 'banners', 'infos'));
+            return view('pages.single-product', compact('slug', 'cart', 'countCart', 'images', 'post', 'banners', 'infos'));
         } else {
             return redirect()->back();
         }
@@ -189,11 +217,13 @@ class ProductController extends Controller
         $banners = Banner::all();
         $infos = Info::all();
         $countCart = Cart::all();
+        $authUser = auth()->user();
+
+        $cart = Cart::where('name', $authUser->name)->get();
 
         if (Auth::check()) {
 
             $authUser = auth()->user();
-
             $countCart = Cart::where('name', $authUser->name)->count();
         }
         $products = Product::where('name', 'Like', '%' . $search . '%')->paginate(5);
@@ -201,7 +231,7 @@ class ProductController extends Controller
             // dd($search, $products);
             return redirect()->back()->with('message', 'No Product Found');
         }
-        return view('pages.shop-list', compact('products', 'images', 'categories', 'countCart', 'banners', 'infos', 'sizes'));
+        return view('pages.shop-list', compact('products', 'images', 'cart', 'categories', 'countCart', 'banners', 'infos', 'sizes'));
     }
 
 
@@ -212,6 +242,7 @@ class ProductController extends Controller
             $user = auth()->user();
             $cart = new Cart;
             $cart->name = $user->name;
+            $cart->product_id = $product->id;
             $cart->product_title = $product->name;
             $cart->price = $product->price;
             $cart->quantity = $request->quantity;

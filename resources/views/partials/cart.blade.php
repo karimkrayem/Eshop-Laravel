@@ -1,4 +1,14 @@
-<div class="heading-banner-area overlay-bg">
+<div class="heading-banner-area">
+
+    @foreach ($banners as $banner)
+        @if ($banner->id == 9)
+            <style>
+                .heading-banner-area {
+                    background-image: url("{{ $banner->banner }}");
+                }
+            </style>
+        @endif
+    @endforeach
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -56,7 +66,7 @@
                                                             <div class="single-product">
                                                                 <div class="product-img">
                                                                     <a href="single-product.html"><img
-                                                                            src="img/product/2.jpg"
+                                                                            src="src/products/{{ $images->where('product_id', $carts->product_id)->first()->image }}"
                                                                             alt="" /></a>
                                                                 </div>
                                                                 <div class="product-info">

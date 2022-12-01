@@ -16,6 +16,13 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->integer('phone')->nullable();
+            $table->string('company')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('town')->nullable();
+            $table->string('adress')->nullable();
+            $table->integer('product_id')->nullable();
             $table->string('product_title')->nullable();
             $table->string('quantity')->nullable();
             $table->string('price')->nullable();

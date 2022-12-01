@@ -232,56 +232,49 @@
                            <h2 class="title-border">Featured Products</h2>
                        </div>
                        <div class="product-slider style-1 arrow-left-right">
-                           <!-- Single-product start -->
-                           {{-- @foreach ($imagess as $imagess) --}}
-                           @foreach ($products as $product)
-                               {{-- @foreach ($test as $image) --}}
-                               {{-- {{ dd($image->product_id) }} --}}
-                               {{-- @if ($product->id == $image->product_id) --}}
 
-                               {{-- @endif --}}
-                               {{-- @endforeach --}}
-                               {{-- @foreach ($imagess as $image) --}}
+                           @foreach ($products as $product)
                                <div class="single-product">
                                    <div class="product-img">
                                        <span class="pro-label new-label">new</span>
                                        <a href="single-product.html">
-                                           <img src="src/products/{{ $test->where('product_id', $product->id)->first()->image }}"
-                                               alt="" /></a>
-
-                                       <div class="product-action clearfix">
-                                           <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
-                                               title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
-                                           <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
-                                               title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
-                                       </div>
-                                   </div>
-                                   <div class="product-info clearfix">
-                                       <div class="fix">
-                                           <h4 class="post-title floatleft"><a
-                                                   href="#">{{ $product->name }}</a>
-                                           </h4>
-                                           <p class="floatright hidden-sm d-none d-md-block">
-                                               {{ $product->category->name }}</p>
-                                       </div>
-                                       <div class="fix">
-                                           <span class="pro-price floatleft">$ {{ $product->price }}</span>
-
-                                       </div>
-                                   </div>
-
-                               </div>
-                               {{-- @endforeach --}}
-                           @endforeach
-                           {{-- @endforeach --}}
-                           <!-- Single-product end -->
-                           <!-- Single-product start -->
-
-                           <!-- Single-product end -->
+                                           @if ($test->where('product_id', $product->id)->first()->image)
+                                               <img src="src/products/{{ $test->where('product_id', $product->id)->first()->image }}"
+                                                   alt="" />
+                                       </a>
+                           @endif
+                           <div class="product-action clearfix">
+                               <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"
+                                   title="Quick View"><i class="zmdi zmdi-zoom-in"></i></a>
+                               <a href="cart.html" data-bs-toggle="tooltip" data-placement="top"
+                                   title="Add To Cart"><i class="zmdi zmdi-shopping-cart-plus"></i></a>
+                           </div>
                        </div>
+                       <div class="product-info clearfix">
+                           <div class="fix">
+                               <h4 class="post-title floatleft"><a href="#">{{ $product->name }}</a>
+                               </h4>
+                               <p class="floatright hidden-sm d-none d-md-block">
+                                   {{ $product->category->name }}</p>
+                           </div>
+                           <div class="fix">
+                               <span class="pro-price floatleft">$ {{ $product->price }}</span>
+
+                           </div>
+                       </div>
+
                    </div>
+                   {{-- @endforeach --}}
+                   @endforeach
+                   {{-- @endforeach --}}
+                   <!-- Single-product end -->
+                   <!-- Single-product start -->
+
+                   <!-- Single-product end -->
                </div>
            </div>
+       </div>
+       </div>
        </div>
        <!-- PRODUCT-AREA END -->
 

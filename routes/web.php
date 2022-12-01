@@ -53,32 +53,24 @@ Route::get('/', function () {
     $test = Image::all();
     $images = Image::latest()->first();
     $carousels = Carousel::all();
-    $allCart = Cart::all();
-    // if ($allCart->count() > 0) {
+    $countCart = Cart::all();
 
-    $countCart = Cart::where('name', $authUser->name)->count();
-    // $countCart = Cart::all();
-    // }
+    if (Auth::check()) {
+
+        $authUser = auth()->user();
+
+        $countCart = Cart::where('name', $authUser->name)->count();
+    }
+
 
 
     return view('welcome', compact('user', 'test', 'countCart', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
 });
 
 
-
-// shopList
-// Route::get('/shop-list.html', function () {
-//     // $data = ;
-//     $images = Image::all();
-//     $products = DB::table('products')->orderBy('id', 'desc')->paginate(5);
-//     $categories = Category::all();
-//     $sizes = Size::all();
-//     $banners = Banner::all();
-//     return view('pages.shop-list', compact('products', 'categories', 'sizes', 'banners', 'images'));
-// });
-
 Route::get('/shop-list.html', [ProductController::class, 'shopList'])->name('shopList');
 Route::get('/shop-list.html/category/{id}', [ProductController::class, 'categories']);
+Route::get('/shop-list.html/size/{id}', [ProductController::class, 'sizes']);
 Route::get('/search', [ProductController::class, 'search']);
 
 
@@ -111,18 +103,8 @@ Route::get('/login.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
     $login = User::all();
-    // $authUser = auth()->user();
-    // $countCart = Cart::where('name', $authUser->name)->count();
     $infos = Info::all();
-
     $countCart = Cart::all();
-
-    // if (Auth::check()) {
-
-    //     $authUser = auth()->user();
-    //     dd($authUser);
-    //     $countCart = Cart::where('name', $authUser->name)->count();
-    // }
     if (Auth::check()) {
         return redirect()->back();
     } else {
@@ -135,11 +117,13 @@ Route::get('/login.html', function () {
 Route::get('/my-account.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
+    $images = Image::all();
+
     $authUser = auth()->user();
     $countCart = Cart::where('name', $authUser->name)->count();
+    $cart = Cart::where('name', $authUser->name)->get();
 
-
-    return view('pages.my-account', compact('banners', 'infos', 'countCart'));
+    return view('pages.my-account', compact('banners', 'images', 'cart', 'infos', 'countCart'));
 });
 
 // blog
@@ -163,8 +147,12 @@ Route::get('/checkout.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
     $authUser = auth()->user();
+    $images = Image::all();
     $countCart = Cart::where('name', $authUser->name)->count();
-    return view('pages.checkout', compact('banners', 'countCart', 'infos'));
+    $cart = Cart::where('name', $authUser->name)->get();
+
+
+    return view('pages.checkout', compact('banners', 'images', 'cart', 'countCart', 'infos'));
 });
 
 // CART
@@ -173,12 +161,12 @@ Route::get('/cart.html', function () {
     $authUser = auth()->user();
     // $product = Product::where('')
     $infos = Info::all();
-    $images = Image::all();
     $allCart = Cart::all();
-
+    $banners = Banner::all();
     $countCart = Cart::where('name', $authUser->name)->count();
+    $images = Image::all();
     $cart = Cart::where('name', $authUser->name)->get();
-    return view('pages.cart', compact('countCart', 'infos', 'allCart', 'images', 'cart'));
+    return view('pages.cart', compact('countCart', 'infos', 'banners', 'allCart', 'images', 'cart'));
 });
 Route::delete('/cart.html/delete/{id}', [ProductController::class, 'destroyCart']);
 
@@ -188,9 +176,13 @@ Route::post('/addcart/{id}', [ProductController::class, 'addcart']);
 Route::get('/order.html', function () {
     $authUser = auth()->user();
     $infos = Info::all();
+    $banners = Banner::all();
+    $images = Image::all();
+
+    $cart = Cart::where('name', $authUser->name)->get();
 
     $countCart = Cart::where('name', $authUser->name)->count();
-    return view('pages.order', compact('countCart', 'infos'));
+    return view('pages.order', compact('countCart', 'banners', 'cart', 'images', 'infos'));
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
