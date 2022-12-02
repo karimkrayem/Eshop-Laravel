@@ -103,7 +103,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="all-cart-product clearfix">
-                                                    @foreach ($cart as $carts)
+                                                    @forelse($cart as $carts)
                                                         <div class="single-cart clearfix">
                                                             <div class="cart-photo">
                                                                 <a href="#"><img
@@ -118,7 +118,11 @@
                                                                             class="zmdi zmdi-close"></i></a></span>
                                                             </div>
                                                         </div>
-                                                    @endforeach
+                                                    @empty
+                                                        <div>
+                                                            <p class="text-center pt-3">cart empty</p>
+                                                        </div>
+                                                    @endforelse
 
 
                                                 </div>

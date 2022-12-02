@@ -1,12 +1,13 @@
 <?php
 
 use App\Models\Tag;
+use App\Models\Cart;
 use App\Models\Info;
 use App\Models\Size;
 use App\Models\Star;
 use App\Models\Team;
-use App\Models\User;
 
+use App\Models\User;
 use App\Models\Image;
 use App\Models\Banner;
 use App\Models\Article;
@@ -20,6 +21,7 @@ use App\Models\Size as ModelsSize;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamController;
@@ -29,7 +31,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
-use App\Models\Cart;
+use App\Mail\HelloMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,8 +56,11 @@ Route::get('/', function () {
     $images = Image::latest()->first();
     $carousels = Carousel::all();
     $countCart = Cart::all();
+    $cart = Cart::all();
 
+    Mail::to('c_est_karim@hotmail.com')->send(new HelloMail);
     if (Auth::check()) {
+        $cart = Cart::where('name', $authUser->name)->get();
 
         $authUser = auth()->user();
 
@@ -64,7 +69,7 @@ Route::get('/', function () {
 
 
 
-    return view('welcome', compact('user', 'test', 'countCart', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
+    return view('welcome', compact('user', 'test', 'countCart', 'cart', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
 });
 
 
@@ -118,13 +123,16 @@ Route::get('/my-account.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
     $images = Image::all();
-
+    $users = User::first();
     $authUser = auth()->user();
     $countCart = Cart::where('name', $authUser->name)->count();
     $cart = Cart::where('name', $authUser->name)->get();
 
-    return view('pages.my-account', compact('banners', 'images', 'cart', 'infos', 'countCart'));
+    return view('pages.my-account', compact('banners', 'images', 'users', 'cart', 'infos', 'countCart'));
 });
+// Route::put('/user/update/{id}', [UserController::class, 'account']);
+Route::put('/userinfo', [UserController::class, 'account']);
+
 
 // blog
 Route::get('/blog.html', function () {
@@ -154,6 +162,8 @@ Route::get('/checkout.html', function () {
 
     return view('pages.checkout', compact('banners', 'images', 'cart', 'countCart', 'infos'));
 });
+Route::post('/checkout.html/order', [ProductController::class, 'confirmOrder']);
+
 
 // CART
 
@@ -178,12 +188,14 @@ Route::get('/order.html', function () {
     $infos = Info::all();
     $banners = Banner::all();
     $images = Image::all();
-
     $cart = Cart::where('name', $authUser->name)->get();
-
     $countCart = Cart::where('name', $authUser->name)->count();
     return view('pages.order', compact('countCart', 'banners', 'cart', 'images', 'infos'));
 });
+
+
+
+// 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -272,6 +284,7 @@ Route::post('/carousel/store', [BackOfficeController::class, 'storeCarousel']);
 
 
 
-
+// MAILING
+// Route::get('')
 
 require __DIR__ . '/auth.php';

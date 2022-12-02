@@ -9,9 +9,10 @@ use App\Models\Cart;
 use App\Models\Info;
 use App\Models\Size;
 use App\Models\Image;
+use App\Models\Order;
 use App\Models\Banner;
-use App\Models\Product;
 // use Intervention\Image\Facades\Image;
+use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -45,10 +46,11 @@ class ProductController extends Controller
         $infos = Info::all();
         $countCart = Cart::all();
         $authUser = auth()->user();
-        $cart = Cart::where('name', $authUser->name)->get();
+        $cart = Cart::all();
 
         if (Auth::check()) {
 
+            $cart = Cart::where('name', $authUser->name)->get();
             $authUser = auth()->user();
             $countCart = Cart::where('name', $authUser->name)->count();
         }
@@ -260,5 +262,28 @@ class ProductController extends Controller
         $delete = Cart::find($id);
         $delete->delete();
         return redirect()->back();
+    }
+    public function confirmOrder(Request $request)
+    {
+        $user = auth()->user();
+        $name = $user->name;
+        $phone = $user->phone;
+        // $name = $user->company;
+        // $name = $user->state;
+        // $name = $user->town;
+        $adress = $user->adress;
+        // dd($request);
+        foreach ($request->productname as $key => $productname) {
+            $order = new Order;
+
+            $order->product_title = $request->productname[$key];
+            $order->price = $request->price[$key];
+            $order->quantity = $request->quantity[$key];
+            // $order->adress = $request->$adress;
+            // // $order->name = $request->$name;
+            // $order->phone = $request->$phone;
+            $order->save();
+        }
+        return redirect('/order.html');
     }
 }

@@ -45,47 +45,51 @@
                        <div class="tab-content">
                            <!-- check-out start -->
                            <div class="tab-pane active" id="check-out">
-                               <form action="#">
-                                   <div class="shop-cart-table check-out-wrap">
-                                       <div class="row">
-                                           <div class="col-md-6">
-                                               <div class="billing-details pr-20">
-                                                   <h4 class="title-1 title-border text-uppercase mb-30">billing details
-                                                   </h4>
-                                                   <input type="text" placeholder="Your name here...">
-                                                   <input type="text" placeholder="Email address here...">
-                                                   <input type="text" placeholder="Phone here...">
-                                                   <input type="text" placeholder="Company neme here...">
-                                                   <select class="custom-select mb-15">
-                                                       <option>Contry</option>
-                                                       <option>Bangladesh</option>
-                                                       <option>United States</option>
-                                                       <option>united Kingdom</option>
-                                                       <option>Australia</option>
-                                                       <option>Canada</option>
-                                                   </select>
-                                                   <select class="custom-select mb-15">
-                                                       <option>State</option>
-                                                       <option>Dhaka</option>
-                                                       <option>New York</option>
-                                                       <option>London</option>
-                                                       <option>Melbourne</option>
-                                                       <option>Ottawa</option>
-                                                   </select>
-                                                   <select class="custom-select mb-15">
-                                                       <option>Town / City</option>
-                                                       <option>Dhaka</option>
-                                                       <option>New York</option>
-                                                       <option>London</option>
-                                                       <option>Melbourne</option>
-                                                       <option>Ottawa</option>
-                                                   </select>
-                                                   <textarea class="custom-textarea" placeholder="Your address here..."></textarea>
-                                               </div>
+                               {{-- <form action="#"> --}}
+                               <div class="shop-cart-table check-out-wrap">
+                                   <div class="row">
+                                       <div class="col-md-6">
+                                           <div class="billing-details pr-20">
+                                               <h4 class="title-1 title-border text-uppercase mb-30">billing details
+                                               </h4>
+                                               <input type="text" placeholder="Your name here...">
+                                               <input type="text" placeholder="Email address here...">
+                                               <input type="text" placeholder="Phone here...">
+                                               <input type="text" placeholder="Company neme here...">
+                                               <select class="custom-select mb-15">
+                                                   <option>Contry</option>
+                                                   <option>Bangladesh</option>
+                                                   <option>United States</option>
+                                                   <option>united Kingdom</option>
+                                                   <option>Australia</option>
+                                                   <option>Canada</option>
+                                               </select>
+                                               <select class="custom-select mb-15">
+                                                   <option>State</option>
+                                                   <option>Dhaka</option>
+                                                   <option>New York</option>
+                                                   <option>London</option>
+                                                   <option>Melbourne</option>
+                                                   <option>Ottawa</option>
+                                               </select>
+                                               <select class="custom-select mb-15">
+                                                   <option>Town / City</option>
+                                                   <option>Dhaka</option>
+                                                   <option>New York</option>
+                                                   <option>London</option>
+                                                   <option>Melbourne</option>
+                                                   <option>Ottawa</option>
+                                               </select>
+                                               <textarea class="custom-textarea" placeholder="Your address here..."></textarea>
                                            </div>
-                                           <div class="col-md-6">
-                                               <div class="our-order payment-details mt-60 pr-20">
-                                                   <h4 class="title-1 title-border text-uppercase mb-30">our order</h4>
+                                       </div>
+                                       <div class="col-md-6">
+
+                                           <div class="our-order payment-details mt-60 pr-20">
+                                               <h4 class="title-1 title-border text-uppercase mb-30">our order
+                                               </h4>
+                                               <form action='{{ url('/checkout.html/order') }}' method="POST">
+                                                   @csrf
                                                    <table>
                                                        <thead>
                                                            <tr>
@@ -94,11 +98,22 @@
                                                            </tr>
                                                        </thead>
                                                        <tbody>
+
                                                            @foreach ($cart as $carts)
                                                                <tr>
-                                                                   <td>{{ $carts->product_title }} x
-                                                                       {{ $carts->quantity }}</td>
+                                                                   <td>{{ $carts->product_title }}
+                                                                       x
+                                                                       {{ $carts->quantity }} </td>
+                                                                   <input type="text" name="productname[]"
+                                                                       value="{{ $carts->product_title }}"
+                                                                       id="" hidden>
+                                                                   <input type="text" name="quantity[]"
+                                                                       value="{{ $carts->quantity }}" id=""
+                                                                       hidden>
                                                                    <td class="text-end">${{ $carts->price }}</td>
+                                                                   <input type="text" name="price[]"
+                                                                       value="{{ $carts->price }}" id=""
+                                                                       hidden>
                                                                </tr>
                                                            @endforeach
                                                            <tr>
@@ -121,11 +136,14 @@
                                                    </table>
                                                    <button class="button-one submit-button mt-15"
                                                        data-text="place order" type="submit">order</button>
-                                               </div>
+                                               </form>
+
+
                                            </div>
                                        </div>
                                    </div>
-                               </form>
+                               </div>
+                               {{-- </form> --}}
                            </div>
                            <!-- check-out end -->
                        </div>
