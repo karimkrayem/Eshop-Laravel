@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Models\Info;
 use App\Models\Star;
+use App\Models\Order;
 use App\Models\Banner;
-use App\Models\Carousel;
 use App\Models\Product;
+use App\Mail\CancelMail;
+use App\Models\Carousel;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -108,27 +111,18 @@ class BackOfficeController extends Controller
         return view('backoffice.pages.carousel.addCarousel');
     }
 
+    public function order()
+    {
+        $orders = Order::all();
+        return view('backoffice.pages.order', compact('orders'));
+    }
+    public function orderDelete($id)
+    {
+        $delete = Order::find($id);
 
-    // public function storeCarousel(Request $request)
-    // {
-    //     $request->validate([
-    //         'carousel.*' => 'required|mimes:jpeg,jpg,png,webp'
-    //     ]);
-    //     Carousel::create([
-    //         'carousel' => $request->carousel,
+        Mail::to($delete->email)->send(new CancelMail);
 
-
-    //     ]);
-
-    //     foreach ($request->file('carousel') as $img) {;
-    //         var_dump($img);
-    //         $newImage = Image::make($img)->resize(1220, 800)->save('src/carousels/' . $img->hashName());
-    //         $image = new Carousel();
-    //         $image->carousel = $newImage->basename;
-    //         // $image->product_id = DB::table('products')->latest('id')->first()->id;
-    //         $image->save();
-    //     }
-
-    //     return redirect()->back()->with('success', "Vous avez ajouté un membre");
-    // }
+        $delete->delete();
+        return redirect()->back();
+    }
 };

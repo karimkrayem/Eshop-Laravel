@@ -16,18 +16,23 @@ class ReviewController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'comment_body' => 'required |string',
+                'name' => 'required|string',
+                'subject' => 'required|string',
             ]);
 
             if ($validator->fails()) {
                 return redirect()->back()->with('message', 'comment area is mandetory');
             }
+            $posty = true;
             $post = Product::where('slug', $request->product_slug)->first();
-            // dd($post);
 
-            if ($post) {
+            if ($posty) {
+                // dd($request);
                 Review::create([
                     'product_id' => $post->id,
                     'user_id' => Auth::user()->id,
+                    'name' => $request->name,
+                    'subject' => $request->subject,
                     'comment_body' => $request->comment_body,
                 ]);
                 return  redirect()->back()->with('message', 'Comment posted');

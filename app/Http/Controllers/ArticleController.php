@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
+use App\Models\Cart;
 use App\Models\Info;
 use App\Models\User;
+use App\Models\Image;
 use App\Models\Banner;
 use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as IMG;
 
 
 class ArticleController extends Controller
@@ -51,7 +54,7 @@ class ArticleController extends Controller
             // 'src' => 'required'
         ]);
 
-        Image::make(request()->file('src'))->resize(300, 200)->save('src/articles/' . $request->file('src')->hashName());
+        IMG::make(request()->file('src'))->resize(300, 200)->save('src/articles/' . $request->file('src')->hashName());
         // $img->save();
 
         $store = new Article();
@@ -87,12 +90,25 @@ class ArticleController extends Controller
 
         $banners = Banner::all();
         $infos = Info::all();
+        $images = Image::all();
+
         $numberPost = Comment::where('article_id', $id)->count();
         $slug = Article::where('slug', $article_slug)->get();
+
+        $cart = Cart::all();
+
+        // Mail::to('Image')->send(new HelloMail);
+        if (Auth::check()) {
+
+            $authUser = auth()->user();
+            $cart = Cart::where('name', $authUser->name)->get();
+
+            $countCart = Cart::where('name', $authUser->name)->count();
+        }
         if ($slug) {
             $post = Article::where('slug', $article_slug)->first();
 
-            return view('pages.single-blog', compact('slug', 'post', 'numberPost', 'banners', 'infos'));
+            return view('pages.single-blog', compact('slug', 'images', 'post', 'countCart', 'cart', 'numberPost', 'banners', 'infos'));
         } else {
             return redirect()->back();
         }

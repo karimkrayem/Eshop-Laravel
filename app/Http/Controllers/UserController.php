@@ -6,10 +6,14 @@ use App\Models\Cart;
 use App\Models\Info;
 use App\Models\Role;
 use App\Models\User;
+use App\Mail\SubMail;
 use App\Models\Image;
 use App\Models\Banner;
+use App\Mail\HelloMail;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -33,19 +37,6 @@ class UserController extends Controller
         return view('backoffice.pages.editRoles', compact('users', 'roles'));
     }
 
-    // public function indexAccount($id)
-    // {
-
-    //     $banners = Banner::all();
-    //     $infos = Info::all();
-    //     $images = Image::all();
-    //     $users = User::find($id);
-    //     $authUser = auth()->user();
-    //     $countCart = Cart::where('name', $authUser->name)->count();
-    //     $cart = Cart::where('name', $authUser->name)->get();
-
-    //     return view('pages.my-account', compact('banners', 'images', 'users', 'cart', 'infos', 'countCart'));
-    // }
     public function editAccount($id)
     {
         $users = User::find($id);
@@ -78,5 +69,28 @@ class UserController extends Controller
         $update->password = $request->password;
         $update->save();
         return redirect()->back();
+    }
+
+    public function storeSub(Request $request)
+    {
+
+
+        // Storage::put('public/img/', $request->file('src'));
+        $request->validate([
+            // 'User_id' => 'required',
+            'email' => 'required',
+            // 'user_id' => 'required',
+            // 'src' => 'required'
+        ]);
+
+        // Image::make(request()->file('src'))->resize(300, 200)->save('src/articles/' . $request->file('src')->hashName());
+        // $img->save();
+
+        $store = new Subscriber();
+        $store->email = $request->email;
+        Mail::to($request->email)->send(new SubMail);
+        $store->save();
+
+        return redirect('/');
     }
 }

@@ -14,9 +14,11 @@ use App\Models\Banner;
 // use Intervention\Image\Facades\Image;
 use App\Models\Product;
 use App\Models\Category;
+use App\Mail\ConfirmMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as IMG;
 
@@ -189,12 +191,14 @@ class ProductController extends Controller
         $products = Product::all();
         $countCart = Cart::all();
         $authUser = auth()->user();
-        $cart = Cart::where('name', $authUser->name)->get();
+        $cart = Cart::all();
+
 
 
         if (Auth::check()) {
 
             $authUser = auth()->user();
+            $cart = Cart::where('name', $authUser->name)->get();
 
             $countCart = Cart::where('name', $authUser->name)->count();
         }
@@ -239,7 +243,7 @@ class ProductController extends Controller
 
     public function addcart(Request $request, $id)
     {
-        if (Auth::id()) {
+        if (Auth::check()) {
             $product = Product::find($id);
             $user = auth()->user();
             $cart = new Cart;
@@ -265,16 +269,25 @@ class ProductController extends Controller
     }
     public function confirmOrder(Request $request)
     {
+        $order = new Order;
         $user = auth()->user();
-        $name = $user->name;
+        $name = $request->name;
+        $email = $request->email;
+        $adress = $request->adress;
         $phone = $user->phone;
+
+
+        $order->email = $request->email;
+        // dd($request->email);
+        $order->phone = $request->phone;
+        $order->adress = $request->adress;
+        $order->name = $request->name;
         // $name = $user->company;
         // $name = $user->state;
         // $name = $user->town;
         $adress = $user->adress;
         // dd($request);
         foreach ($request->productname as $key => $productname) {
-            $order = new Order;
 
             $order->product_title = $request->productname[$key];
             $order->price = $request->price[$key];
@@ -282,6 +295,8 @@ class ProductController extends Controller
             // $order->adress = $request->$adress;
             // // $order->name = $request->$name;
             // $order->phone = $request->$phone;
+
+            Mail::to($order->email)->send(new ConfirmMail);
             $order->save();
         }
         return redirect('/order.html');

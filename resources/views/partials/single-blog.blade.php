@@ -149,16 +149,16 @@
                                                @csrf
                                                <input type="text " class="d-none" name="article_slug"
                                                    value="{{ $post->slug }}">
-                                               {{-- <div class="row">
+                                               <div class="row">
                                                    <div class="col-md-6">
-                                                       <input type="text" placeholder="Your name here..."
+                                                       <input type="text" required placeholder="Your name here..."
                                                            name="name" />
                                                    </div>
                                                    <div class="col-md-6">
-                                                       <input type="text" placeholder="Your email here..."
+                                                       <input type="text" required placeholder="Your email here..."
                                                            name="email" />
                                                    </div>
-                                               </div> --}}
+                                               </div>
 
                                                @if (session('message'))
                                                    <div class="primary m-5  ">

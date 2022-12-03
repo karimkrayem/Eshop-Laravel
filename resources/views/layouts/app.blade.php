@@ -23,6 +23,7 @@
     <link rel="stylesheet" href={{ asset('css/animate.min.css') }}>
     <!-- jquery-ui.min css -->
     <link rel="stylesheet" href={{ asset('css/jquery-ui.min.css') }}>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <!-- meanmenu css -->
     <link rel="stylesheet" href={{ asset('css/meanmenu.min.css') }}>
     <!-- nivo-slider css -->

@@ -1,1 +1,1 @@
-hi bro
+You are now registered

@@ -10,12 +10,14 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Banner;
+use App\Mail\HelloMail;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\BackOffice;
+use App\Models\Subscriber;
 use App\Models\Tag as ModelsTag;
 use App\Models\Size as ModelsSize;
 use Illuminate\Support\Facades\DB;
@@ -29,9 +31,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
-use App\Mail\HelloMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +53,7 @@ Route::get('/', function () {
     $products = Product::all();
     $articles = DB::table('articles')->take(2)->get();
     $last = Product::latest()->first();
+    $lastSub = Subscriber::latest()->first();
     $infos = Info::all();
     $test = Image::all();
     $images = Image::latest()->first();
@@ -58,7 +61,7 @@ Route::get('/', function () {
     $countCart = Cart::all();
     $cart = Cart::all();
 
-    Mail::to('c_est_karim@hotmail.com')->send(new HelloMail);
+    // Mail::to('Image')->send(new HelloMail);
     if (Auth::check()) {
         $cart = Cart::where('name', $authUser->name)->get();
 
@@ -97,10 +100,23 @@ Route::get('/about.html', function () {
 // contact
 Route::get('/contact.html', function () {
     $banners = Banner::all();
+    $cart = Cart::all();
     $authUser = auth()->user();
-    $countCart = Cart::where('name', $authUser->name)->count();
+    $images = Image::all();
+
     $infos = Info::all();
-    return view('pages.contact', compact('banners', 'infos', 'countCart'));
+
+    // Mail::to('Image')->send(new HelloMail);
+    if (Auth::check()) {
+        $cart = Cart::where('name', $authUser->name)->get();
+
+        $authUser = auth()->user();
+
+        $countCart = Cart::where('name', $authUser->name)->count();
+    }
+
+    $infos = Info::all();
+    return view('pages.contact', compact('banners', 'images', 'infos', 'cart', 'infos', 'countCart'));
 });
 
 // login
@@ -140,10 +156,20 @@ Route::get('/blog.html', function () {
     $tags = Tag::all();
     $comments = Comment::all();
     $infos = Info::all();
-    $authUser = auth()->user();
-    $countCart = Cart::where('name', $authUser->name)->count();
+    $images = Image::all();
+    $cart = Cart::all();
 
-    return view('pages.blog', compact('articles', 'tags', 'infos', 'countCart', 'comments'));
+    // Mail::to('Image')->send(new HelloMail);
+    if (Auth::check()) {
+
+        $authUser = auth()->user();
+        $cart = Cart::where('name', $authUser->name)->get();
+
+        $countCart = Cart::where('name', $authUser->name)->count();
+    }
+
+
+    return view('pages.blog', compact('articles', 'images', 'tags', 'cart', 'infos', 'countCart', 'comments'));
 });
 Route::get('/blog/{article_slug}/{id}', [ArticleController::class, 'viewPost']);
 Route::post('comments', [CommentController::class, 'store']);
@@ -154,11 +180,16 @@ Route::post('reviews', [ReviewController::class, 'store']);
 Route::get('/checkout.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
-    $authUser = auth()->user();
-    $images = Image::all();
-    $countCart = Cart::where('name', $authUser->name)->count();
-    $cart = Cart::where('name', $authUser->name)->get();
+    $cart = Cart::all();
+    $countCart = Cart::all();
 
+    $images = Image::all();
+    if (Auth::check()) {
+
+        $authUser = auth()->user();
+        $cart = Cart::where('name', $authUser->name)->get();
+        $countCart = Cart::where('name', $authUser->name)->count();
+    }
 
     return view('pages.checkout', compact('banners', 'images', 'cart', 'countCart', 'infos'));
 });
@@ -193,6 +224,9 @@ Route::get('/order.html', function () {
     return view('pages.order', compact('countCart', 'banners', 'cart', 'images', 'infos'));
 });
 
+
+// Contact
+Route::post('/contactUs', [ContactController::class, 'store']);
 
 
 // 
@@ -280,11 +314,17 @@ Route::put('/carousel/update/{id}', [BackOfficeController::class, 'carouselUpdat
 Route::delete('/carousel/delete/{id}', [BackOfficeController::class, 'carouselDelete']);
 Route::post('/carousel/store', [BackOfficeController::class, 'storeCarousel']);
 
-
-
-
+// ORDER BACKOFFICE
+Route::get('/manage/order', [BackOfficeController::class, 'order']);
+Route::delete('/manage/order/{id}', [BackOfficeController::class, 'orderDelete']);
 
 // MAILING
+Route::get('/contactUs', [ContactController::class, 'index']);
+
+
+
+
+Route::post('/storeSub', [UserController::class, 'storeSub'])->name('storeSub');
 // Route::get('')
 
 require __DIR__ . '/auth.php';

@@ -280,17 +280,17 @@
                                            <form action="{{ url('reviews') }}" method="POST">
                                                @csrf
                                                <input type="text" class="d-none" name='product_slug'
-                                                   value="{{ $post->slug }}" name="" id="">
-                                               {{-- <div class="row">
+                                                   value="{{ $post->slug }}" id="">
+                                               <div class="row">
                                                    <div class="col-md-6">
-                                                       <input type="text" placeholder="Your name here..."
+                                                       <input type="text" required placeholder="Your name here..."
                                                            name="name" />
                                                    </div>
                                                    <div class="col-md-6">
-                                                       <input type="text" placeholder="Subject..."
-                                                           name="name" />
+                                                       <input type="text" required placeholder="Subject..."
+                                                           name="subject" />
                                                    </div>
-                                               </div> --}}
+                                               </div>
                                                @if (session('message'))
                                                    <div class="primary m-5  ">
                                                        {{ session('message') }}
@@ -299,7 +299,7 @@
 
                                                <div class="row">
                                                    <div class="col-md-12">
-                                                       <textarea class="custom-textarea" name="comment_body" placeholder="Your review here..."></textarea>
+                                                       <textarea required class="custom-textarea" name="comment_body" placeholder="Your review here..."></textarea>
                                                        <button type="submit" data-text="submit review"
                                                            class="button-one submit-button mt-20">submit
                                                            review</button>

@@ -10,7 +10,7 @@
             <input type="password" name="password" required autocomplete="new-password" placeholder="Password">
             <input type="password" name="password_confirmation" required placeholder="Confirm password">
             <p class="mb-0">
-                <input type="checkbox" id="newsletter" name="newsletter" checked>
+                <input type="checkbox" id="newsletter" value="name" name="newsletter" checked>
                 <label for="newsletter"><span>Sign up for our newsletter!</span></label>
             </p>
             <button type="submit" data-text="register" class="button-one submit-button mt-15">regiter</button>

@@ -16,6 +16,8 @@ class CommentController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'comment_body' => 'required |string',
+                'name' => 'required |string',
+                'email' => 'required |string',
             ]);
 
             if ($validator->fails()) {
@@ -27,6 +29,8 @@ class CommentController extends Controller
             if ($post) {
                 Comment::create([
                     'article_id' => $post->id,
+                    'name' => $request->name,
+                    'email' => $request->email,
                     'user_id' => Auth::user()->id,
                     'comment_body' => $request->comment_body,
                 ]);
