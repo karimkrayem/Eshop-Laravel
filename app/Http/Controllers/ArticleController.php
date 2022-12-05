@@ -91,12 +91,9 @@ class ArticleController extends Controller
         $banners = Banner::all();
         $infos = Info::all();
         $images = Image::all();
-
         $numberPost = Comment::where('article_id', $id)->count();
         $slug = Article::where('slug', $article_slug)->get();
-
         $cart = Cart::all();
-
         // Mail::to('Image')->send(new HelloMail);
         if (Auth::check()) {
 

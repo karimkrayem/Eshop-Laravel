@@ -31,7 +31,37 @@ class ContactController extends Controller
     public function index()
     {
 
-        $messages = Contact::all();
+        $messages = Contact::where('archive', false)->get();
         return view('backoffice.pages.customer', compact('messages'));
+    }
+
+    public function archived()
+    {
+
+        $messages = Contact::where('archive', true)->get();
+        return view('backoffice.pages.archive', compact('messages'));
+    }
+
+    public function show($id)
+    {
+        $messages = Contact::find($id);
+        if ($messages->read == false) {
+            $messages->read =   true;
+            $messages->save();
+        }
+
+
+        return view('backoffice.pages.showMessage', compact('messages'));
+    }
+    public function archive($id)
+    {
+        $messages = Contact::find($id);
+        if ($messages->archive == false) {
+            $messages->archive =   true;
+            $messages->save();
+        }
+
+
+        return redirect()->back()->with('message', 'Message is in archives');
     }
 }

@@ -1,6 +1,6 @@
 <div>
     @foreach ($teams as $team)
-        <div class="card text-center">
+        <div class="card text-center ">
             <div class="card-header">
                 Member ID :
                 <span>{{ $team->id }}</span>

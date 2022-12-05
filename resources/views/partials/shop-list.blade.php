@@ -170,8 +170,10 @@
                                                            @csrf
                                                            <div class="clearfix">
                                                                <div class="cart-plus-minus">
-                                                                   <input type="text" value="{{ $product->stock }}"
-                                                                       name="quantity" class="cart-plus-minus-box">
+
+                                                                   <input type="number" max="{{ $product->stock }}"
+                                                                       value="1" min="1" name="quantity"
+                                                                       class="cart-plus-minus-box">
                                                                </div>
                                                                <div class="product-action clearfix">
                                                                    <a href="#" data-bs-toggle="modal"

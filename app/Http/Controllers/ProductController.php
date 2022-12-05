@@ -253,8 +253,6 @@ class ProductController extends Controller
             $cart->price = $product->price;
             $cart->quantity = $request->quantity;
             $cart->save();
-
-
             return redirect()->back();
         } else {
             return redirect('login.html');
@@ -264,6 +262,7 @@ class ProductController extends Controller
     public function destroyCart($id)
     {
         $delete = Cart::find($id);
+        // dd($delete);
         $delete->delete();
         return redirect()->back();
     }

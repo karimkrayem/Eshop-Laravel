@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('comment');
+            $table->boolean('read')->default(false);
+            $table->boolean('archive')->default(false);
             $table->timestamps();
         });
     }

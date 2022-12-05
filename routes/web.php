@@ -103,6 +103,7 @@ Route::get('/contact.html', function () {
     $cart = Cart::all();
     $authUser = auth()->user();
     $images = Image::all();
+    $countCart = Cart::all();
 
     $infos = Info::all();
 
@@ -158,6 +159,8 @@ Route::get('/blog.html', function () {
     $infos = Info::all();
     $images = Image::all();
     $cart = Cart::all();
+    $countCart = Cart::all();
+
 
     // Mail::to('Image')->send(new HelloMail);
     if (Auth::check()) {
@@ -202,14 +205,20 @@ Route::get('/cart.html', function () {
     $authUser = auth()->user();
     // $product = Product::where('')
     $infos = Info::all();
-    $allCart = Cart::all();
+    $countCart = Cart::all();
     $banners = Banner::all();
-    $countCart = Cart::where('name', $authUser->name)->count();
+    $cart = Cart::all();
     $images = Image::all();
-    $cart = Cart::where('name', $authUser->name)->get();
-    return view('pages.cart', compact('countCart', 'infos', 'banners', 'allCart', 'images', 'cart'));
+
+    if (Auth::check()) {
+
+        $authUser = auth()->user();
+        $cart = Cart::where('name', $authUser->name)->get();
+        $countCart = Cart::where('name', $authUser->name)->count();
+    }
+    return view('pages.cart', compact('countCart', 'infos', 'banners', 'countCart', 'images', 'cart'));
 });
-Route::delete('/cart.html/delete/{id}', [ProductController::class, 'destroyCart']);
+Route::delete('/cart/{id}', [ProductController::class, 'destroyCart']);
 
 Route::post('/addcart/{id}', [ProductController::class, 'addcart']);
 
@@ -320,6 +329,9 @@ Route::delete('/manage/order/{id}', [BackOfficeController::class, 'orderDelete']
 
 // MAILING
 Route::get('/contactUs', [ContactController::class, 'index']);
+Route::get('/showMessage/{id}', [ContactController::class, 'show']);
+Route::get('/archive/{id}', [ContactController::class, 'archive']);
+Route::get('/archived', [ContactController::class, 'archived']);
 
 
 
