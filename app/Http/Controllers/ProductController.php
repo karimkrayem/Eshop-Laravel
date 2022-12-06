@@ -49,15 +49,19 @@ class ProductController extends Controller
         $countCart = Cart::all();
         $authUser = auth()->user();
         $cart = Cart::all();
+        $total = Cart::all();
+
 
         if (Auth::check()) {
 
             $cart = Cart::where('name', $authUser->name)->get();
             $authUser = auth()->user();
+            $total = Cart::where('user_id', $authUser->id)->sum('price');
+
             $countCart = Cart::where('name', $authUser->name)->count();
         }
 
-        return view('pages.shop-list', compact('products', 'cart', 'countCart', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('products', 'total', 'cart', 'countCart', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
 
@@ -95,18 +99,20 @@ class ProductController extends Controller
         $infos = Info::all();
         $countCart = Cart::all();
         $authUser = auth()->user();
-        $cart = Cart::where('name', $authUser->name)->get();
+        $total = Cart::all();
+
+        $cart = Cart::where('user_id', $authUser->id)->get();
 
 
         if (Auth::check()) {
 
             $authUser = auth()->user();
-
-            $countCart = Cart::where('name', $authUser->name)->count();
+            $total = Cart::where('user_id', $authUser->id)->sum('price');
+            $countCart = Cart::where('user_id', $authUser->id)->count();
         }
         // $productss = Product::where('category_id', $id);
 
-        return view('pages.shop-list', compact('countCart', 'cart', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('countCart', 'cart', 'total', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
     public function edit($id)
@@ -193,16 +199,14 @@ class ProductController extends Controller
         if (Auth::check()) {
 
             $authUser = auth()->user();
-            $cart = Cart::where('name', $authUser->name)->get();
+            $cart = Cart::where('user_id', $authUser->id)->get();
 
-            $countCart = Cart::where('name', $authUser->name)->count();
+            $countCart = Cart::where('user_id', $authUser->id)->count();
         }
 
         $slug = Product::where('slug', $product_slug)->get();
         if ($slug) {
             $post = Product::where('slug', $product_slug)->first();
-
-            // $article_tag =
             return view('pages.single-product', compact('slug', 'cart', 'countCart', 'images', 'post', 'banners', 'infos'));
         } else {
             return redirect()->back();
@@ -247,6 +251,8 @@ class ProductController extends Controller
             $cart->product_title = $product->name;
             $cart->price = $product->price;
             $cart->quantity = $request->quantity;
+            $cart->user_id = $user->id;
+
             $product->stock -= $request->quantity;
             $cart->save();
             $product->save();

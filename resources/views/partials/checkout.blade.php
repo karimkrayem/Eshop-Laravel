@@ -54,13 +54,15 @@
                                                <div class="billing-details pr-20">
                                                    <h4 class="title-1 title-border text-uppercase mb-30">billing details
                                                    </h4>
-                                                   <input type="text" name="name" required
-                                                       placeholder="Your name here...">
-                                                   <input type="text" name="email" required
-                                                       placeholder="Email address here...">
-                                                   <input type="text" name="phone" required
+                                                   <input type="text" value="{{ auth()->user()->name }}"
+                                                       name="name" required placeholder="Your name here...">
+                                                   <input type="text" value="{{ auth()->user()->email }}"
+                                                       name="email" required placeholder="Email address here...">
+                                                   <input type="text" name="phone"
+                                                       value="{{ auth()->user()->phone }}" required
                                                        placeholder="Phone here...">
-                                                   <input type="text" placeholder="Company neme here...">
+                                                   <input type="text"
+                                                       value="{{ auth()->user()->company }}"placeholder="Company neme here...">
                                                    <select class="custom-select mb-15">
                                                        <option>Contry</option>
                                                        <option>Bangladesh</option>
@@ -122,19 +124,16 @@
                                                            @endforeach
                                                            <tr>
                                                                <td>Cart Subtotal</td>
-                                                               <td class="text-end">$155.00</td>
+                                                               <td class="text-end">${{ $total }}</td>
                                                            </tr>
-                                                           <tr>
-                                                               <td>Shipping and Handing</td>
-                                                               <td class="text-end">$15.00</td>
-                                                           </tr>
+
                                                            <tr>
                                                                <td>Vat</td>
-                                                               <td class="text-end">$00.00</td>
+                                                               <td class="text-end">${{ $total * 0.21 }}</td>
                                                            </tr>
                                                            <tr>
                                                                <td>Order Total</td>
-                                                               <td class="text-end">$170.00</td>
+                                                               <td class="text-end">${{ $total + $total * 0.21 }}</td>
                                                            </tr>
                                                        </tbody>
                                                    </table>

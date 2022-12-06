@@ -184,19 +184,16 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="text-left">Cart Subtotal</td>
-                                                    <td class="text-end">$155.00</td>
+                                                    <td class="text-end">${{ $total }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="text-left">Cart Subtotal</td>
-                                                    <td class="text-end">$15.00</td>
-                                                </tr>
+
                                                 <tr>
                                                     <td class="text-left">Vat</td>
-                                                    <td class="text-end">$00.00</td>
+                                                    <td class="text-end">${{ $total * 0.21 }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">Order Total</td>
-                                                    <td class="text-end">$170.00</td>
+                                                    <td class="text-end">${{ $total + $total * 0.21 }} </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -208,8 +205,10 @@
                         <!-- shopping-cart end -->
                         <!-- check-out end -->
                     </div>
-                    <button type="submit" data-text="proceed-checkout" class="button-one submit-button mt-15">PROCEED
-                        CHECK OUT</button>
+                    {{-- <button type="submit" data-text="proceed-checkout" class="button-one submit-button mt-15">PROCEED
+                        CHECK OUT</button> --}}
+                    <a href="/checkout.html" data-text="proceed-checkout" class="button-one submit-button mt-15">PROCEED
+                        CHECK OUT</a>
                 </div>
             </div>
         </div>

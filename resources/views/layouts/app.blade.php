@@ -114,9 +114,14 @@
                                                             <div class="cart-info">
                                                                 <h5><a href="#">{{ $carts->product_title }}</a></h5>
                                                                 <p class="mb-0">Price : $ {{ $carts->price }}</p>
-                                                                <p class="mb-0">Qty : 02 </p>
-                                                                <span class="cart-delete"><a href="#"><i
-                                                                            class="zmdi zmdi-close"></i></a></span>
+                                                                <p class="mb-0">Qty : {{ $carts->quantity }} </p>
+                                                                <form action="/cart/{{ $carts->id }}" method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <span class="cart-delete"> <button type="submit"><i
+                                                                                class="zmdi zmdi-close"></i></button></span>
+
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     @empty
@@ -128,7 +133,8 @@
 
                                                 </div>
                                                 <div class="cart-totals">
-                                                    <h5 class="mb-0">Total <span class="floatright">$500.00</span></h5>
+                                                    <h5 class="mb-0">Total <span class="floatright"> $
+                                                            {{ $total }}</span></h5>
                                                 </div>
                                                 <div class="cart-bottom  clearfix">
                                                     <a href="cart.html" class="button-one floatleft text-uppercase"

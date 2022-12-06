@@ -34,6 +34,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BackOfficeController;
+use App\Models\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,11 +96,11 @@ Route::get('/about.html', function () {
 
     // Mail::to('Image')->send(new HelloMail);
     if (Auth::check()) {
-        $cart = Cart::where('name', $authUser->name)->get();
+        $cart = Cart::where('user_id', $authUser->id)->get();
 
         $authUser = auth()->user();
 
-        $countCart = Cart::where('name', $authUser->name)->count();
+        $countCart = Cart::where('user_id', $authUser->id)->count();
     }
     return view('pages.about', compact('teams', 'cart', 'countCart', 'banners', 'infos'));
 });
@@ -117,11 +118,11 @@ Route::get('/contact.html', function () {
 
     // Mail::to('Image')->send(new HelloMail);
     if (Auth::check()) {
-        $cart = Cart::where('name', $authUser->name)->get();
+        $cart = Cart::where('user_id', $authUser->id)->get();
 
         $authUser = auth()->user();
 
-        $countCart = Cart::where('name', $authUser->name)->count();
+        $countCart = Cart::where('user_id', $authUser->id)->count();
     }
 
     $infos = Info::all();
@@ -159,9 +160,9 @@ Route::get('/my-account.html', function () {
     if (Auth::check()) {
 
         $authUser = auth()->user();
-        $cart = Cart::where('name', $authUser->name)->get();
+        $cart = Cart::where('user_id', $authUser->id)->get();
 
-        $countCart = Cart::where('name', $authUser->name)->count();
+        $countCart = Cart::where('user_id', $authUser->id)->count();
     }
 
     return view('pages.my-account', compact('banners', 'images', 'users', 'cart', 'infos', 'countCart'));
@@ -187,9 +188,8 @@ Route::get('/blog.html', function () {
     if (Auth::check()) {
 
         $authUser = auth()->user();
-        $cart = Cart::where('name', $authUser->name)->get();
-
-        $countCart = Cart::where('name', $authUser->name)->count();
+        $cart = Cart::where('user_id', $authUser->id)->get();
+        $countCart = Cart::where('user_id', $authUser->id)->count();
     }
 
 
@@ -209,14 +209,17 @@ Route::get('/checkout.html', function () {
     $countCart = Cart::all();
 
     $images = Image::all();
+    $total = Cart::all();
+
     if (Auth::check()) {
 
         $authUser = auth()->user();
-        $cart = Cart::where('name', $authUser->name)->get();
-        $countCart = Cart::where('name', $authUser->name)->count();
+        $cart = Cart::where('user_id', $authUser->id)->get();
+        $countCart = Cart::where('user_id', $authUser->id)->count();
+        $total = Cart::where('user_id', $authUser->id)->sum('price');
     }
 
-    return view('pages.checkout', compact('banners', 'images', 'cart', 'countCart', 'infos'));
+    return view('pages.checkout',  compact('banners', 'total', 'images', 'cart', 'countCart', 'infos'));
 });
 Route::post('/checkout.html/order', [ProductController::class, 'confirmOrder']);
 
@@ -231,14 +234,17 @@ Route::get('/cart.html', function () {
     $banners = Banner::all();
     $cart = Cart::all();
     $images = Image::all();
+    $total = Cart::all();
+
 
     if (Auth::check()) {
 
         $authUser = auth()->user();
-        $cart = Cart::where('name', $authUser->name)->get();
-        $countCart = Cart::where('name', $authUser->name)->count();
+        $cart = Cart::where('user_id', $authUser->id)->get();
+        $total = Cart::where('user_id', $authUser->id)->sum('price');
+        $countCart = Cart::where('user_id', $authUser->id)->count();
     }
-    return view('pages.cart', compact('countCart', 'infos', 'banners', 'countCart', 'images', 'cart'));
+    return view('pages.cart', compact('countCart', 'infos', 'banners', 'total', 'countCart', 'images', 'cart'));
 });
 Route::delete('/cart/{id}', [ProductController::class, 'destroyCart']);
 
@@ -250,9 +256,31 @@ Route::get('/order.html', function () {
     $infos = Info::all();
     $banners = Banner::all();
     $images = Image::all();
-    $cart = Cart::where('name', $authUser->name)->get();
-    $countCart = Cart::where('name', $authUser->name)->count();
-    return view('pages.order', compact('countCart', 'banners', 'cart', 'images', 'infos'));
+    $cart = Cart::all();
+    $countCart = Cart::all();
+    $order = Order::where('user_id', $authUser->id)->first();
+    $total = Cart::all();
+
+
+
+
+    if (Auth::check()) {
+
+        $authUser = auth()->user();
+        $cart = Cart::where('user_id', $authUser->idate)->get();
+        $total = Cart::where('user_id', $authUser->id)->sum('price')->get();
+
+        $countCart = Cart::where('user_id', $authUser->id)->count();
+    }
+
+
+
+    if ($order) {
+
+        return view('pages.order', compact('countCart', 'banners', 'order', 'cart', 'images', 'infos'));
+    } else {
+        return redirect()->back();
+    }
 });
 
 
