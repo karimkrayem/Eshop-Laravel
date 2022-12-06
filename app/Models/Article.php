@@ -31,4 +31,9 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class, 'article_id', 'id');
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

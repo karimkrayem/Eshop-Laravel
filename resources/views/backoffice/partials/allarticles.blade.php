@@ -22,6 +22,13 @@
                 <a href="/article/edit/{{ $article->id }}" class="btn btn-primary">Edit Product</a>
             </div>
 
+
+            <form action="" method="">
+                <div><a href="/publish/{{ $article->id }}">
+                        <h5>Publish</h5>
+                    </a></div>
+            </form>
+
             <form action="/article/delete/{{ $article->id }}" method="POST">
                 @csrf
                 @method('DELETE')
@@ -29,6 +36,9 @@
                 <button class="btn btn-danger " type="submit">Delete</button>
 
             </form>
+
+
+
         </div>
     @endforeach
 </div>

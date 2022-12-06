@@ -16,9 +16,10 @@
                                         <h4>Categories</h4>
                                     </div>
                                     <div id="cat-treeview" class="widget-info product-cat boxscrol2">
-                                        @foreach ($tags as $tag)
+                                        @foreach ($categories as $category)
                                             <ul>
-                                                <li><span>{{ $tag->name }}</span>
+                                                <li><a
+                                                        href="/categoriesBlog/{{ $category->id }}"><span>{{ $category->name }}</span></a>
                                                 </li>
 
                                             </ul>
@@ -35,7 +36,7 @@
             <div class="row">
                 <!-- Single-blog start -->
 
-                @foreach ($articles as $article)
+                @forelse ($articles as $article)
                     <div class="col-lg-4 col-md-6">
                         <div class="single-blog mb-30">
                             <div class="blog-photo">
@@ -64,7 +65,11 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="text-center">
+                        <h3>No articles</h3>
+                    </div>
+                @endforelse
 
                 <!-- Single-blog end -->
                 <!-- Single-blog start -->

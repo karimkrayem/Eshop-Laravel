@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Models\Cart;
 use App\Models\Info;
+use App\Models\Size;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Banner;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as IMG;
@@ -23,7 +26,7 @@ class ArticleController extends Controller
     public function index()
     {
 
-        $articles = Article::all();
+        $articles = Article::where('published');
         $users = User::all();
         $tags = Tag::all();
         return view('backoffice.pages.articlesForm', compact('tags', 'articles', 'users'));
@@ -77,10 +80,33 @@ class ArticleController extends Controller
         $update->title = $request->title;
         $update->slug = $request->slug;
         $update->content = $request->content;
-        // $update->src = $request->src;
-        // $update->user_id = $request->user_id;
         $update->save();
         return redirect()->back();
+    }
+
+    public function categories($id)
+    {
+
+
+        $articles = DB::table('articles')->where('category_id', $id)->where('published', true)->paginate(5);
+        $images = Image::all();
+        $categories = Category::all();
+        $sizes = Size::all();
+        $banners = Banner::all();
+        $infos = Info::all();
+        $countCart = Cart::all();
+        $comments = Comment::all();
+
+        $authUser = auth()->user();
+        $cart = Cart::all();
+
+
+        if (Auth::check()) {
+            $authUser = auth()->user();
+            $cart = Cart::where('name', $authUser->name)->get();
+            $countCart = Cart::where('name', $authUser->name)->count();
+        }
+        return view('pages.blog', compact('countCart', 'comments', 'cart', 'articles', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
 

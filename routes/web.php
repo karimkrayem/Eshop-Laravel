@@ -90,10 +90,18 @@ Route::get('/about.html', function () {
     $infos = Info::all();
     $banners = Banner::all();
     $authUser = auth()->user();
-    $countCart = Cart::where('name', $authUser->name)->count();
+    $countCart = Cart::all();
+    $cart = Cart::all();
 
+    // Mail::to('Image')->send(new HelloMail);
+    if (Auth::check()) {
+        $cart = Cart::where('name', $authUser->name)->get();
 
-    return view('pages.about', compact('teams', 'countCart', 'banners', 'infos'));
+        $authUser = auth()->user();
+
+        $countCart = Cart::where('name', $authUser->name)->count();
+    }
+    return view('pages.about', compact('teams', 'cart', 'countCart', 'banners', 'infos'));
 });
 
 
@@ -142,8 +150,19 @@ Route::get('/my-account.html', function () {
     $images = Image::all();
     $users = User::first();
     $authUser = auth()->user();
-    $countCart = Cart::where('name', $authUser->name)->count();
-    $cart = Cart::where('name', $authUser->name)->get();
+    $countCart = Cart::all();
+    $cart = Cart::all();
+
+
+
+    // Mail::to('Image')->send(new HelloMail);
+    if (Auth::check()) {
+
+        $authUser = auth()->user();
+        $cart = Cart::where('name', $authUser->name)->get();
+
+        $countCart = Cart::where('name', $authUser->name)->count();
+    }
 
     return view('pages.my-account', compact('banners', 'images', 'users', 'cart', 'infos', 'countCart'));
 });
@@ -153,12 +172,14 @@ Route::put('/userinfo', [UserController::class, 'account']);
 
 // blog
 Route::get('/blog.html', function () {
-    $articles = DB::table('articles')->orderBy('id', 'desc')->paginate(6);
+    $articles = DB::table('articles')->where('published', true)->orderBy('id', 'desc')->paginate(6);
     $tags = Tag::all();
     $comments = Comment::all();
     $infos = Info::all();
     $images = Image::all();
     $cart = Cart::all();
+    $categories = Category::all();
+
     $countCart = Cart::all();
 
 
@@ -172,12 +193,13 @@ Route::get('/blog.html', function () {
     }
 
 
-    return view('pages.blog', compact('articles', 'images', 'tags', 'cart', 'infos', 'countCart', 'comments'));
+    return view('pages.blog', compact('articles', 'images', 'tags', 'categories', 'cart', 'infos', 'countCart', 'comments'));
 });
 Route::get('/blog/{article_slug}/{id}', [ArticleController::class, 'viewPost']);
 Route::post('comments', [CommentController::class, 'store']);
 Route::get('/product/{product_slug}', [ProductController::class, 'viewPost']);
 Route::post('reviews', [ReviewController::class, 'store']);
+Route::get('categoriesBlog/{id}', [ArticleController::class, 'categories']);
 
 // checkout
 Route::get('/checkout.html', function () {
@@ -278,6 +300,8 @@ Route::get('/allarticles', function () {
 Route::get('/article/edit/{id}', [ArticleController::class, 'edit']);
 Route::put('/article/update/{id}', [ArticleController::class, 'update']);
 Route::delete('/article/delete/{id}', [ArticleController::class, 'destroy']);
+Route::get('/publish/{id}', [BackOfficeController::class, 'published']);
+
 
 
 // TEAM BACKOFFICE

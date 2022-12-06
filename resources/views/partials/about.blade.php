@@ -1,15 +1,12 @@
 <div class="heading-banner-area">
 
-
-
     @foreach ($banners as $banner)
         @if ($banner->id == 1)
             <style>
                 .heading-banner-area {
-                    background-image: url("src/banners/{{ $banner->banner }}");
+                    background-image: url("{{ $banner->banner }}");
                 }
             </style>
-            <img src="{{ $banner->banner }}" alt="">
         @endif
     @endforeach
     <div class="container">

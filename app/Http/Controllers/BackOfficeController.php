@@ -7,6 +7,7 @@ use App\Models\Info;
 use App\Models\Star;
 use App\Models\Order;
 use App\Models\Banner;
+use App\Models\Article;
 use App\Models\Product;
 use App\Mail\CancelMail;
 use App\Models\Carousel;
@@ -124,5 +125,18 @@ class BackOfficeController extends Controller
 
         $delete->delete();
         return redirect()->back();
+    }
+
+
+    public function published($id)
+    {
+        $articles = Article::find($id);
+        if ($articles->published == false) {
+            $articles->published =   true;
+            $articles->save();
+        }
+
+
+        return redirect()->back()->with('message', 'Article Published');
     }
 };

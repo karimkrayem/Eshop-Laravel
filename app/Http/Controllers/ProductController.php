@@ -64,8 +64,6 @@ class ProductController extends Controller
 
     public function categories($id)
     {
-
-
         $products = DB::table('products')->where('category_id', $id)->paginate(5);
         $images = Image::all();
         $categories = Category::all();
@@ -75,15 +73,12 @@ class ProductController extends Controller
         $countCart = Cart::all();
         $authUser = auth()->user();
         $cart = Cart::where('name', $authUser->name)->get();
-
-
         if (Auth::check()) {
 
             $authUser = auth()->user();
 
             $countCart = Cart::where('name', $authUser->name)->count();
         }
-        // $productss = Product::where('category_id', $id);
 
         return view('pages.shop-list', compact('countCart', 'cart', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
@@ -252,7 +247,9 @@ class ProductController extends Controller
             $cart->product_title = $product->name;
             $cart->price = $product->price;
             $cart->quantity = $request->quantity;
+            $product->stock -= $request->quantity;
             $cart->save();
+            $product->save();
             return redirect()->back();
         } else {
             return redirect('login.html');
@@ -262,7 +259,9 @@ class ProductController extends Controller
     public function destroyCart($id)
     {
         $delete = Cart::find($id);
-        // dd($delete);
+        $product = Product::find($id);
+        $product->stock += $delete->quantity;
+        $product->save();
         $delete->delete();
         return redirect()->back();
     }
@@ -277,24 +276,15 @@ class ProductController extends Controller
 
 
         $order->email = $request->email;
-        // dd($request->email);
         $order->phone = $request->phone;
         $order->adress = $request->adress;
         $order->name = $request->name;
-        // $name = $user->company;
-        // $name = $user->state;
-        // $name = $user->town;
         $adress = $user->adress;
-        // dd($request);
         foreach ($request->productname as $key => $productname) {
 
             $order->product_title = $request->productname[$key];
             $order->price = $request->price[$key];
             $order->quantity = $request->quantity[$key];
-            // $order->adress = $request->$adress;
-            // // $order->name = $request->$name;
-            // $order->phone = $request->$phone;
-
             Mail::to($order->email)->send(new ConfirmMail);
             $order->save();
         }

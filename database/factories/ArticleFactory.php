@@ -28,7 +28,8 @@ class ArticleFactory extends Factory
             'content' => $this->faker->text($maxNbChars = 200),
             'src' => $this->faker->imageUrl(width: 620, height: 480),
             'user_id' => $this->faker->numberBetween(1, 4),
-            'slug' => $slug
+            'slug' => $slug,
+            'category_id' => $this->faker->numberBetween(1, 4),
         ];
     }
 }

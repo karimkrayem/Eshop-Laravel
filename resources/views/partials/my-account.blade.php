@@ -43,29 +43,37 @@
                                    </a>
                                </div>
                                <div id="my-info" class="panel-collapse collapse show" data-bs-parent="#accordion">
+
                                    <form action="/userinfo" method="POST">
                                        @csrf
                                        @method('PUT')
-                                       <div class="panel-body">
-                                           <div class="billing-details shop-cart-table">
-                                               <input type="text" name="name" value="{{ Auth::user()->name }}"
-                                                   placeholder="Your name here...">
-                                               <input type="text" name="email" value="{{ Auth::user()->email }}"
-                                                   placeholder="Email address here...">
-                                               {{-- <input type="text" name='name' placeholder="Phone here..."> --}}
-                                               <input type="text" name='role_id' value="{{ Auth::user()->role_id }}">
-                                               <input type="text" name='password'
-                                                   value="{{ Auth::user()->password }}" hidden
-                                                   placeholder="Phone here...">
-                                               <input type="text" name="company" placeholder="Company neme here...">
-                                               <input type="text" name="country" placeholder="Country neme here...">
-                                               <input type="text" name="state" placeholder="State neme here...">
-                                               <input type="text" name="town" placeholder="Town neme here...">
-                                               <textarea name="adress" placeholder="Your address here..." class="custom-textarea"></textarea>
-                                               <button type="submit" data-text="place order"
-                                                   class="button-one submit-button mt-15">Update Infos</button>
+                                       @if (Auth::check())
+                                           <div class="panel-body">
+                                               <div class="billing-details shop-cart-table">
+                                                   <input type="text" name="name" value="{{ Auth::user()->name }}"
+                                                       placeholder="Your name here...">
+                                                   <input type="text" name="email"
+                                                       value="{{ Auth::user()->email }}"
+                                                       placeholder="Email address here...">
+                                                   {{-- <input type="text" name='name' placeholder="Phone here..."> --}}
+                                                   <input type="text" name='role_id'
+                                                       value="{{ Auth::user()->role_id }}">
+                                                   <input type="text" name='password'
+                                                       value="{{ Auth::user()->password }}" hidden
+                                                       placeholder="Phone here...">
+                                                   <input type="text" name="company"
+                                                       placeholder="Company neme here...">
+                                                   <input type="text" name="country"
+                                                       placeholder="Country neme here...">
+                                                   <input type="text" name="state"
+                                                       placeholder="State neme here...">
+                                                   <input type="text" name="town" placeholder="Town neme here...">
+                                                   <textarea name="adress" placeholder="Your address here..." class="custom-textarea"></textarea>
+                                                   <button type="submit" data-text="place order"
+                                                       class="button-one submit-button mt-15">Update Infos</button>
+                                               </div>
                                            </div>
-                                       </div>
+                                       @endif
                                    </form>
                                </div>
                            </div>

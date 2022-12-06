@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('content');
             $table->string('slug');
             $table->text('src');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->boolean('published')->default(false);
             $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
