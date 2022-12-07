@@ -1,20 +1,26 @@
 @extends('backoffice.layouts.app')
 @section('content')
-    @forelse ($orders as $order)
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Adress</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Cancel</th>
-                </tr>
-            </thead>
-            <tbody>
+    <h1 class="text-center m-5">ALL ORDERS</h1>
+    <style>
+        tr {
+            height: 20% !important;
+        }
+    </style>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Cancel</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($orders as $order)
                 <tr>
                     <th scope="row">{{ $order->id }}</th>
                     <td>{{ $order->name }}</td>
@@ -32,15 +38,16 @@
 
                         </form>
                     </td>
-
                 </tr>
+            @empty
+                <div class="text-center mt-5">
+                    <h3>NO ORDERS YET</h3>
+                </div>
+            @endforelse
 
-            </tbody>
-        </table>
 
-    @empty
-        <div class="text-center mt-5">
-            <h3>NO ORDERS YET</h3>
-        </div>
-    @endforelse
+
+
+        </tbody>
+    </table>
 @endsection

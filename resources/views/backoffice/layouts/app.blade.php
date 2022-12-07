@@ -51,29 +51,7 @@
     <div class="wrapper">
 
         <!-- Mobile-header-top Start -->
-        <div class="mobile-header-top d-block d-md-none">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- header-search-mobile start -->
-                        <div class="header-search-mobile">
-                            <div class="table">
-                                <div class="table-cell">
-                                    <ul>
-                                        <li><a class="search-open" href="#"><i class="zmdi zmdi-search"></i></a>
-                                        </li>
-                                        <li><a href="login.html"><i class="zmdi zmdi-lock"></i></a></li>
-                                        <li><a href="my-account.html"><i class="zmdi zmdi-account"></i></a></li>
-                                        <li><a href="wishlist.html"><i class="zmdi zmdi-favorite"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- header-search-mobile start -->
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Mobile-header-top End -->
         <!-- HEADER-AREA START -->
         <header id="sticky-menu" class="header">
@@ -103,7 +81,7 @@
                 <li><a href="/backoffice">home</a>
 
                 </li>
-                <li><a href="shop.html">Forms</a>
+                <li><a>Forms</a>
                     <div class="mega-menu menu-scroll">
                         <div class="table">
                             <div class="table-cell">
@@ -131,7 +109,7 @@
                             <li class="menu-title">Edit Section</li>
                             <li><a href="/users">Users</a></li>
                             <li><a href="/allproducts">Products</a></li>
-                            <li><a href="/allArticles">Articles</a></li>
+                            <li><a href="/allarticles">Articles</a></li>
                             <li><a href="/team">Team</a></li>
                         </ul>
                     </div>
@@ -139,36 +117,8 @@
 
 
                 <li><a href="/tagcategoryform">Tags & Categories</a></li>
-                <li><a href="/shop-list.html">Banners</a></li>
-                <li><a href="/blog.html">blog</a></li>
-                <li><a href="#">pages</a>
-                    <div class="sub-menu menu-scroll">
-                        <ul>
-                            <li class="menu-title">Page's</li>
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                            <li><a href="shop-grid-right-sidebar.html">Shop Right Sidebar</a></li>
-                            <li><a href="/shop-list.html">Shop List</a></li>
-                            <li><a href="shop-list-right-sidebar.html">Shop List right sidebar</a></li>
-                            <li><a href="single-product.html">Single Product</a></li>
-                            <li><a href="single-product-sidebar.html">Single Product Sidebar</a></li>
-                            <li><a href="cart.html">Shopping Cart</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="order.html">Order</a></li>
-                            <li><a href="login.html">login / Registration</a></li>
-                            <li><a href="my-account.html">My Account</a></li>
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="single-blog.html">Single Blog</a></li>
-                            <li><a href="single-blog-sidebar.html">Single Blog Sidebar</a></li>
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="about.html">about us</a></li>
-                <li><a href="contact.html">contact</a></li>
+                <li><a href="/banners">Banners</a></li>
+
             </ul>
         </nav>
     </div>
@@ -183,17 +133,14 @@
                     <div class="mobile-menu">
                         <nav id="dropdown">
                             <ul>
-                                <li><a href="index.html">home</a>
-                                    <ul>
-                                        <li><a href="index.html">Home Version 1</a></li>
-                                        <li><a href="index-2.html">Home Version 2</a></li>
-                                    </ul>
+                                <li><a href="/backoffice">home</a>
+
                                 </li>
-                                <li><a href="shop.html">products</a></li>
-                                <li><a href="shop-sidebar.html">accesories</a></li>
-                                <li><a href="/shop-list.html">lookbook</a></li>
-                                <li><a href="blog.html">blog</a></li>
-                                <li><a href="#">pages</a>
+                                <li><a href="allproducts">products</a></li>
+                                <li><a href="allarticles">blog</a></li>
+                                <li><a href="/team">Team</a></li>
+                                <li><a href="/carousel">Carousel</a></li>
+                                {{-- <li><a href="#">pages</a>
                                     <ul>
                                         <li><a href="shop.html">Shop</a></li>
                                         <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
@@ -213,9 +160,8 @@
                                         <li><a href="about.html">About Us</a></li>
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
-                                </li>
-                                <li><a href="about.html">about us</a></li>
-                                <li><a href="contact.html">contact</a></li>
+                                </li> --}}
+
                             </ul>
                         </nav>
                     </div>

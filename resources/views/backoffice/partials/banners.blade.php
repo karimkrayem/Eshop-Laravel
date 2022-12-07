@@ -1,13 +1,13 @@
-<div>
+<div class=" d-flex m-auto justify-content-center flex-wrap">
     @foreach ($banners as $banner)
-        <div class="card text-center">
+        <div class="card text-center w-25 m-1">
             <div class="card-header">
-                Banner ID :
-                <span>{{ $banner->id }}</span>
+                Banner ID : {{ $banner->id }}
+
             </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ $banner->name }}</h5>
-                <img src="src/banners/{{ $banner->banner }}" alt="">
+            <div class="card-body m-0 p-0">
+                {{-- <h5 class="card-title">{{ $banner->name }}</h5> --}}
+                <img class="w-100" src="src/banners/{{ $banner->banner }}" alt="">
 
                 {{-- <a href="/article/edit/{{ $article->id }}" class="btn btn-primary">Edit Product</a> --}}
             </div>

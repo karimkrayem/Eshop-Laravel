@@ -1,5 +1,7 @@
 @extends('backoffice.layouts.app')
 @section('content')
+    <h1 class="text-center m-5">Edit carousel picture</h1>
+    <a class="m-5 text-primary" href="/carousel">Carousel pictures </a>
     @foreach ($allCarousel as $img)
         <div class="d-flex">
 
@@ -21,9 +23,9 @@
         </form> --}}
 
 
-        <div class="d-flex">
+        <div class="d-flex justify-content-center border rounded w-50 m-auto mt-5">
 
-            <input type="file" required name="carousel" multiple id="">
+            <input class="p-3 m-3" type="file" required name="carousel" multiple id="">
             {{-- <a href="/carousel/edit/{{ $carousel->id }}">Add to carouse</a> --}}
             <button class="p-3 m-3 border border-solid  " type="submit">Add To carousel</button>
 

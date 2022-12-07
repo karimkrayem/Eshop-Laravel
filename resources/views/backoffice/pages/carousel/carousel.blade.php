@@ -1,16 +1,19 @@
 @extends('backoffice.layouts.app')
 @section('content')
-    <div>
+    <h1 class="text-center m-5"> Choose your carousel pictures</h1>
 
-    </div>
-    @foreach ($carousels as $carousel)
-        {{-- <form action="/banner/update/{{ $carousel->id }}" enctype="multipart/form-data" method="post"> --}}
-        {{-- @csrf
-            @method('PUT') --}}
-        <div>
-            <img src="src/carousels/{{ $carousel->carousel }}" alt="">
-        </div>
-        {{-- <form action="/carousel/delete/{{ $carousel->id }}" method="POST">
+
+    <div class="d-flex ">
+
+        @foreach ($carousels as $carousel)
+            {{-- <form action="/banner/update/{{ $carousel->id }}" enctype="multipart/form-data" method="post"> --}}
+            {{-- @csrf
+                @method('PUT') --}}
+            <div>
+                <div>
+                    <img class="" src="src/carousels/{{ $carousel->carousel }}" alt="">
+                </div>
+                {{-- <form action="/carousel/delete/{{ $carousel->id }}" method="POST">
             @csrf
             @method('DELETE')
 
@@ -18,14 +21,18 @@
 
         </form> --}}
 
-        <div class="d-flex">
+                <div class="d-flex">
 
-            {{-- <input type="file" name="carousel" multiple id=""> --}}
-            <a href="/carousel/edit/{{ $carousel->id }}">EDIT</a>
-            {{-- <button type="submit">l</button> --}}
-        </div>
-        {{-- </form> --}}
-    @endforeach
+                    {{-- <input type="file" name="carousel" multiple id=""> --}}
+                    <a href="/carousel/edit/{{ $carousel->id }}">EDIT</a>
+                    {{-- <button type="submit">l</button> --}}
+                </div>
+            </div>
+            {{-- </form> --}}
+        @endforeach
+
+    </div>
+
 
     {{-- <a href="/carouselForm">Add to carousel</a> --}}
 @endsection

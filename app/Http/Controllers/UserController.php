@@ -88,6 +88,10 @@ class UserController extends Controller
 
         $store = new Subscriber();
         $store->email = $request->email;
+
+        if (Subscriber::where('email', '=', $request->email)->exists()) {
+            return redirect()->back()->with('sub', 'you are already subscribed');
+        }
         Mail::to($request->email)->send(new SubMail);
         $store->save();
 

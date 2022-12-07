@@ -51,7 +51,9 @@ Route::get('/', function () {
     $user = User::all();
     $star = Star::all();
     $authUser = auth()->user();
-    $products = Product::all();
+    $products = Product::inRandomOrder()
+        ->limit(5)
+        ->get();
     $articles = DB::table('articles')->take(2)->get();
     $last = Product::latest()->first();
     $lastSub = Subscriber::latest()->first();
@@ -61,19 +63,22 @@ Route::get('/', function () {
     $carousels = Carousel::all();
     $countCart = Cart::all();
     $cart = Cart::all();
+    $total = Cart::all();
+
 
     // Mail::to('Image')->send(new HelloMail);
     if (Auth::check()) {
         $cart = Cart::where('name', $authUser->name)->get();
 
         $authUser = auth()->user();
+        $total = Cart::where('user_id', $authUser->id)->sum('price');
 
         $countCart = Cart::where('name', $authUser->name)->count();
     }
 
 
 
-    return view('welcome', compact('user', 'test', 'countCart', 'cart', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
+    return view('welcome', compact('user', 'test', 'total', 'countCart', 'cart', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
 });
 
 
@@ -93,16 +98,19 @@ Route::get('/about.html', function () {
     $authUser = auth()->user();
     $countCart = Cart::all();
     $cart = Cart::all();
+    $total = Cart::all();
+
 
     // Mail::to('Image')->send(new HelloMail);
     if (Auth::check()) {
-        $cart = Cart::where('user_id', $authUser->id)->get();
 
         $authUser = auth()->user();
+        $cart = Cart::where('user_id', $authUser->id)->get();
+        $total = Cart::where('user_id', $authUser->id)->sum('price');
 
         $countCart = Cart::where('user_id', $authUser->id)->count();
     }
-    return view('pages.about', compact('teams', 'cart', 'countCart', 'banners', 'infos'));
+    return view('pages.about', compact('teams', 'cart', 'total', 'countCart', 'banners', 'infos'));
 });
 
 
@@ -113,6 +121,7 @@ Route::get('/contact.html', function () {
     $authUser = auth()->user();
     $images = Image::all();
     $countCart = Cart::all();
+    $total = Cart::all();
 
     $infos = Info::all();
 
@@ -121,12 +130,13 @@ Route::get('/contact.html', function () {
         $cart = Cart::where('user_id', $authUser->id)->get();
 
         $authUser = auth()->user();
+        $total = Cart::where('user_id', $authUser->id)->sum('price');
 
         $countCart = Cart::where('user_id', $authUser->id)->count();
     }
 
     $infos = Info::all();
-    return view('pages.contact', compact('banners', 'images', 'infos', 'cart', 'infos', 'countCart'));
+    return view('pages.contact', compact('banners', 'total', 'images', 'infos', 'cart', 'infos', 'countCart'));
 });
 
 // login
@@ -135,12 +145,14 @@ Route::get('/login.html', function () {
     $infos = Info::all();
     $login = User::all();
     $infos = Info::all();
+    $total = Cart::all();
+
     $countCart = Cart::all();
     if (Auth::check()) {
         return redirect()->back();
     } else {
 
-        return view('pages.login', compact('login', 'countCart', 'banners', 'infos'));
+        return view('pages.login', compact('login', 'total', 'countCart', 'banners', 'infos'));
     }
 });
 
@@ -153,6 +165,7 @@ Route::get('/my-account.html', function () {
     $authUser = auth()->user();
     $countCart = Cart::all();
     $cart = Cart::all();
+    $total = Cart::where('user_id', $authUser->id)->sum('price');
 
 
 
@@ -161,11 +174,12 @@ Route::get('/my-account.html', function () {
 
         $authUser = auth()->user();
         $cart = Cart::where('user_id', $authUser->id)->get();
+        $total = Cart::where('user_id', $authUser->id)->sum('price');
 
         $countCart = Cart::where('user_id', $authUser->id)->count();
     }
 
-    return view('pages.my-account', compact('banners', 'images', 'users', 'cart', 'infos', 'countCart'));
+    return view('pages.my-account', compact('banners', 'images', 'total', 'users', 'cart', 'infos', 'countCart'));
 });
 // Route::put('/user/update/{id}', [UserController::class, 'account']);
 Route::put('/userinfo', [UserController::class, 'account']);
@@ -181,6 +195,8 @@ Route::get('/blog.html', function () {
     $cart = Cart::all();
     $categories = Category::all();
 
+    $total = Cart::all();
+
     $countCart = Cart::all();
 
 
@@ -189,11 +205,13 @@ Route::get('/blog.html', function () {
 
         $authUser = auth()->user();
         $cart = Cart::where('user_id', $authUser->id)->get();
+        $total = Cart::where('user_id', $authUser->id)->sum('price');
+
         $countCart = Cart::where('user_id', $authUser->id)->count();
     }
 
 
-    return view('pages.blog', compact('articles', 'images', 'tags', 'categories', 'cart', 'infos', 'countCart', 'comments'));
+    return view('pages.blog', compact('articles', 'images', 'tags', 'categories', 'total', 'cart', 'infos', 'countCart', 'comments'));
 });
 Route::get('/blog/{article_slug}/{id}', [ArticleController::class, 'viewPost']);
 Route::post('comments', [CommentController::class, 'store']);
@@ -267,17 +285,18 @@ Route::get('/order.html', function () {
     if (Auth::check()) {
 
         $authUser = auth()->user();
-        $cart = Cart::where('user_id', $authUser->idate)->get();
-        $total = Cart::where('user_id', $authUser->id)->sum('price')->get();
-
+        $order = Order::where('user_id', $authUser->id)->get();
+        $total = Order::where('user_id', $authUser->id)->sum('price');
         $countCart = Cart::where('user_id', $authUser->id)->count();
     }
 
 
 
     if ($order) {
+        $total = Order::where('user_id', $authUser->id)->sum('price');
 
-        return view('pages.order', compact('countCart', 'banners', 'order', 'cart', 'images', 'infos'));
+
+        return view('pages.order', compact('countCart', 'total', 'banners', 'order', 'cart', 'images', 'infos'));
     } else {
         return redirect()->back();
     }
@@ -321,8 +340,9 @@ Route::delete('/product/delete/{id}', [ProductController::class, 'destroy']);
 Route::get('/articleform', [ArticleController::class, 'index']);
 Route::post('/articleform/store', [ArticleController::class, 'store']);
 Route::get('/allarticles', function () {
-    $articles = Article::all();
-    return view('backoffice.pages.allArticles', compact('articles'));
+    $articles = Article::where('published', false)->get();
+    $published =  Article::where('published', true)->get();
+    return view('backoffice.pages.allArticles', compact('articles', 'published'));
 });
 
 Route::get('/article/edit/{id}', [ArticleController::class, 'edit']);

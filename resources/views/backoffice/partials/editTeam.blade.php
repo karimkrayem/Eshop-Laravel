@@ -1,4 +1,4 @@
-<div>
+<div class="w-50 m-auto">
     <form action="/team/update/{{ $teams->id }}" method="post">
         @csrf
         @method('PUT')
@@ -16,16 +16,16 @@
 
         </div>
 
-        <div><img src="{{ $teams->src }}" alt="">{{ $teams->src }}</div>
+        <div class="d-flex"><img class="w-25" src="{{ $teams->src }}" alt="">{{ $teams->src }}</div>
         <input type="file" name="src" id="">
         <div>
             <label for="floating_email">Desciption</label>
         </div>
-        <textarea name="description" id="" cols="30" rows="10">{{ $teams->descrition }}</textarea>
+        <textarea name="description" id="" class="w-100" cols="30" rows="10">{{ $teams->description }}</textarea>
         {{-- <span>{{ $teams->descrition }}</span> --}}
         <div>
 
-            <div>
+            <div class="d-flex justify-content-between">
 
                 <select name="role_id" id="">
                     @foreach ($teamRoles as $role)
@@ -33,8 +33,8 @@
                     @endforeach
                 </select>
 
+                <button class="p-2 border rounded m-2" type="submit">Submit</button>
             </div>
         </div>
-        <button type="submit">Submit</button>
     </form>
 </div>

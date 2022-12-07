@@ -1,3 +1,7 @@
+<h1 class="text-center">Add a Team member</h1>
+<h5><a href="/team" class="text-primary m-5">Team member</a></h5>
+
+
 <div class=" d-flex justify-content-center">
 
     <form action="/teamform/store" enctype="multipart/form-data" method="POST">

@@ -1,5 +1,7 @@
 @extends('backoffice.layouts.app')
 @section('content')
+    <h1 class="text-center m-5"> All customer messages</h1>
+    <a class="text-primary m-5" href="/archived">Archived messages</a>
     <style>
         .customerMessage {
             font-weight: 800;
@@ -24,8 +26,8 @@
                 <th scope="col">Archive</th>
             </tr>
         </thead>
-        @foreach ($messages as $message)
-            <tbody class="font-weight-bold">
+        <tbody class="font-weight-bold">
+            @forelse ($messages as $message)
                 <tr class='{{ $message->read == true ? 'fontchange' : 'customerMessage' }}'>
                     <th class="" scope="row">{{ $message->id }}</th>
                     <td class="">{{ $message->name }}</td>
@@ -44,8 +46,11 @@
 
                     </td>
                 </tr>
-
-            </tbody>
-        @endforeach
+            @empty
+                <div>
+                    <h4 class="text-center m-5">No Messages yet</h4>
+                </div>
+            @endforelse
+        </tbody>
     </table>
 @endsection

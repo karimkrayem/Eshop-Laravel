@@ -1,18 +1,27 @@
-<div>
+<div class="  m-auto">
+
+    <style>
+        .banneredit {
+            height: 200px
+        }
+    </style>
     <form action="/banner/update/{{ $banners->id }}" enctype="multipart/form-data" method="post">
         @csrf
         @method('PUT')
         <div>
-            <label for="name">Name</label>
-            <input type="text" name="name" value="{{ old('name', $banners->name) }}" id="">
+            {{-- <label for="name">Name</label> --}}
+            {{-- <input type="text" name="name" value="{{ old('name', $banners->name) }}" id=""> --}}
 
 
         </div>
         <div>
-            <label for="floating_email">Change the banner</label>
-            <img src="{{ $banners->banner }}" alt="">
-            <input type="file" name="banner" id="">
+            <img class="w-100 banneredit" src="{{ $banners->banner }}" alt="">
+            <div class="m-2">
+
+                <h3>Change the banner here</h1>
+                    <input type="file" name="banner" id="">
+                    <button class="p-2 border rounded" type="submit">Submit</button>
+            </div>
         </div>
-        <button type="submit">Submit</button>
     </form>
 </div>

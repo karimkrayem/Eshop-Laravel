@@ -1,24 +1,32 @@
-<div class="d-flex flex-wrap  ">
+<h1 class="text-center m-5">All users</h1>
+<div class="d-flex flex-wrap w-75 m-auto  ">
     @foreach ($users as $user)
-        <div class=" m-5 p-5">
-            <h1>{{ $user->name }}</h1>
+        <div class=" m-2 p-4  border rounded">
+            <h4>Name : {{ $user->name }}</h4>
 
 
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $user->email }}</p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $user->role->role }}</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">E-mail : {{ $user->email }}</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Role : {{ $user->role->role }}</p>
             <img src="{{ $user->src }}" alt="">
+
+            {{-- <img src="{{}}" alt=""> --}}
             <div>{{ $user->src }}</div>
             {{-- @can('check-admin', $user->role_id) --}}
-            <a href="/user/edit/{{ $user->id }}">Edit</a>
 
-            <form action="/user/delete/{{ $user->id }}" method="POST">
-                @csrf
-                @method('DELETE')
+            <div class="d-flex">
 
-                <button type="submit">Delete</button>
+                <a href="/user/edit/{{ $user->id }}" class="border rounded bg-primary text-white p-2">Edit</a>
+
+                <form action="/user/delete/{{ $user->id }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+
+                    <button class="border rounded bg-danger text-white p-2" type="submit">Delete</button>
 
 
-            </form>
+                </form>
+            </div>
+
             {{-- @endcan --}}
 
             {{-- <form action="/article/delete/{{ $article->id }}" method="POST">

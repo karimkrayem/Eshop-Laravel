@@ -57,7 +57,6 @@ class ProductController extends Controller
             $cart = Cart::where('name', $authUser->name)->get();
             $authUser = auth()->user();
             $total = Cart::where('user_id', $authUser->id)->sum('price');
-
             $countCart = Cart::where('name', $authUser->name)->count();
         }
 
@@ -75,16 +74,20 @@ class ProductController extends Controller
         $banners = Banner::all();
         $infos = Info::all();
         $countCart = Cart::all();
-        $authUser = auth()->user();
-        $cart = Cart::where('name', $authUser->name)->get();
+        $total = Cart::all();
+
+
+        $cart = Cart::all();
         if (Auth::check()) {
 
             $authUser = auth()->user();
+            $total = Cart::where('user_id', $authUser->id)->sum('price');
+            $cart = Cart::where('name', $authUser->name)->get();
 
             $countCart = Cart::where('name', $authUser->name)->count();
         }
 
-        return view('pages.shop-list', compact('countCart', 'cart', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('countCart', 'cart', 'products', 'total', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
     public function sizes($id)
@@ -180,6 +183,14 @@ class ProductController extends Controller
         $update->size_id = $request->size_id;
         $update->slug = $request->slug;
         $update->category_id = $request->category_id;
+        // foreach ($request->file('image') as $img) {;
+        //     var_dump($img);
+        //     $newImage = IMG::make($img)->resize(450, 375)->save('src/products/' . $img->hashName());
+        //     $image = new Image();
+        //     $image->image = $newImage->basename;
+        //     $image->product_id = DB::table('products')->latest('id')->first()->id;
+        //     $image->save();
+        // }
         $update->save();
         return redirect()->back();
     }
@@ -194,12 +205,14 @@ class ProductController extends Controller
         $authUser = auth()->user();
         $cart = Cart::all();
 
+        $total = Cart::all();
 
 
         if (Auth::check()) {
 
             $authUser = auth()->user();
             $cart = Cart::where('user_id', $authUser->id)->get();
+            $total = Cart::where('user_id', $authUser->id)->sum('price');
 
             $countCart = Cart::where('user_id', $authUser->id)->count();
         }
@@ -207,7 +220,7 @@ class ProductController extends Controller
         $slug = Product::where('slug', $product_slug)->get();
         if ($slug) {
             $post = Product::where('slug', $product_slug)->first();
-            return view('pages.single-product', compact('slug', 'cart', 'countCart', 'images', 'post', 'banners', 'infos'));
+            return view('pages.single-product', compact('slug', 'cart', 'total', 'countCart', 'images', 'post', 'banners', 'infos'));
         } else {
             return redirect()->back();
         }
@@ -219,6 +232,8 @@ class ProductController extends Controller
         $images = Image::all();
         $categories = Category::all();
         $sizes = Size::all();
+        $total = Cart::all();
+
         $banners = Banner::all();
         $infos = Info::all();
         $countCart = Cart::all();
@@ -229,6 +244,8 @@ class ProductController extends Controller
         if (Auth::check()) {
 
             $authUser = auth()->user();
+            $total = Cart::where('user_id', $authUser->id)->sum('price');
+
             $countCart = Cart::where('name', $authUser->name)->count();
         }
         $products = Product::where('name', 'Like', '%' . $search . '%')->paginate(5);
@@ -236,7 +253,7 @@ class ProductController extends Controller
             // dd($search, $products);
             return redirect()->back()->with('message', 'No Product Found');
         }
-        return view('pages.shop-list', compact('products', 'images', 'cart', 'categories', 'countCart', 'banners', 'infos', 'sizes'));
+        return view('pages.shop-list', compact('products', 'images', 'total', 'cart', 'categories', 'countCart', 'banners', 'infos', 'sizes'));
     }
 
 
@@ -256,7 +273,7 @@ class ProductController extends Controller
             $product->stock -= $request->quantity;
             $cart->save();
             $product->save();
-            return redirect()->back();
+            return redirect()->back()->with('cart', 'Product added to cart');
         } else {
             return redirect('login.html');
         }
@@ -280,11 +297,13 @@ class ProductController extends Controller
         $adress = $request->adress;
         $phone = $user->phone;
 
-
+        Cart::where('user_id', $user->id)->delete();
         $order->email = $request->email;
         $order->phone = $request->phone;
         $order->adress = $request->adress;
         $order->name = $request->name;
+        $order->user_id = $user->id;
+        // $cart->delete();
         $adress = $user->adress;
         foreach ($request->productname as $key => $productname) {
 

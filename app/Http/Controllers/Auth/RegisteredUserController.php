@@ -70,6 +70,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($store);
 
-        return redirect('/');
+        return redirect('/')->with('register', 'You are registered');
     }
 }

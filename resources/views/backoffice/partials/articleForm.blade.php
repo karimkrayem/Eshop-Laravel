@@ -1,3 +1,5 @@
+<h5><a href="/allarticles" class="text-primary m-5">All Articles</a></h5>
+
 <div class="mt-10">
     <div class="mx-auto   w-50">
         <h1 class="text-center">Add an Article</h1>

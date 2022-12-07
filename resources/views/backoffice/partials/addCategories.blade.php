@@ -1,11 +1,17 @@
 <div>
-    <h1>All the available categories for the products<i class="fa fa-transgender" aria-hidden="true"></i></h1>
-    @foreach ($categories as $category)
-        <span>{{ $category->name }}</span>
-    @endforeach
+    <h5>All the available categories for the products and articles<i class="fa fa-transgender" aria-hidden="true"></i>
+    </h5>
+    <ul>
+
+        @foreach ($categories as $category)
+            <li>{{ $category->name }}</li>
+        @endforeach
+    </ul>
 </div>
 
+<h6 class="m-2">Add Categories</h6>
 <div class="d-flex justify-center ">
+
 
     <form action="/categoryform/store" enctype="multipart/form-data" method="POST">
         @csrf
@@ -15,7 +21,7 @@
         </div>
 
 
-        <button type="submit">ADD</button>
+        <button class="border rounded p-2" type="submit">ADD</button>
     </form>
 
 </div>

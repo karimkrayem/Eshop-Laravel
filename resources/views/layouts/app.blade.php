@@ -144,6 +144,20 @@
                                                 </div>
                                             </div>
                                         </li>
+
+                                        <li>
+
+
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+
+                                                <button type="submit"
+                                                    class="underline text-sm text-gray-600 hover:text-gray-900">
+                                                    {{ __('Log Out') }}
+                                                </button>
+                                            </form>
+
+                                        </li>
                                     </ul>
                                 </div>
                             @endauth
@@ -151,6 +165,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+
+
             </div>
             <!-- MAIN-MENU START -->
             <div class="menu-toggle hamburger hamburger--emphatic d-none d-md-block">

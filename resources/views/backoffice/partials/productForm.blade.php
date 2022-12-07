@@ -1,3 +1,6 @@
+<h1 class="text-center">Add a product</h1>
+<h5><a href="/allproducts" class="text-primary m-5">All Products</a></h5>
+
 <div class="d-flex justify-content-center">
 
     <form action="/productform/store" enctype="multipart/form-data" method="POST">
@@ -12,15 +15,15 @@
             <input type="text" name="description">
         </div>
         <div class="m-2">
-            <label for="price">Price</label>
+            <h6 for="price">Price</h6>
             <input type="number" name="price">
         </div>
         <div class="m-2">
-            <label for="stock">Stock</label>
+            <h6 for="stock">Stock</h6>
             <input type="number" name="stock">
         </div>
         <div class="m-2">
-            <label for="slug">Slug</label>
+            <h6 for="slug">Slug</h6>
             <input type="string" name="slug">
         </div>
 
@@ -28,7 +31,7 @@
         <div class="m-2">
 
 
-            <label for="stock">Category</label>
+            <h6 for="stock">Category</h6>
 
 
             <select name="category_id" id="">
@@ -41,7 +44,7 @@
 
         <div class="m-2">
 
-            <label for="stock">Size</label>
+            <h6 for="stock">Size</h6>
 
             <select name="size_id" id="">
 

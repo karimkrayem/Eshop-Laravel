@@ -32,6 +32,11 @@
    <!-- HEADING-BANNER END -->
    <!-- PRODUCT-AREA START -->
    <div class="product-area pt-80 product-style-2">
+       @if (session('cart'))
+           <div class=" w-50 mx-auto m-5 alert alert-success">
+               {{ session('cart') }}
+           </div>
+       @endif
        <div class="container">
            <div class="row">
                <div class="col-lg-3 order-2 order-lg-1">

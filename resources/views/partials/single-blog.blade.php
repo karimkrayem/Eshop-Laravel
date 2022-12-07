@@ -143,6 +143,14 @@
                                    </div>
 
                                    <div class="leave-review">
+                                       @if (session('message'))
+                                           <div class="bg-success m-5 p-3  text-center   ">
+                                               <h5 class="text-white">
+                                                   {{ session('message') }}
+
+                                               </h5>
+                                           </div>
+                                       @endif
                                        <h3 class="tab-title title-border mb-30">Leave your reviw</h3>
                                        <div class="reply-box">
                                            <form method="POST" action="{{ url('comments') }}">
@@ -151,20 +159,16 @@
                                                    value="{{ $post->slug }}">
                                                <div class="row">
                                                    <div class="col-md-6">
-                                                       <input type="text" required placeholder="Your name here..."
-                                                           name="name" />
+                                                       <input type="text" value="{{ Auth()->user()->name }}"
+                                                           required placeholder="Your name here..." name="name" />
                                                    </div>
                                                    <div class="col-md-6">
-                                                       <input type="text" required placeholder="Your email here..."
-                                                           name="email" />
+                                                       <input type="text" value="{{ Auth()->user()->email }}"
+                                                           required placeholder="Your email here..." name="email" />
                                                    </div>
                                                </div>
 
-                                               @if (session('message'))
-                                                   <div class="primary m-5  ">
-                                                       {{ session('message') }}
-                                                   </div>
-                                               @endif
+
                                                <div class="row">
                                                    <div class="col-md-12">
                                                        {{-- <input type="text" value="{{ $post->slug }}"

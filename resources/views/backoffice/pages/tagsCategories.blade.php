@@ -1,5 +1,13 @@
 @extends('backoffice.layouts.app')
 @section('content')
-    @include('backoffice.partials.addTags')
-    @include('backoffice.partials.addCategories')
+    <div class="d-flex justify-content-center">
+
+        <div class="m-5">
+            @include('backoffice.partials.addTags')
+        </div>
+        <div class="m-5">
+            @include('backoffice.partials.addCategories')
+        </div>
+
+    </div>
 @endsection

@@ -1,6 +1,9 @@
-<div>
+<h1 class="text-center">Team</h1>
+<h5><a href="/addTeam" class="text-primary m-5">+ Add team member</a></h5>
+
+<div class="d-flex flex-wrap justify-content-center m-2">
     @foreach ($teams as $team)
-        <div class="card text-center ">
+        <div class="card text-center m-2 ">
             <div class="card-header">
                 Member ID :
                 <span>{{ $team->id }}</span>

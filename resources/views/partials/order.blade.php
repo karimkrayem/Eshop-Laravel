@@ -42,78 +42,84 @@
                        </ul>
 
                        <!-- Tab panes -->
+
                        <div class="tab-content">
                            <!-- order-complete start -->
                            <div class="tab-pane active" id="order-complete">
-                               <form action="#">
-                                   <div class="thank-recieve bg-white mb-30">
-                                       <p>Thank you. Your order has been received.</p>
+
+                               <div class="thank-recieve bg-white mb-30">
+                                   <p>Thank you. Your order has been received.</p>
+                               </div>
+                               <div class="order-info bg-white text-center clearfix mb-30">
+                                   <div class="single-order-info">
+                                       <h4 class="title-1 text-uppercase text-light-black mb-0">order no</h4>
+                                       <p class="text-uppercase text-light-black mb-0"><strong>m
+                                               2653257</strong>
+                                       </p>
                                    </div>
-                                   <div class="order-info bg-white text-center clearfix mb-30">
-                                       <div class="single-order-info">
-                                           <h4 class="title-1 text-uppercase text-light-black mb-0">order no</h4>
-                                           <p class="text-uppercase text-light-black mb-0"><strong>m 2653257</strong>
-                                           </p>
-                                       </div>
-                                       <div class="single-order-info">
-                                           <h4 class="title-1 text-uppercase text-light-black mb-0">Date</h4>
-                                           <p class="text-uppercase text-light-black mb-0"><strong>june 15,
-                                                   2021</strong></p>
-                                       </div>
-                                       <div class="single-order-info">
-                                           <h4 class="title-1 text-uppercase text-light-black mb-0">Total</h4>
-                                           <p class="text-uppercase text-light-black mb-0"><strong>$ 170.00</strong></p>
-                                       </div>
-                                       <div class="single-order-info">
-                                           <h4 class="title-1 text-uppercase text-light-black mb-0">payment method</h4>
-                                           <p class="text-uppercase text-light-black mb-0"><a
-                                                   href="#"><strong>check payment</strong></a></p>
-                                       </div>
+                                   <div class="single-order-info">
+                                       <h4 class="title-1 text-uppercase text-light-black mb-0">Date</h4>
+                                       <p class="text-uppercase text-light-black mb-0">
+                                           <strong></strong>
+                                       </p>
                                    </div>
-                                   <div class="shop-cart-table check-out-wrap">
-                                       <div class="row">
-                                           <div class="col-md-6">
-                                               <div class="our-order payment-details pr-20">
-                                                   <h4 class="title-1 title-border text-uppercase mb-30">our order</h4>
-                                                   <table>
-                                                       <thead>
+                                   <div class="single-order-info">
+                                       <h4 class="title-1 text-uppercase text-light-black mb-0">Total</h4>
+                                       <p class="text-uppercase text-light-black mb-0"><strong>$
+                                               {{ $total + $total * 0.21 }}</strong>
+                                       </p>
+                                   </div>
+                                   <div class="single-order-info">
+                                       <h4 class="title-1 text-uppercase text-light-black mb-0">payment method
+                                       </h4>
+                                       <p class="text-uppercase text-light-black mb-0"><a href="#"><strong>check
+                                                   payment</strong></a></p>
+                                   </div>
+                               </div>
+                               <div class="shop-cart-table check-out-wrap">
+                                   <div class="row">
+                                       <div class="col-md-6">
+                                           <div class="our-order payment-details pr-20">
+                                               <h4 class="title-1 title-border text-uppercase mb-30">our order
+                                               </h4>
+                                               <table>
+                                                   <thead>
+                                                       <tr>
+                                                           <th><strong>Product</strong></th>
+                                                           <th class="text-end"><strong>Total</strong></th>
+                                                       </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                       @foreach ($order as $order)
                                                            <tr>
-                                                               <th><strong>Product</strong></th>
-                                                               <th class="text-end"><strong>Total</strong></th>
+                                                               <td>{{ $order->product_title }} x {{ $order->quantity }}
+                                                               </td>
+                                                               <td class="text-end">${{ $order->price }}</td>
                                                            </tr>
-                                                       </thead>
-                                                       <tbody>
-                                                           <tr>
-                                                               <td>Dummy Product Name x 2</td>
-                                                               <td class="text-end">$86.00</td>
-                                                           </tr>
-                                                           <tr>
-                                                               <td>Dummy Product Name x 1</td>
-                                                               <td class="text-end">$69.00</td>
-                                                           </tr>
-                                                           <tr>
-                                                               <td>Cart Subtotal</td>
-                                                               <td class="text-end">$155.00</td>
-                                                           </tr>
-                                                           <tr>
-                                                               <td>Shipping and Handing</td>
-                                                               <td class="text-end">$15.00</td>
-                                                           </tr>
-                                                           <tr>
-                                                               <td>Vat</td>
-                                                               <td class="text-end">$00.00</td>
-                                                           </tr>
-                                                           <tr>
-                                                               <td>Order Total</td>
-                                                               <td class="text-end">$170.00</td>
-                                                           </tr>
-                                                       </tbody>
-                                                   </table>
-                                               </div>
+                                                       @endforeach
+
+
+                                                       <tr>
+                                                           <td>Cart Subtotal</td>
+                                                           <td class="text-end">${{ $total }}</td>
+                                                       </tr>
+
+                                                       <tr>
+                                                           <td>Vat</td>
+                                                           <td class="text-end">${{ $total * 0.21 }}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>Order Total</td>
+                                                           <td class="text-end">${{ $total + $total * 0.21 }}</td>
+                                                       </tr>
+
+                                                   </tbody>
+                                               </table>
                                            </div>
                                        </div>
                                    </div>
-                               </form>
+                               </div>
+
                            </div>
                            <!-- order-complete end -->
                        </div>

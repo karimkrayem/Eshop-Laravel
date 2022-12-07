@@ -62,10 +62,11 @@
             </div>
         </div>
 
-        <div>
-            <img name="src" src="{{ $articles->src }}" alt="">
-        </div>
-        {{-- <div>
+        <div class="d-flex justify-content-around ">
+
+            <img name="src" class="w-25" src="{{ $articles->src }}" alt="">
+
+            {{-- <div>
 
             @foreach ($images as $image)
                 @if ($image->product_id == $products->id)
@@ -73,9 +74,11 @@
                 @endif
             @endforeach
         </div> --}}
-        <div class="d-flex justify-content-end">
+
 
             <button class="p-3 m-3 border border-solid  " type="submit">Submit</button>
+
+
         </div>
     </form>
 </div>

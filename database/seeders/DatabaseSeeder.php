@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             ImageSeeder::class,
             ArticleSeeder::class,
             TeamRoleSeeder::class,
+            TeamSeeder::class,
             BannerSeeder::class,
             CarouselSeeder::class,
             StarSeeder::class,

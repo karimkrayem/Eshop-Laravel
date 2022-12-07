@@ -96,6 +96,7 @@ class ArticleController extends Controller
         $infos = Info::all();
         $countCart = Cart::all();
         $comments = Comment::all();
+        $total = Cart::all();
 
         $authUser = auth()->user();
         $cart = Cart::all();
@@ -104,6 +105,8 @@ class ArticleController extends Controller
         if (Auth::check()) {
             $authUser = auth()->user();
             $cart = Cart::where('name', $authUser->name)->get();
+            $total = Cart::where('user_id', $authUser->id)->sum('price');
+
             $countCart = Cart::where('name', $authUser->name)->count();
         }
         return view('pages.blog', compact('countCart', 'comments', 'cart', 'articles', 'infos', 'categories', 'sizes', 'banners', 'images'));
@@ -115,6 +118,8 @@ class ArticleController extends Controller
     {
 
         $banners = Banner::all();
+        $total = Cart::all();
+
         $infos = Info::all();
         $images = Image::all();
         $numberPost = Comment::where('article_id', $id)->count();
@@ -125,13 +130,15 @@ class ArticleController extends Controller
 
             $authUser = auth()->user();
             $cart = Cart::where('name', $authUser->name)->get();
+            $total = Cart::where('user_id', $authUser->id)->sum('price');
 
             $countCart = Cart::where('name', $authUser->name)->count();
         }
         if ($slug) {
             $post = Article::where('slug', $article_slug)->first();
+            $total = Cart::where('user_id', $authUser->id)->sum('price');
 
-            return view('pages.single-blog', compact('slug', 'images', 'post', 'countCart', 'cart', 'numberPost', 'banners', 'infos'));
+            return view('pages.single-blog', compact('slug', 'total', 'images', 'post', 'countCart', 'cart', 'numberPost', 'banners', 'infos'));
         } else {
             return redirect()->back();
         }

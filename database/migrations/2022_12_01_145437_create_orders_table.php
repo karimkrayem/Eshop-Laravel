@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('town')->nullable();
             $table->string('adress')->nullable();
             $table->integer('product_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->string('product_title')->nullable();
             $table->integer('quantity')->nullable();
             $table->integer('price')->nullable();

@@ -36,7 +36,7 @@ class BackOfficeController extends Controller
     public function banners()
     {
         $banners = Banner::all();
-        return view('backoffice.partials.banners', compact('banners'));
+        return view('backoffice.pages.banners', compact('banners'));
     }
 
     public function edit($id)
@@ -64,7 +64,7 @@ class BackOfficeController extends Controller
         $file->banner = $request->file('banner')->hashName();
         Image::make($request->file('banner'))->resize(1920, 300)->save(public_path('src/banners/' . $file->banner));
         $file->save();
-        return redirect('/');
+        return redirect('/banners');
     }
 
 

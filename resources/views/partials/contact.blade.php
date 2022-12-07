@@ -13,6 +13,7 @@
            @endif
        @endforeach
        <div class="container">
+
            <div class="row">
                <div class="col-md-12">
                    <div class="heading-banner">
@@ -32,6 +33,12 @@
    </div>
    <!-- HEADING-BANNER END -->
    <!-- contact-us-AREA START -->
+
+   @if (session('success'))
+       <div class="alert alert-success">
+           {{ session('success') }}
+       </div>
+   @endif
    <div class="contact-us-area  pt-80 pb-80">
        <div class="container">
            <div class="contact-us customer-login bg-white">
@@ -59,11 +66,8 @@
                        </div>
 
                        <div class="send-message mt-60">
-                           @if (session('success'))
-                               <div class="primary m-5  ">
-                                   {{ session('success') }}
-                               </div>
-                           @endif
+
+
                            <form action="contactUs" method="POST">
                                @csrf
                                <h4 class="title-1 title-border text-uppercase mb-30">send message</h4>
