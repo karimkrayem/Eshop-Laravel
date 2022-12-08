@@ -233,16 +233,20 @@
                                                @csrf
                                                <input type="text" class="d-none" name='product_slug'
                                                    value="{{ $post->slug }}" id="">
-                                               <div class="row">
-                                                   <div class="col-md-6">
-                                                       <input type="text" value="{{ auth()->user()->name }}"
-                                                           required placeholder="Your name here..." name="name" />
+                                               @if (auth()->check())
+                                                   <div class="row">
+                                                       <div class="col-md-6">
+                                                           <input type="text" value="{{ auth()->user()->name }}"
+                                                               required placeholder="Your name here..."
+                                                               name="name" />
+                                                       </div>
+                                                       <div class="col-md-6">
+                                                           <input type="text" required placeholder="Subject..."
+                                                               name="subject" />
+                                                       </div>
                                                    </div>
-                                                   <div class="col-md-6">
-                                                       <input type="text" required placeholder="Subject..."
-                                                           name="subject" />
-                                                   </div>
-                                               </div>
+                                               @endif
+
                                                @if (session('message'))
                                                    <div class="bg-success m-5 p-3  text-center   ">
                                                        <h5 class="text-white">

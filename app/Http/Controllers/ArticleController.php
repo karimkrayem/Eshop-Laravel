@@ -11,6 +11,7 @@ use App\Models\Image;
 use App\Models\Banner;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -77,9 +78,14 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         $update = Article::find($id);
+        if (file_exists(public_path('src/articles/' . $update->src))) {
+            IMG::make(request()->file('src'))->resize(300, 200)->save('src/articles/' . $request->file('src')->hashName());
+        }
         $update->title = $request->title;
         $update->slug = $request->slug;
         $update->content = $request->content;
+        IMG::make(request()->file('src'))->resize(300, 200)->save('src/articles/' . $request->file('src')->hashName());
+
         $update->save();
         return redirect()->back();
     }
@@ -125,6 +131,11 @@ class ArticleController extends Controller
         $numberPost = Comment::where('article_id', $id)->count();
         $slug = Article::where('slug', $article_slug)->get();
         $cart = Cart::all();
+        $users = User::all();
+        $countCart = Cart::all();
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
         // Mail::to('Image')->send(new HelloMail);
         if (Auth::check()) {
 
@@ -136,9 +147,10 @@ class ArticleController extends Controller
         }
         if ($slug) {
             $post = Article::where('slug', $article_slug)->first();
-            $total = Cart::where('user_id', $authUser->id)->sum('price');
+            $total = Cart::all();
 
-            return view('pages.single-blog', compact('slug', 'total', 'images', 'post', 'countCart', 'cart', 'numberPost', 'banners', 'infos'));
+
+            return view('pages.single-blog', compact('slug', 'total', 'users', 'footerproduct', 'images', 'post', 'countCart', 'cart', 'numberPost', 'banners', 'infos'));
         } else {
             return redirect()->back();
         }

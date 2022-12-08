@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="about-photo">
-                        <img src="img/bg/about.png" alt="" />
+                        <img src="img/bg/team.jpg" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -77,7 +77,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="single-member text-center bg-white mt-25">
                             <a href="#">
-                                <img src="{{ $team->src }}" alt="" />
+                                <img src="src/team/{{ $team->src }}" alt="" />
 
                             </a>
                             <h3 class="text-uppercase mt-20">{{ $team->name }} {{ $team->surname }}</h3>

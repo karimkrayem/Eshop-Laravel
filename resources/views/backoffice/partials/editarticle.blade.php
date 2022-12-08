@@ -1,4 +1,8 @@
+<h1 class="text-center m-5"> EDIT ARTICLE</h1>
+<a href="/allarticles" class="text-primary m-5">All articles</a>
+
 <div class="w-50 mx-auto bg-light">
+
     <form action="/article/update/{{ $articles->id }}" method="post">
         @csrf
         @method('PUT')

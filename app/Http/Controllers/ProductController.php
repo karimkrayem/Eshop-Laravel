@@ -31,9 +31,12 @@ class ProductController extends Controller
         $categories = Category::all();
         $sizes = Size::all();
         $image = Image::all();
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
 
 
-        return view('backoffice.pages.product', compact('product', 'sizes', 'categories', 'image'));
+        return view('backoffice.pages.product', compact('product', 'footerproduct', 'sizes', 'categories', 'image'));
     }
 
     public function shopList()
@@ -50,7 +53,9 @@ class ProductController extends Controller
         $authUser = auth()->user();
         $cart = Cart::all();
         $total = Cart::all();
-
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
 
         if (Auth::check()) {
 
@@ -60,7 +65,7 @@ class ProductController extends Controller
             $countCart = Cart::where('name', $authUser->name)->count();
         }
 
-        return view('pages.shop-list', compact('products', 'total', 'cart', 'countCart', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('products', 'footerproduct', 'total', 'cart', 'countCart', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
 
@@ -75,9 +80,10 @@ class ProductController extends Controller
         $infos = Info::all();
         $countCart = Cart::all();
         $total = Cart::all();
-
-
         $cart = Cart::all();
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
         if (Auth::check()) {
 
             $authUser = auth()->user();
@@ -87,7 +93,7 @@ class ProductController extends Controller
             $countCart = Cart::where('name', $authUser->name)->count();
         }
 
-        return view('pages.shop-list', compact('countCart', 'cart', 'products', 'total', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('countCart', 'footerproduct', 'cart', 'products', 'total', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
     public function sizes($id)
@@ -103,7 +109,9 @@ class ProductController extends Controller
         $countCart = Cart::all();
         $authUser = auth()->user();
         $total = Cart::all();
-
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
         $cart = Cart::where('user_id', $authUser->id)->get();
 
 
@@ -115,7 +123,7 @@ class ProductController extends Controller
         }
         // $productss = Product::where('category_id', $id);
 
-        return view('pages.shop-list', compact('countCart', 'cart', 'total', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.shop-list', compact('countCart', 'footerproduct', 'cart', 'total', 'products', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
     public function edit($id)
@@ -183,6 +191,22 @@ class ProductController extends Controller
         $update->size_id = $request->size_id;
         $update->slug = $request->slug;
         $update->category_id = $request->category_id;
+        $img = Image::where('product_id', $id)->get();
+        foreach ($img as $imgs) {
+            IMG::make('src/products/' . $imgs->image)->destroy();
+            $imgs->delete();
+        }
+        // dd($request);
+        foreach ($request->image as $img) {;
+            // var_dump($img);
+            // dd($img);
+            $newImage = IMG::make($img)->resize(450, 375)->save('src/products/' . $img->hashName());
+            $image = new Image();
+            $image->image = $newImage->basename;
+            $image->product_id = $id;
+            $image->save();
+        }
+
         // foreach ($request->file('image') as $img) {;
         //     var_dump($img);
         //     $newImage = IMG::make($img)->resize(450, 375)->save('src/products/' . $img->hashName());
@@ -202,25 +226,22 @@ class ProductController extends Controller
         $images = Image::all();
         $products = Product::all();
         $countCart = Cart::all();
-        $authUser = auth()->user();
         $cart = Cart::all();
-
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
         $total = Cart::all();
-
-
         if (Auth::check()) {
-
             $authUser = auth()->user();
             $cart = Cart::where('user_id', $authUser->id)->get();
             $total = Cart::where('user_id', $authUser->id)->sum('price');
-
             $countCart = Cart::where('user_id', $authUser->id)->count();
         }
 
         $slug = Product::where('slug', $product_slug)->get();
         if ($slug) {
             $post = Product::where('slug', $product_slug)->first();
-            return view('pages.single-product', compact('slug', 'cart', 'total', 'countCart', 'images', 'post', 'banners', 'infos'));
+            return view('pages.single-product', compact('slug', 'footerproduct', 'cart', 'total', 'countCart', 'images', 'post', 'banners', 'infos'));
         } else {
             return redirect()->back();
         }
@@ -233,12 +254,13 @@ class ProductController extends Controller
         $categories = Category::all();
         $sizes = Size::all();
         $total = Cart::all();
-
         $banners = Banner::all();
         $infos = Info::all();
         $countCart = Cart::all();
         $authUser = auth()->user();
-
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
         $cart = Cart::where('name', $authUser->name)->get();
 
         if (Auth::check()) {
@@ -253,7 +275,7 @@ class ProductController extends Controller
             // dd($search, $products);
             return redirect()->back()->with('message', 'No Product Found');
         }
-        return view('pages.shop-list', compact('products', 'images', 'total', 'cart', 'categories', 'countCart', 'banners', 'infos', 'sizes'));
+        return view('pages.shop-list', compact('products', 'footerproduct', 'images', 'total', 'cart', 'categories', 'countCart', 'banners', 'infos', 'sizes'));
     }
 
 

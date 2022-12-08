@@ -1,5 +1,5 @@
 <div class="w-50 m-auto">
-    <form action="/team/update/{{ $teams->id }}" method="post">
+    <form action="/team/update/{{ $teams->id }}" enctype="multipart/form-data" method="post">
         @csrf
         @method('PUT')
         <div>
@@ -15,9 +15,8 @@
 
 
         </div>
+        <input type="file" required name="src">
 
-        <div class="d-flex"><img class="w-25" src="{{ $teams->src }}" alt="">{{ $teams->src }}</div>
-        <input type="file" name="src" id="">
         <div>
             <label for="floating_email">Desciption</label>
         </div>

@@ -54,11 +54,16 @@ Route::get('/', function () {
     $products = Product::inRandomOrder()
         ->limit(5)
         ->get();
+    $footerproduct = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
     $articles = DB::table('articles')->take(2)->get();
     $last = Product::latest()->first();
     $lastSub = Subscriber::latest()->first();
     $infos = Info::all();
     $test = Image::all();
+    // {{ asset('src/products/' . $images->where('product_id', $post->id)->first()->image) }}
+
     $images = Image::latest()->first();
     $carousels = Carousel::all();
     $countCart = Cart::all();
@@ -78,7 +83,7 @@ Route::get('/', function () {
 
 
 
-    return view('welcome', compact('user', 'test', 'total', 'countCart', 'cart', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
+    return view('welcome', compact('user', 'footerproduct', 'test', 'total', 'countCart', 'cart', 'infos', 'star', 'products', 'articles', 'last', 'images', 'carousels'));
 });
 
 
@@ -95,10 +100,14 @@ Route::get('/about.html', function () {
     $teams = Team::all();
     $infos = Info::all();
     $banners = Banner::all();
+    $images = Image::all();
     $authUser = auth()->user();
     $countCart = Cart::all();
     $cart = Cart::all();
     $total = Cart::all();
+    $footerproduct = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
 
 
     // Mail::to('Image')->send(new HelloMail);
@@ -110,7 +119,7 @@ Route::get('/about.html', function () {
 
         $countCart = Cart::where('user_id', $authUser->id)->count();
     }
-    return view('pages.about', compact('teams', 'cart', 'total', 'countCart', 'banners', 'infos'));
+    return view('pages.about', compact('teams', 'cart', 'footerproduct', 'total', 'images', 'countCart', 'banners', 'infos'));
 });
 
 
@@ -122,7 +131,9 @@ Route::get('/contact.html', function () {
     $images = Image::all();
     $countCart = Cart::all();
     $total = Cart::all();
-
+    $footerproduct = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
     $infos = Info::all();
 
     // Mail::to('Image')->send(new HelloMail);
@@ -136,7 +147,7 @@ Route::get('/contact.html', function () {
     }
 
     $infos = Info::all();
-    return view('pages.contact', compact('banners', 'total', 'images', 'infos', 'cart', 'infos', 'countCart'));
+    return view('pages.contact', compact('banners', 'footerproduct', 'total', 'images', 'infos', 'cart', 'infos', 'countCart'));
 });
 
 // login
@@ -145,14 +156,18 @@ Route::get('/login.html', function () {
     $infos = Info::all();
     $login = User::all();
     $infos = Info::all();
+    $images = Image::all();
     $total = Cart::all();
+    $footerproduct = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
 
     $countCart = Cart::all();
     if (Auth::check()) {
         return redirect()->back();
     } else {
 
-        return view('pages.login', compact('login', 'total', 'countCart', 'banners', 'infos'));
+        return view('pages.login', compact('login', 'images', 'footerproduct', 'total', 'countCart', 'banners', 'infos'));
     }
 });
 
@@ -161,13 +176,16 @@ Route::get('/my-account.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
     $images = Image::all();
+
     $users = User::first();
     $authUser = auth()->user();
     $countCart = Cart::all();
     $cart = Cart::all();
-    $total = Cart::where('user_id', $authUser->id)->sum('price');
+    $total = Cart::all();
 
-
+    $footerproduct = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
 
     // Mail::to('Image')->send(new HelloMail);
     if (Auth::check()) {
@@ -175,11 +193,13 @@ Route::get('/my-account.html', function () {
         $authUser = auth()->user();
         $cart = Cart::where('user_id', $authUser->id)->get();
         $total = Cart::where('user_id', $authUser->id)->sum('price');
-
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
         $countCart = Cart::where('user_id', $authUser->id)->count();
     }
 
-    return view('pages.my-account', compact('banners', 'images', 'total', 'users', 'cart', 'infos', 'countCart'));
+    return view('pages.my-account', compact('banners', 'images', 'footerproduct', 'total', 'users', 'cart', 'infos', 'countCart'));
 });
 // Route::put('/user/update/{id}', [UserController::class, 'account']);
 Route::put('/userinfo', [UserController::class, 'account']);
@@ -192,8 +212,13 @@ Route::get('/blog.html', function () {
     $comments = Comment::all();
     $infos = Info::all();
     $images = Image::all();
+
+
     $cart = Cart::all();
     $categories = Category::all();
+    $footerproduct = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
 
     $total = Cart::all();
 
@@ -206,12 +231,15 @@ Route::get('/blog.html', function () {
         $authUser = auth()->user();
         $cart = Cart::where('user_id', $authUser->id)->get();
         $total = Cart::where('user_id', $authUser->id)->sum('price');
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
 
         $countCart = Cart::where('user_id', $authUser->id)->count();
     }
 
 
-    return view('pages.blog', compact('articles', 'images', 'tags', 'categories', 'total', 'cart', 'infos', 'countCart', 'comments'));
+    return view('pages.blog', compact('articles', 'footerproduct', 'images', 'tags', 'categories', 'total', 'cart', 'infos', 'countCart', 'comments'));
 });
 Route::get('/blog/{article_slug}/{id}', [ArticleController::class, 'viewPost']);
 Route::post('comments', [CommentController::class, 'store']);
@@ -224,8 +252,11 @@ Route::get('/checkout.html', function () {
     $banners = Banner::all();
     $infos = Info::all();
     $cart = Cart::all();
-    $countCart = Cart::all();
 
+    $countCart = Cart::all();
+    $footerproduct = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
     $images = Image::all();
     $total = Cart::all();
 
@@ -237,7 +268,7 @@ Route::get('/checkout.html', function () {
         $total = Cart::where('user_id', $authUser->id)->sum('price');
     }
 
-    return view('pages.checkout',  compact('banners', 'total', 'images', 'cart', 'countCart', 'infos'));
+    return view('pages.checkout',  compact('banners', 'footerproduct', 'total', 'images', 'cart', 'countCart', 'infos'));
 });
 Route::post('/checkout.html/order', [ProductController::class, 'confirmOrder']);
 
@@ -249,6 +280,9 @@ Route::get('/cart.html', function () {
     // $product = Product::where('')
     $infos = Info::all();
     $countCart = Cart::all();
+    $footerproduct = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
     $banners = Banner::all();
     $cart = Cart::all();
     $images = Image::all();
@@ -262,7 +296,7 @@ Route::get('/cart.html', function () {
         $total = Cart::where('user_id', $authUser->id)->sum('price');
         $countCart = Cart::where('user_id', $authUser->id)->count();
     }
-    return view('pages.cart', compact('countCart', 'infos', 'banners', 'total', 'countCart', 'images', 'cart'));
+    return view('pages.cart', compact('countCart', 'infos', 'footerproduct', 'banners', 'total', 'countCart', 'images', 'cart'));
 });
 Route::delete('/cart/{id}', [ProductController::class, 'destroyCart']);
 
@@ -275,6 +309,9 @@ Route::get('/order.html', function () {
     $banners = Banner::all();
     $images = Image::all();
     $cart = Cart::all();
+    $footerproduct = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
     $countCart = Cart::all();
     $order = Order::where('user_id', $authUser->id)->first();
     $total = Cart::all();
@@ -296,7 +333,7 @@ Route::get('/order.html', function () {
         $total = Order::where('user_id', $authUser->id)->sum('price');
 
 
-        return view('pages.order', compact('countCart', 'total', 'banners', 'order', 'cart', 'images', 'infos'));
+        return view('pages.order', compact('countCart', 'footerproduct', 'total', 'banners', 'order', 'cart', 'images', 'infos'));
     } else {
         return redirect()->back();
     }

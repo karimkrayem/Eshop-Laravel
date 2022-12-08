@@ -9,8 +9,8 @@
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Role : {{ $user->role->role }}</p>
             <img src="{{ $user->src }}" alt="">
 
-            {{-- <img src="{{}}" alt=""> --}}
-            <div>{{ $user->src }}</div>
+            <img src='src/users/{{ $user->src }}' alt="">
+            <div></div>
             {{-- @can('check-admin', $user->role_id) --}}
 
             <div class="d-flex">

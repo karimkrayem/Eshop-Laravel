@@ -111,7 +111,11 @@
                                                @else
                                                    <li class="threaded-comments bg-ba">
                                                        <div class="pro-reviewer">
-                                                           <img src="img/reviewer/1.jpg" alt="" />
+                                                           {{-- {{ dd($users->where('id', $comment->user_id)->src) }} --}}
+                                                           <img src="{{ $users->where('id', $comment->user_id)->first()->src }}"
+                                                               alt="" />
+                                                           {{-- . $images->where('product_id', $post->id)->first()->image) --}}
+
                                                        </div>
                                                        <div class="pro-reviewer-comment">
                                                            <div class="fix">
@@ -157,16 +161,23 @@
                                                @csrf
                                                <input type="text " class="d-none" name="article_slug"
                                                    value="{{ $post->slug }}">
-                                               <div class="row">
-                                                   <div class="col-md-6">
-                                                       <input type="text" value="{{ Auth()->user()->name }}"
-                                                           required placeholder="Your name here..." name="name" />
+                                               @if (auth()->check())
+                                                   <div class="row">
+                                                       <div class="col-md-6">
+
+
+                                                           <input type="text" value="{{ Auth()->user()->name }}"
+                                                               required placeholder="Your name here..."
+                                                               name="name" />
+                                                       </div>
+                                                       <div class="col-md-6">
+                                                           <input type="text" value="{{ Auth()->user()->email }}"
+                                                               required placeholder="Your email here..."
+                                                               name="email" />
+                                                       </div>
                                                    </div>
-                                                   <div class="col-md-6">
-                                                       <input type="text" value="{{ Auth()->user()->email }}"
-                                                           required placeholder="Your email here..." name="email" />
-                                                   </div>
-                                               </div>
+                                               @endif
+
 
 
                                                <div class="row">

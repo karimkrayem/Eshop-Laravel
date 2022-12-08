@@ -290,24 +290,24 @@
                                 <h3 class="footer-title  title-border">your choice Products</h3>
                                 <div class="footer-product">
                                     <div class="row">
-                                        <div class="col-sm-6 col-12">
-                                            <div class="footer-thumb">
-                                                <a href="#"><img src="img/footer/1.jpg" alt="" /></a>
-                                                <div class="footer-thumb-info">
-                                                    <p><a href="#">Furniture Product<br>Name</a></p>
-                                                    <h4 class="price-3">$ 60.00</h4>
+                                        @foreach ($footerproduct as $productf)
+                                            <div class="col-sm-6 col-12">
+                                                <div class="footer-thumb">
+
+
+                                                    {{-- @if ($test->where('product_id', $productf->id)->first()->image) --}}
+                                                    <a href="#"><img
+                                                            src="src/products/{{ $images->where('product_id', $productf->id)->first()->image }}"
+                                                            alt="" /></a>
+                                                    {{-- @endif --}}
+
+                                                    <div class="footer-thumb-info">
+                                                        <p>{{ $productf->name }}</p>
+                                                        <h4 class="price-3">$ {{ $productf->price }}</h4>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6 col-12">
-                                            <div class="footer-thumb">
-                                                <a href="#"><img src="img/footer/1.jpg" alt="" /></a>
-                                                <div class="footer-thumb-info">
-                                                    <p><a href="#">Furniture Product<br>Name</a></p>
-                                                    <h4 class="price-3">$ 60.00</h4>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

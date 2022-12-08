@@ -57,19 +57,20 @@
             </div>
             <div class="single-banner banner-2">
                 @foreach ($star as $star)
-                    @foreach ($test as $imagess)
-                        @if ($star->product->id == $imagess->id)
-                            <a class="banner-thumb" href="#"><img src="src/products/{{ $imagess->image }}"
-                                    alt="" /></a>
-                        @endif
+                    {{-- @foreach ($test as $imagess) --}}
+                    {{-- @if ($star->product->id == $imagess->product_id) --}}
+                    <a class="banner-thumb" href="#"><img
+                            src="src/products/{{ $star->product->productImages()->first()->image }}"
+                            alt="" /></a>
+                    {{-- @endif --}}
 
-                        <div class="banner-brief">
-                            <h2 class="banner-title"><a href="#">{{ $star->product->name }}</a></h2>
-                            <p class="hidden-md hidden-sm d-none d-md-block">{{ $star->product->description }}
-                            </p>
-                            <a href="#" class="button-one font-16px" data-text="Buy now">Buy now</a>
-                        </div>
-                    @endforeach
+                    <div class="banner-brief">
+                        <h2 class="banner-title"><a href="#">{{ $star->product->name }}</a></h2>
+                        <p class="hidden-md hidden-sm d-none d-md-block">{{ $star->product->description }}
+                        </p>
+                        <a href="#" class="button-one font-16px" data-text="Buy now">Buy now</a>
+                    </div>
+                    {{-- @endforeach --}}
                 @endforeach
             </div>
         </div>

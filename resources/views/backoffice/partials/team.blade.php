@@ -13,8 +13,8 @@
 
 
                 <div>
-                    {{ $team->src }}
-                    <img src="{{ $team->src }}" alt="">
+
+                    <img src="src/team/{{ $team->src }}" alt="">
                 </div>
                 <h5 class="card-title">Name:</h5>
 

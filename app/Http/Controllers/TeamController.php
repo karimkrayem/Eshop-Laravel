@@ -15,7 +15,10 @@ class TeamController extends Controller
     public function index()
     {
         $teams = Team::all();
+
         $teamRoles = TeamRole::all();
+
+
 
         return view('backoffice.pages.team', compact('teams', 'teamRoles'));
     }
@@ -69,14 +72,19 @@ class TeamController extends Controller
     {
         $file = Team::find($id);
         if ($request->file('src')) {
-            Storage::delete('src/team/' . $file->src);
-            $file->delete();
+            if (file_exists(public_path('src/team/' . $file->src))) {
+                Image::make('src/team/' . $file->src)->destroy();
+            }
+
+
+            // $file->delete();
             $file->src = $request->file('src')->hashName();
             $file->name = $request->name;
             $file->surname = $request->surname;
             $file->description = $request->description;
-            $file->role_id = $request->name;
-            Storage::put('src/team/', $request->file('src'));
+            $file->role_id = $request->role_id;
+            Image::make(request()->file('src'))->resize(300, 200)->save('src/team/' . $request->file('src')->hashName());
+
             $file->save();
         } else {
             $file->src = $file->src;

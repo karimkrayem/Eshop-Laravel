@@ -42,25 +42,25 @@
                     </ul>
 
                     <!-- Tab panes -->
-                    @forelse ($cart as $carts)
-                        <div class="tab-content">
-                            <!-- shopping-cart start -->
-                            <div class="tab-pane active" id="shopping-cart">
+                    <div class="tab-content">
+                        <!-- shopping-cart start -->
+                        <div class="tab-pane active" id="shopping-cart">
 
-                                <div class="shop-cart-table">
-                                    <div class="table-content table-responsive">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th class="product-thumbnail">Product</th>
-                                                    <th class="product-price">Price</th>
-                                                    <th class="product-quantity">Quantity</th>
-                                                    <th class="product-subtotal">Total</th>
-                                                    <th class="product-remove">Remove</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{-- {{ dd($carts->id) }} --}}
+                            <div class="shop-cart-table">
+                                <div class="table-content table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="product-thumbnail">Product</th>
+                                                <th class="product-price">Price</th>
+                                                <th class="product-quantity">Quantity</th>
+                                                <th class="product-subtotal">Total</th>
+                                                <th class="product-remove">Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{-- {{ dd($carts->id) }} --}}
+                                            @forelse ($cart as $carts)
                                                 <tr>
                                                     <td class="product-thumbnail  text-left">
                                                         <!-- Single-product start -->
@@ -103,66 +103,66 @@
                                                         </td>
                                                     </form>
                                                 </tr>
+                                            @empty
+
+                                                <div>
+                                                    <h4 class="text-center m-5 ">Cart Empty</h4>
+                                                </div>
+                                            @endforelse
 
 
 
+                                        </tbody>
+                                    </table>
+                                    {{-- @endforelse --}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="customer-login mt-30">
+                                        <h4 class="title-1 title-border text-uppercase">coupon discount</h4>
+                                        <p class="text-gray">Enter your coupon code if you have one!</p>
+                                        <input type="text" placeholder="Enter your code here.">
+                                        <button type="submit" data-text="apply coupon"
+                                            class="button-one submit-button mt-15">apply coupon</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="customer-login payment-details mt-30">
+                                        <h4 class="title-1 title-border text-uppercase">payment details</h4>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">Cart Subtotal</td>
+                                                    <td class="text-end">${{ $total }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="text-left">Vat</td>
+                                                    <td class="text-end">${{ $total * 0.21 }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Order Total</td>
+                                                    <td class="text-end">${{ $total + $total * 0.21 }} </td>
+                                                </tr>
                                             </tbody>
                                         </table>
-                                        {{-- @endforelse --}}
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="customer-login mt-30">
-                                            <h4 class="title-1 title-border text-uppercase">coupon discount</h4>
-                                            <p class="text-gray">Enter your coupon code if you have one!</p>
-                                            <input type="text" placeholder="Enter your code here.">
-                                            <button type="submit" data-text="apply coupon"
-                                                class="button-one submit-button mt-15">apply coupon</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="customer-login payment-details mt-30">
-                                            <h4 class="title-1 title-border text-uppercase">payment details</h4>
-                                            <table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="text-left">Cart Subtotal</td>
-                                                        <td class="text-end">${{ $total }}</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class="text-left">Vat</td>
-                                                        <td class="text-end">${{ $total * 0.21 }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-left">Order Total</td>
-                                                        <td class="text-end">${{ $total + $total * 0.21 }} </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
 
-                            <!-- shopping-cart end -->
-                            <!-- check-out end -->
                         </div>
-                        {{-- <button type="submit" data-text="proceed-checkout" class="button-one submit-button mt-15">PROCEED
+
+                        <!-- shopping-cart end -->
+                        <!-- check-out end -->
+                    </div>
+                    {{-- <button type="submit" data-text="proceed-checkout" class="button-one submit-button mt-15">PROCEED
                             CHECK OUT</button> --}}
-                        <a href="/checkout.html" data-text="proceed-checkout"
-                            class="button-one submit-button mt-15">PROCEED
-                            CHECK OUT</a>
+                    <a href="/checkout.html" data-text="proceed-checkout" class="button-one submit-button mt-15">PROCEED
+                        CHECK OUT</a>
                 </div>
 
-            @empty
 
-                <div>
-                    <h4 class="text-center m-5 ">Cart Empty</h4>
-                </div>
-                @endforelse
             </div>
         </div>
     </div>

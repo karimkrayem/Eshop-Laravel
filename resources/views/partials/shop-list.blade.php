@@ -185,21 +185,9 @@
                                                                        data-bs-target="#productModal"
                                                                        title="Quick View"><i
                                                                            class="zmdi zmdi-zoom-in"></i></a>
-
-                                                                   {{-- <input type="submit" data-bs-toggle="tooltip"
-                                                                       data-placement="top"
-                                                                       class="zmdi zmdi-shopping-cart-plus"
-                                                                       title="Add To Cart"> --}}
                                                                    <button type="submit"> <i
                                                                            class="zmdi zmdi-shopping-cart-plus"></i></button>
-                                                                   {{-- <a href="cart.html" type="submit"
-                                                                       data-bs-toggle="tooltip" data-placement="top"
-                                                                       title="Add To Cart"><i
-                                                                           class="zmdi zmdi-shopping-cart-plus"></i></a>
 
-                                                                   <i class="zmdi zmdi-shopping-cart-plus"> <input
-                                                                           type="submit" value=""
-                                                                           class="hidden"></i> --}}
 
                                                                </div>
                                                            </div>

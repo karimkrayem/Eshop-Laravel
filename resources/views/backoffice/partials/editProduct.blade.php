@@ -1,10 +1,15 @@
-<div class="w-50  mx-auto bg-light editformproduct">
+<h1 class="text-center m-5"> EDIT PRODUCT</h1>
+<a href="/allproducts" class="text-primary m-5">All articles</a>
+
+
+
+<div class="w-50 m-5 mx-auto bg-light editformproduct">
     {{-- <style>
         .editformproduct {
             height: 50vh;
         }
     </style> --}}
-    <form action="/product/update/{{ $products->id }}" method="post">
+    <form class="m-5" action="/product/update/{{ $products->id }}" enctype="multipart/form-data" method="post">
         @csrf
         @method('PUT')
         <div>
@@ -34,6 +39,13 @@
                 {{-- <span>{{ $products->stock }}</span> --}}
 
             </div>
+            <div>
+                <label for="slug   ">Slug</label>
+                <input type="text" name="slug" value="{{ old('slug', $products->slug) }}">
+                {{-- <span>{{ $products->stock }}</span> --}}
+
+            </div>
+
 
             <div class="d-flex flex-column  ">
 
@@ -52,6 +64,24 @@
                                 <option value="{{ $category->id }}">{{ $category->name }}
                                 </option>
                             @endif
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+
+                    <label for="size">Size</label>
+                </div>
+                <div>
+
+                    <select class="p-2 border border-none bg-light" name="size_id" id="">
+                        <option value="{{ $products->size->id }}">{{ $products->size->size }}
+                        <option disabled value="">-------
+                        </option>
+                        @foreach ($sizes as $size)
+                            {{-- @if ($products->size->size != $size->name) --}}
+                            <option value="{{ $size->id }}">{{ $size->size }}
+                            </option>
+                            {{-- @endif --}}
                         @endforeach
                     </select>
                 </div>
