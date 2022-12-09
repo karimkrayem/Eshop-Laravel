@@ -5,7 +5,7 @@
            @if ($banner->id == 7)
                <style>
                    .heading-banner-area {
-                       background-image: url("{{ $banner->banner }}");
+                       background-image: url("src/banners/{{ $banner->banner }}");
                    }
                </style>
            @endif
@@ -38,7 +38,8 @@
                    <div class="col-lg-12">
                        <div class="single-blog mb-30">
                            <div class="blog-photo">
-                               <a href="#"><img src="{{ $post->src }}" alt="" /></a>
+                               <a href="#"><img src="{{ asset('src/articles/' . $post->src) }}"
+                                       alt="" /></a>
                                <div class="like-share fix">
                                    <a href="#"><i
                                            class="zmdi zmdi-account"></i><span>{{ $post->user->name }}</span></a>

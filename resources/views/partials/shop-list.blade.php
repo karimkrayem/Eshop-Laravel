@@ -6,7 +6,7 @@
            @if ($banner->id == 6)
                <style>
                    .heading-banner-area {
-                       background-image: url("{{ $banner->banner }}");
+                       background-image: url("src/banners/{{ $banner->banner }}");
                    }
                </style>
            @endif

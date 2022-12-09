@@ -41,7 +41,7 @@
                         <div class="single-blog mb-30">
                             <div class="blog-photo">
                                 <a href="{{ '/blog' . '/' . $article->slug . '/' . $article->id }}"><img
-                                        src="{{ $article->src }}" alt="" /></a>
+                                        src="src/articles/{{ $article->src }}" alt="" /></a>
                                 <div class="like-share text-center fix">
                                     <a href="#"><i class="zmdi zmdi-favorite"></i><span>89 Like</span></a>
                                     <a href="#"><i

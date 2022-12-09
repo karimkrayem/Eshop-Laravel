@@ -31,7 +31,7 @@
                 <h5 class="card-title">BLOG</h5>
                 <p class="card-text">From Here You can check your articles, add new ones and edit them as you please </p>
 
-                <a href="/allproducts" class=" text-primary card-linl">Blog Articles</a>
+                <a href="/allarticles" class=" text-primary card-linl">Blog Articles</a>
 
             </div>
         </div>

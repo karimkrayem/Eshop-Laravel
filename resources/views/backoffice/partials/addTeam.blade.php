@@ -1,8 +1,14 @@
-<h1 class="text-center">Add a Team member</h1>
+<?php
+
+use App\Models\Team;
+?>
+
+
+<h1 class="text-center m-5">Add a Team member</h1>
 <h5><a href="/team" class="text-primary m-5">Team member</a></h5>
 
 
-<div class=" d-flex justify-content-center">
+<div class=" d-flex justify-content-center m-5">
 
     <form action="/teamform/store" enctype="multipart/form-data" method="POST">
         @csrf
@@ -28,7 +34,12 @@
             <select class="p-2" required name="role_id" id="">
 
                 @foreach ($teamRoles as $role)
-                    <option class="p-2" value="{{ $role->id }}">{{ $role->role }}</option>
+                    @if (!(
+                        $role->id == 1 &&
+                        Team::where('role_id', 1)->get()->count() > 0
+                    ))
+                        <option class="p-2" value="{{ $role->id }}">{{ $role->role }}</option>
+                    @endif
                 @endforeach
             </select>
         </div>

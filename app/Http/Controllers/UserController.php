@@ -68,7 +68,7 @@ class UserController extends Controller
         $update->adress = $request->adress;
         $update->password = $request->password;
         $update->save();
-        return redirect()->back();
+        return redirect()->back()->with('up', 'infos updated');;
     }
 
     public function storeSub(Request $request)

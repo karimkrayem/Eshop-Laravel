@@ -333,13 +333,15 @@
                             </div>
                             <div class="col-xl-6 col-md-5">
                                 <div class="blog-photo">
-                                    <a href="#"><img src="{{ $article->src }}" alt="" /></a>
+                                    <a href="#"><img src="src/articles/{{ $article->src }}"
+                                            alt="" /></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
+
 
             <!-- Single-blog end -->
             <!-- Single-blog start -->

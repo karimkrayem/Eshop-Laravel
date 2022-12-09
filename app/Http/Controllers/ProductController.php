@@ -112,13 +112,17 @@ class ProductController extends Controller
         $footerproduct = Product::inRandomOrder()
             ->limit(2)
             ->get();
-        $cart = Cart::where('user_id', $authUser->id)->get();
+
+
+        $cart = Cart::all();
 
 
         if (Auth::check()) {
 
             $authUser = auth()->user();
             $total = Cart::where('user_id', $authUser->id)->sum('price');
+            $cart = Cart::where('user_id', $authUser->id)->get();
+
             $countCart = Cart::where('user_id', $authUser->id)->count();
         }
         // $productss = Product::where('category_id', $id);
@@ -261,7 +265,7 @@ class ProductController extends Controller
         $footerproduct = Product::inRandomOrder()
             ->limit(2)
             ->get();
-        $cart = Cart::where('name', $authUser->name)->get();
+        $cart = Cart::all();
 
         if (Auth::check()) {
 

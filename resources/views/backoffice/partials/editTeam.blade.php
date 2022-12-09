@@ -1,3 +1,8 @@
+<?php
+
+use App\Models\Team;
+?>
+
 <div class="w-50 m-auto">
     <form action="/team/update/{{ $teams->id }}" enctype="multipart/form-data" method="post">
         @csrf
@@ -28,7 +33,12 @@
 
                 <select name="role_id" id="">
                     @foreach ($teamRoles as $role)
-                        <option value="{{ $role->id }}">{{ $role->role }}</option>
+                        @if (!(
+                            $role->id == 1 &&
+                            Team::where('role_id', 1)->get()->count() > 0
+                        ))
+                            <option value="{{ $role->id }}">{{ $role->role }}</option>
+                        @endif
                     @endforeach
                 </select>
 

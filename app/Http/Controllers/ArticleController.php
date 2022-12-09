@@ -30,7 +30,8 @@ class ArticleController extends Controller
         $articles = Article::where('published');
         $users = User::all();
         $tags = Tag::all();
-        return view('backoffice.pages.articlesForm', compact('tags', 'articles', 'users'));
+        $categories = Category::all();
+        return view('backoffice.pages.articlesForm', compact('tags', 'categories', 'articles', 'users'));
     }
 
     public function edit($id)
@@ -67,6 +68,7 @@ class ArticleController extends Controller
         $store->content = $request->content;
         $store->user_id = $request->user_id;
         $store->slug = $request->slug;
+        $store->category_id = $request->category_id;
         $store->save();
         foreach ($request->tag as $tag) {
 
@@ -106,7 +108,9 @@ class ArticleController extends Controller
 
         $authUser = auth()->user();
         $cart = Cart::all();
-
+        $footerproduct = Product::inRandomOrder()
+            ->limit(2)
+            ->get();
 
         if (Auth::check()) {
             $authUser = auth()->user();
@@ -115,7 +119,7 @@ class ArticleController extends Controller
 
             $countCart = Cart::where('name', $authUser->name)->count();
         }
-        return view('pages.blog', compact('countCart', 'comments', 'cart', 'articles', 'infos', 'categories', 'sizes', 'banners', 'images'));
+        return view('pages.blog', compact('countCart', 'comments', 'footerproduct', 'total', 'cart', 'articles', 'infos', 'categories', 'sizes', 'banners', 'images'));
     }
 
 

@@ -1,3 +1,4 @@
+<h1 class="m-5 text-center "> EDIT BANNERS</h1>
 <div class=" d-flex m-auto justify-content-center flex-wrap">
     @foreach ($banners as $banner)
         <div class="card text-center w-25 m-1">

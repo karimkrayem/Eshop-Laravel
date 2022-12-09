@@ -80,6 +80,21 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="m-2">
+
+
+                                <h6 for="stock">Category</h6>
+
+
+                                <select name="category_id" id="">
+
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                         </div>
 
                     </div>

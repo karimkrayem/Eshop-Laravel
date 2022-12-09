@@ -5,7 +5,7 @@
            @if ($banner->id == 5)
                <style>
                    .heading-banner-area {
-                       background-image: url("{{ $banner->banner }}");
+                       background-image: url("src/banners/{{ $banner->banner }}");
                    }
                </style>
            @endif
@@ -28,9 +28,17 @@
            </div>
        </div>
    </div>
+   @if (session('up'))
+       <div class=" w-50 mx-auto m-5 alert alert-success">
+           {{ session('up') }}
+       </div>
+   @endif
+
    <!-- HEADING-BANNER END -->
    <!-- MY-ACCOUNT-AREA START -->
    <div class="my-account-area  pt-80 pb-80">
+
+
        <div class="container">
            <div class="my-account">
                <div class="row">
